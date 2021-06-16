@@ -3,10 +3,12 @@ package com.example.quizme;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -36,6 +38,11 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
         holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum()));
         holder.question.setText(tmpQuestion.getQuestion());
+        if(position == 1) {
+
+            holder.quizImage.setVisibility(View.VISIBLE);
+            holder.quizImage.setBackgroundResource(R.drawable.user);
+        }
 
     }
         @Override
@@ -47,6 +54,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
             public TextView questionNumber;
             public TextView question;
+            public ImageView quizImage;
             public RadioButton answer1;
             public RadioButton answer2;
             public RadioButton answer3;
@@ -59,6 +67,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
                 this.questionNumber = itemView.findViewById(R.id.quizNum);
                 this.question = itemView.findViewById(R.id.singleQus);
+                this.quizImage = itemView.findViewById(R.id.quizImage);
                 this.ans = itemView.findViewById(R.id.mcq);
 
                 this.answer1 = itemView.findViewById(R.id.ans1);

@@ -3,6 +3,7 @@ package com.example.quizme;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
@@ -24,11 +25,32 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 
-        RecyclerView recyclerView = findViewById(R.id.reView);
+        ViewPager2 viewPager2 = findViewById(R.id.singleQ);
         QuizListAdapter adapter = new QuizListAdapter(questions);
+        viewPager2.setAdapter(adapter);
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+        });
+
+        /*RecyclerView recyclerView = findViewById(R.id.reView);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
 
 
     }
