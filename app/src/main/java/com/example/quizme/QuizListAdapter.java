@@ -1,8 +1,11 @@
 package com.example.quizme;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,6 +20,8 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
 
     ArrayList<Question> questions;
+    View view;
+
 
     public QuizListAdapter(ArrayList<Question> questions) {
         this.questions = questions;
@@ -32,17 +37,48 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Question tmpQuestion = this.questions.get(position);
 
-        holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum()));
-        holder.question.setText(tmpQuestion.getQuestion());
-        if(position == 1) {
+        holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum()+1));
+        holder.question.setText(tmpQuestion.getQuestion().trim());
+        if(tmpQuestion.getImageUri() != null) {
 
             holder.quizImage.setVisibility(View.VISIBLE);
-            holder.quizImage.setBackgroundResource(R.drawable.user);
+            holder.quizImage.setImageURI(tmpQuestion.getImageUri());
         }
+
+        holder.answer1.setText(tmpQuestion.getAnswer1().trim());
+        holder.answer2.setText(tmpQuestion.getAnswer2().trim());
+        holder.answer3.setText(tmpQuestion.getAnswer3().trim());
+        holder.answer4.setText(tmpQuestion.getAnswer4().trim());
+
+        holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalData.deleteQuestion(position);
+                GlobalData.reduceIndex(position);
+
+                Intent intent = new Intent(view.getContext(),CreateQuestionActivity.class);
+                view.getContext().startActivity(intent);
+
+            }
+        });
+
+        holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalData.setModifiedQuestion(questions.get(position));
+                GlobalData.deleteQuestion(position);
+                GlobalData.reduceIndex(position);
+
+                Intent intent = new Intent(view.getContext(),CreateQuestionActivity.class);
+                view.getContext().startActivity(intent);
+
+            }
+        });
+
 
     }
         @Override
@@ -60,10 +96,14 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             public RadioButton answer3;
             public RadioButton answer4;
             public RadioGroup ans;
+            public Button deleteQuestion;
+            public Button modifyQuestion;
 
 
             public ViewHolder(View itemView) {
                 super(itemView);
+
+                view = itemView;
 
                 this.questionNumber = itemView.findViewById(R.id.quizNum);
                 this.question = itemView.findViewById(R.id.singleQus);
@@ -74,6 +114,10 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 this.answer2 = itemView.findViewById(R.id.ans2);
                 this.answer3 = itemView.findViewById(R.id.ans3);
                 this.answer4 = itemView.findViewById(R.id.ans4);
+
+                this.deleteQuestion = itemView.findViewById(R.id.delQus);
+                this.modifyQuestion = itemView.findViewById(R.id.modQus);
+
 
             }
         }

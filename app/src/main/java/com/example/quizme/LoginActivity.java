@@ -14,12 +14,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button button = findViewById(R.id.loginBtn);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        Button button1 = findViewById(R.id.loginBtn);
+
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this,CreateQuestionActivity.class);
                 startActivity(intent);
             }
         });

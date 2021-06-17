@@ -16,17 +16,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //creating dummy questions
-        ArrayList<Question> questions = new ArrayList<>();
-        Question tmpQuestion;
-        for(int i=0;i<10;i++){
-            tmpQuestion = new Question("Question "+String.valueOf(i+1),i+1,"answer 1","answer 2","answer 3","answer 4");
-            questions.add(tmpQuestion);
-        }
-
 
         ViewPager2 viewPager2 = findViewById(R.id.singleQ);
-        QuizListAdapter adapter = new QuizListAdapter(questions);
+        QuizListAdapter adapter = new QuizListAdapter(GlobalData.getQuestionList());
         viewPager2.setAdapter(adapter);
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
