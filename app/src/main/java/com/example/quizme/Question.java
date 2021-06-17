@@ -1,5 +1,7 @@
 package com.example.quizme;
 
+import android.net.Uri;
+
 public class Question {
 
     private String question;
@@ -8,6 +10,17 @@ public class Question {
     private String answer2;
     private String answer3;
     private String answer4;
+    private Uri imageUri;
+
+    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri) {
+        this.question = question;
+        this.questionNum = questionNum;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.answer4 = answer4;
+        this.imageUri = imageUri;
+    }
 
     public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4) {
         this.question = question;
@@ -16,6 +29,15 @@ public class Question {
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
+
+    }
+
+    public Uri getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
     }
 
     public String getQuestion() {

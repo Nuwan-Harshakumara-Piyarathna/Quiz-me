@@ -36,13 +36,19 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
         Question tmpQuestion = this.questions.get(position);
 
-        holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum()));
+        holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum()+1));
         holder.question.setText(tmpQuestion.getQuestion());
-        if(position == 1) {
+        if(tmpQuestion.getImageUri() != null) {
 
             holder.quizImage.setVisibility(View.VISIBLE);
-            holder.quizImage.setBackgroundResource(R.drawable.user);
+            holder.quizImage.setImageURI(tmpQuestion.getImageUri());
         }
+
+        holder.answer1.setText(tmpQuestion.getAnswer1());
+        holder.answer2.setText(tmpQuestion.getAnswer2());
+        holder.answer3.setText(tmpQuestion.getAnswer3());
+        holder.answer4.setText(tmpQuestion.getAnswer4());
+
 
     }
         @Override
