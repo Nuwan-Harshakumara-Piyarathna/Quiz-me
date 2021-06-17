@@ -9,96 +9,134 @@
     android:visibility="visible"
     android:background="@color/colorPrimary">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/round_background"
-        android:orientation="vertical"
-        android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/round_background"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <TextView
-                android:id="@+id/quizNum"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="1"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=") "
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/quizNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/singleQus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=") "
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/singleQus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="This is your first question.Please answer"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/quizImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:text="This is your first question.Please answer"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                android:maxWidth="10dp"
+                android:maxHeight="10dp"
+                android:visibility="gone" />
+
+            <RadioGroup
+                android:id="@+id/mcq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="20dp">
+
+                <RadioButton
+                    android:id="@+id/ans1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="answer1" />
+
+                <RadioButton
+                    android:id="@+id/ans2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="answer2" />
+
+                <RadioButton
+                    android:id="@+id/ans3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="answer3" />
+
+                <RadioButton
+                    android:id="@+id/ans4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="answer4" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/modQus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_background"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Modify Question"
+                    android:textStyle="italic" />
+
+                <Button
+                    android:id="@+id/delQus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_background"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Delete Question"
+                    android:textStyle="italic" />
+            </LinearLayout>
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/quizImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:maxWidth="10dp"
-            android:maxHeight="10dp"
-            android:visibility="gone" />
-
-        <RadioGroup
-            android:id="@+id/mcq"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="20dp">
-
-            <RadioButton
-                android:id="@+id/ans1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="answer1" />
-
-            <RadioButton
-                android:id="@+id/ans2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="answer2" />
-
-            <RadioButton
-                android:id="@+id/ans3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="answer3" />
-
-            <RadioButton
-                android:id="@+id/ans4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="answer4" />
-
-        </RadioGroup>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

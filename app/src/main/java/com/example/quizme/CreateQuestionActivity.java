@@ -53,6 +53,23 @@ public class CreateQuestionActivity extends AppCompatActivity {
         ans3 = findViewById(R.id.qA3);
         ans4 = findViewById(R.id.qA4);
 
+        questionCount.setText("Question Count : "+GlobalData.getLength());
+
+        if(GlobalData.getModifiedQuestion() != null){
+
+            Question tmpQuestion = GlobalData.getModifiedQuestion();
+            GlobalData.setModifiedQuestion(null);
+
+            questionTitle.setText(tmpQuestion.getQuestion());
+            questionImage.setImageURI(tmpQuestion.getImageUri());
+            ans1.setText(tmpQuestion.getAnswer1());
+            ans2.setText(tmpQuestion.getAnswer2());
+            ans3.setText(tmpQuestion.getAnswer3());
+            ans4.setText(tmpQuestion.getAnswer4());
+            imageUri = tmpQuestion.getImageUri();
+
+        }
+
         pickImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +94,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 questionImage.setImageURI(null);
+                imageUri = null;
 
             }
         });
@@ -96,7 +114,29 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
                 Log.e("ques",questionTitle.getText().toString());
 
-                if(title!=null && answer1!=null  && answer2!=null && answer3!=null && answer3!=null) {
+                if(title.trim().length() == 0){
+                    //questionTitle.requestFocus();
+                    questionTitle.setError("Question name can not be empty");
+                }
+                if(answer1.trim().length() == 0){
+                    //ans1.requestFocus();
+                    ans1.setError("Answer1 can not be empty");
+                }
+                if(answer2.trim().length() == 0){
+                    //ans2.requestFocus();
+                    ans2.setError("Answer2 can not be empty");
+                }
+                if(answer3.trim().length() == 0){
+                    //ans3.requestFocus();
+                    ans3.setError("Answer3 can not be empty");
+                }
+                if(answer4.trim().length() == 0){
+                   // ans4.requestFocus();
+                    ans4.setError("Answer4 can not be empty");
+                }
+
+
+                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 ) {
 
                     if (imageUri != null) {
                         tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri);
@@ -115,7 +155,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     ans2.setText("");
                     ans3.setText("");
                     ans4.setText("");
-                    Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
+                   // Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
 
 
                 }
