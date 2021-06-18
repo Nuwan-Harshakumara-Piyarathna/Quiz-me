@@ -10,8 +10,8 @@
 
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:layout_width="413dp"
-        android:layout_height="676dp"
+        android:layout_width="416dp"
+        android:layout_height="682dp"
         android:background="#60A3D9"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
         android:layout_alignParentBottom="true"
 
         android:background="#5207BD"
-        app:itemIconTint="@color/design_default_color_on_primary"
+        app:itemIconTint="@drawable/tab_color"
         app:itemTextColor="#EDFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
