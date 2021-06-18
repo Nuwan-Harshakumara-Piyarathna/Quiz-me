@@ -23,10 +23,25 @@ public class QuizFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(getActivity(), CreateQuestionActivity.class);
+                in.putExtra("status",0);
                 startActivity(in);
             }
         });
+
+        Button takeQuiz = (Button) quizFrag.findViewById(R.id.takeQuiz);
+        takeQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), HomeActivity.class);
+                in.putExtra("status",1);
+                startActivity(in);
+            }
+        });
+
         return  quizFrag;
+
+
+
     }
 
 }
