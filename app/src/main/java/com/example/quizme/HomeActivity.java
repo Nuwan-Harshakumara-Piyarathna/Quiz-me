@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
             ArrayList<Question> tmpQuestions = new ArrayList<>();
             Question tmpQuestion;
             for(int i=0;i<10;i++){
-                tmpQuestion = new Question("Question "+String.valueOf(i+1),i,"answer1","answer2","answer3","answer4");
+                tmpQuestion = new Question("Question "+ (i + 1),i,"answer1","answer2","answer3","answer4");
                 tmpQuestions.add(tmpQuestion);
             }
 
