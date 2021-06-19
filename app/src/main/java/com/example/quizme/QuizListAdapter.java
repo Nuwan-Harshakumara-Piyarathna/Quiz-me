@@ -83,6 +83,10 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
+                                Intent intent = new Intent(view.getContext(), QuizResultActivity.class);
+                                view.getContext().startActivity(intent);
+                                ((Activity)view.getContext()).finish();
+
 
                             }
                         });
