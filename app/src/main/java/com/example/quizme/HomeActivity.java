@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -16,9 +17,26 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Intent intent = getIntent();
+        int status = intent.getIntExtra("status",0);
 
+        QuizListAdapter adapter;
         ViewPager2 viewPager2 = findViewById(R.id.singleQ);
-        QuizListAdapter adapter = new QuizListAdapter(GlobalData.getQuestionList());
+        if(status == 0) {
+            adapter = new QuizListAdapter(GlobalData.getQuestionList(), status);
+        }else{
+
+            //creating dummy date
+            ArrayList<Question> tmpQuestions = new ArrayList<>();
+            Question tmpQuestion;
+            for(int i=0;i<10;i++){
+                tmpQuestion = new Question("Question "+String.valueOf(i+1),i,"answer1","answer2","answer3","answer4");
+                tmpQuestions.add(tmpQuestion);
+            }
+
+            adapter = new QuizListAdapter(tmpQuestions, status);
+
+        }
         viewPager2.setAdapter(adapter);
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

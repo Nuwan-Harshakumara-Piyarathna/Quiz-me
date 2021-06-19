@@ -1,5 +1,6 @@
 package com.example.quizme;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -21,10 +22,12 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
     ArrayList<Question> questions;
     View view;
+    int status;
 
 
-    public QuizListAdapter(ArrayList<Question> questions) {
+    public QuizListAdapter(ArrayList<Question> questions,int status) {
         this.questions = questions;
+        this.status = status;
     }
 
 
@@ -54,30 +57,39 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
         holder.answer4.setText(tmpQuestion.getAnswer4().trim());
 
-        holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GlobalData.deleteQuestion(position);
-                GlobalData.reduceIndex(position);
+        if (status == 1){
+            holder.deleteQuestion.setVisibility(View.GONE);
+            holder.modifyQuestion.setVisibility(View.GONE);
+        }
+        else {
 
-                Intent intent = new Intent(view.getContext(),CreateQuestionActivity.class);
-                view.getContext().startActivity(intent);
+            holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GlobalData.deleteQuestion(position);
+                    GlobalData.reduceIndex(position);
 
-            }
-        });
+                    Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
+                    view.getContext().startActivity(intent);
+                    ((Activity)view.getContext()).finish();
 
-        holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GlobalData.setModifiedQuestion(questions.get(position));
-                GlobalData.deleteQuestion(position);
-                GlobalData.reduceIndex(position);
+                }
+            });
 
-                Intent intent = new Intent(view.getContext(),CreateQuestionActivity.class);
-                view.getContext().startActivity(intent);
+            holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GlobalData.setModifiedQuestion(questions.get(position));
+                    GlobalData.deleteQuestion(position);
+                    GlobalData.reduceIndex(position);
 
-            }
-        });
+                    Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
+                    view.getContext().startActivity(intent);
+                    ((Activity)view.getContext()).finish();
+
+                }
+            });
+        }
 
 
     }

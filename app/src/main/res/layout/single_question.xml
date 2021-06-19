@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#60A3D9"
     android:orientation="vertical"
     android:paddingTop="70dp"
-    android:visibility="visible"
-    android:background="@color/colorPrimary">
+    android:visibility="visible">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -83,24 +83,28 @@
                     android:id="@+id/ans1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
                     android:text="answer1" />
 
                 <RadioButton
                     android:id="@+id/ans2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
                     android:text="answer2" />
 
                 <RadioButton
                     android:id="@+id/ans3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
                     android:text="answer3" />
 
                 <RadioButton
                     android:id="@+id/ans4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
                     android:text="answer4" />
 
             </RadioGroup>
