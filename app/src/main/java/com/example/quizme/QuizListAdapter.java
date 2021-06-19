@@ -76,19 +76,18 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
                         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(view.getContext());
                         builder.setTitle("Finish Quiz...!");
-                        builder.setMessage("Are you want to finish quiz?");
+                        builder.setMessage("Do you want to finish quiz?");
 
 
                         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                Intent intent = new Intent(view.getContext(), QuizResultActivity.class);
-                                view.getContext().startActivity(intent);
-                                ((Activity)view.getContext()).finish();
 
                             }
                         });
+
+                        builder.show();
 
                         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -99,7 +98,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
 
 
-                        builder.show();
+
 
 
                     }
@@ -125,6 +124,8 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
         }
         else {
+
+            holder.correctAns.setText("Correct Answer : " + tmpQuestion.getCorrectAns());
 
             holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
                 @Override

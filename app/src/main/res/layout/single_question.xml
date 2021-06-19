@@ -130,20 +130,15 @@
                     android:id="@+id/modQus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/button_background"
-                    android:text="Modify Question"
-                    android:textStyle="italic" />
+                    android:layout_marginRight="3dp"
+                    android:text="MODIFY QUESTION" />
 
                 <Button
                     android:id="@+id/delQus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_background"
-                    android:text="Delete Question"
-                    android:textStyle="italic" />
+                    android:layout_marginLeft="3dp"
+                    android:text="DELETE QUESTION" />
             </LinearLayout>
 
             <LinearLayout
