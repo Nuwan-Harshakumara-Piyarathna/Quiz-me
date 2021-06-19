@@ -24,6 +24,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     Button pickImage;
     Button addQuestion;
     Button viewQuestions;
+    Button uploadQuiz;
     Button questionCount;
     Button deleteImage;
     EditText questionTitle;
@@ -31,6 +32,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     EditText ans2;
     EditText ans3;
     EditText ans4;
+    EditText correctAnswer;
     Uri imageUri;
 
     private static final int PICK_IMAGE = 100;
@@ -44,6 +46,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         questionImage = findViewById(R.id.quesImg);
         pickImage = findViewById(R.id.pickImage);
         viewQuestions = findViewById(R.id.viewList);
+        uploadQuiz = findViewById(R.id.submitQuiz);
         addQuestion = findViewById(R.id.addQuestion);
         questionTitle = findViewById(R.id.qId);
         questionCount = findViewById(R.id.questionCount);
@@ -52,6 +55,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         ans2 = findViewById(R.id.qA2);
         ans3 = findViewById(R.id.qA3);
         ans4 = findViewById(R.id.qA4);
+        correctAnswer = findViewById(R.id.cAnswer);
 
         questionCount.setText("Question Count : "+GlobalData.getLength());
 
@@ -66,6 +70,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             ans2.setText(tmpQuestion.getAnswer2());
             ans3.setText(tmpQuestion.getAnswer3());
             ans4.setText(tmpQuestion.getAnswer4());
+            correctAnswer.setText(String.valueOf(tmpQuestion.getCorrectAns()));
             imageUri = tmpQuestion.getImageUri();
 
         }
@@ -89,6 +94,21 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
         });
 
+        uploadQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(GlobalData.getLength()>0) {
+                    Toast.makeText(CreateQuestionActivity.this,GlobalData.getQuestionList().toString(),Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(CreateQuestionActivity.this,"No Questions to Upload",Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
         deleteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +129,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 String answer2 = ans2.getText().toString();
                 String answer3 = ans3.getText().toString();
                 String answer4 = ans4.getText().toString();
+                String cAnswer = correctAnswer.getText().toString();
 
 
 
@@ -134,15 +155,19 @@ public class CreateQuestionActivity extends AppCompatActivity {
                    // ans4.requestFocus();
                     ans4.setError("Answer4 can not be empty");
                 }
+                if(cAnswer.trim().length() == 0){
+                    // ans4.requestFocus();
+                    correctAnswer.setError("Correct Answer can not be empty");
+                }
 
 
-                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 ) {
+                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 && cAnswer.trim().length() != 0) {
 
                     if (imageUri != null) {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri);
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, Integer.parseInt(cAnswer),imageUri);
 
                     } else {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4);
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,Integer.parseInt(cAnswer));
 
                     }
 
@@ -155,6 +180,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     ans2.setText("");
                     ans3.setText("");
                     ans4.setText("");
+                    correctAnswer.setText("");
                    // Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
 
 

@@ -2,18 +2,24 @@ package com.example.quizme;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
@@ -60,8 +66,70 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         if (status == 1){
             holder.deleteQuestion.setVisibility(View.GONE);
             holder.modifyQuestion.setVisibility(View.GONE);
+            holder.correctAns.setVisibility(View.GONE);
+
+            if(position == (GlobalData.getLengthClient()-1)){
+                holder.finishQuiz.setVisibility(View.VISIBLE);
+                holder.finishQuiz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+
+                        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(view.getContext());
+                        builder.setTitle("Finish Quiz...!");
+                        builder.setMessage("Do you want to finish quiz?");
+
+
+                        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                Intent intent = new Intent(view.getContext(), QuizResultActivity.class);
+                                view.getContext().startActivity(intent);
+                                ((Activity)view.getContext()).finish();
+
+
+                            }
+                        });
+
+                        builder.show();
+
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+
+
+
+
+
+
+                    }
+                });
+            }
+
+
+
+
+            holder.ans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    //Log.e("selected",String.valueOf(i-2131230795));
+                    Question tmpQuestion = questions.get(position);
+                    tmpQuestion.setClientAns(i-2131230795);
+                    questions.set(position,tmpQuestion);
+                    GlobalData.modifyClientQuestion(position,tmpQuestion);
+                    //Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
+                    //Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
+                }
+            });
+
+
         }
         else {
+
+            holder.correctAns.setText("Correct Answer : " + tmpQuestion.getCorrectAns());
 
             holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -108,8 +176,10 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             public RadioButton answer3;
             public RadioButton answer4;
             public RadioGroup ans;
+            public TextView correctAns;
             public Button deleteQuestion;
             public Button modifyQuestion;
+            public Button finishQuiz;
 
 
             public ViewHolder(View itemView) {
@@ -126,9 +196,12 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 this.answer2 = itemView.findViewById(R.id.ans2);
                 this.answer3 = itemView.findViewById(R.id.ans3);
                 this.answer4 = itemView.findViewById(R.id.ans4);
+                this.correctAns = itemView.findViewById(R.id.correctAnswer);
 
                 this.deleteQuestion = itemView.findViewById(R.id.delQus);
                 this.modifyQuestion = itemView.findViewById(R.id.modQus);
+
+                this.finishQuiz = itemView.findViewById(R.id.finishQuiz);
 
 
             }
