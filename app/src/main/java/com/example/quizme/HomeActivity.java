@@ -1,8 +1,6 @@
 package com.example.quizme;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -23,14 +21,14 @@ public class HomeActivity extends AppCompatActivity {
         QuizListAdapter adapter;
         ViewPager2 viewPager2 = findViewById(R.id.singleQ);
         if(status == 0) {
-            adapter = new QuizListAdapter(GlobalData.getQuestionList(), status);
+            adapter = new QuizListAdapter(GlobalData.getProblems(), status);
         }else{
 
             //creating dummy date
             ArrayList<Question> tmpQuestions = new ArrayList<>();
             Question tmpQuestion;
             for(int i=0;i<10;i++){
-                tmpQuestion = new Question("Question "+String.valueOf(i+1),i,"answer1","answer2","answer3","answer4");
+                tmpQuestion = new Question("Question "+String.valueOf(i+1),i,"answer1","answer2","answer3","answer4",1);
                 tmpQuestions.add(tmpQuestion);
             }
 

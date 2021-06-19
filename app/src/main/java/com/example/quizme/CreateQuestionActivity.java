@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +31,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
     EditText ans3;
     EditText ans4;
     Uri imageUri;
+    RadioGroup selectAnswerSection;
+    Button setCorrectAnswer;
+    int correctAnswer = -1;
+    TextView showCorrectAnswer;
 
     private static final int PICK_IMAGE = 100;
     //private  static  final  int PERMISSION_CODE = 1001;
@@ -47,6 +55,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
         ans2 = findViewById(R.id.qA2);
         ans3 = findViewById(R.id.qA3);
         ans4 = findViewById(R.id.qA4);
+        selectAnswerSection = findViewById(R.id.correctAnswerRadioGroup);
+        setCorrectAnswer = findViewById(R.id.applyCorrectAnswer);
+        showCorrectAnswer = findViewById(R.id.text_correct_answer);
+
 
         questionCount.setText("Question Count : "+GlobalData.getLength());
 
@@ -129,15 +141,19 @@ public class CreateQuestionActivity extends AppCompatActivity {
                    // ans4.requestFocus();
                     ans4.setError("Answer4 can not be empty");
                 }
+                if(correctAnswer == -1){
+                    showCorrectAnswer.requestFocus();
+                    showCorrectAnswer.setError("Select the Correct Answer");
+                }
 
 
                 if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 ) {
 
                     if (imageUri != null) {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri);
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,1);
 
                     } else {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4);
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,1);
 
                     }
 
@@ -150,6 +166,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     ans2.setText("");
                     ans3.setText("");
                     ans4.setText("");
+                    correctAnswer = -1;
                    // Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
 
 
@@ -173,5 +190,16 @@ public class CreateQuestionActivity extends AppCompatActivity {
             questionImage.setImageURI( imageUri);
 
         }
+    }
+
+    public void answerCheckButton(View view){
+        int radioId = selectAnswerSection.getCheckedRadioButtonId();
+
+        View radioButton = selectAnswerSection.findViewById(radioId);
+        correctAnswer = selectAnswerSection.indexOfChild(radioButton)+1;
+
+//        Toast.makeText(this,"Selected Radio Button = "+correctAnswer,Toast.LENGTH_SHORT).show();
+        showCorrectAnswer.setText("Correct Answer = "+(correctAnswer));
+        showCorrectAnswer.setError(null);
     }
 }

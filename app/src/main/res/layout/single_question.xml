@@ -141,6 +141,16 @@
                     android:text="Delete Question"
                     android:textStyle="italic" />
             </LinearLayout>
+            <Button
+                android:id="@+id/subQus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_background"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Submit Quiz"
+                android:textStyle="italic" />
 
         </LinearLayout>
     </ScrollView>

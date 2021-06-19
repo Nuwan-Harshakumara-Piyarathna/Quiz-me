@@ -22,7 +22,7 @@ public class QuizFragment extends Fragment {
         qBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(getActivity(), CreateQuestionActivity.class);
+                Intent in = new Intent(getActivity(), QuizDetailsActivity.class);
                 in.putExtra("status",0);
                 startActivity(in);
             }

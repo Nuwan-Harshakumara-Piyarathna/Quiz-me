@@ -60,6 +60,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         if (status == 1){
             holder.deleteQuestion.setVisibility(View.GONE);
             holder.modifyQuestion.setVisibility(View.GONE);
+            holder.submitQuiz.setVisibility(View.GONE);
         }
         else {
 
@@ -89,6 +90,16 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
                 }
             });
+
+            holder.submitQuiz.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO: Quiz submission
+
+
+
+                }
+            });
         }
 
 
@@ -110,6 +121,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             public RadioGroup ans;
             public Button deleteQuestion;
             public Button modifyQuestion;
+            public Button submitQuiz;
 
 
             public ViewHolder(View itemView) {
@@ -129,7 +141,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
                 this.deleteQuestion = itemView.findViewById(R.id.delQus);
                 this.modifyQuestion = itemView.findViewById(R.id.modQus);
-
+                this.submitQuiz = itemView.findViewById(R.id.subQus);
 
             }
         }
