@@ -109,6 +109,14 @@
 
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/correctAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:text="TextView" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -125,8 +133,6 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/button_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
                     android:text="Modify Question"
                     android:textStyle="italic" />
 
@@ -136,10 +142,23 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/button_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
                     android:text="Delete Question"
                     android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/finishQuiz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finish Quiz"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </LinearLayout>

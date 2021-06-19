@@ -27,14 +27,14 @@ public class HomeActivity extends AppCompatActivity {
         }else{
 
             //creating dummy date
-            ArrayList<Question> tmpQuestions = new ArrayList<>();
+            /*ArrayList<Question> tmpQuestions = new ArrayList<>();
             Question tmpQuestion;
             for(int i=0;i<10;i++){
                 tmpQuestion = new Question("Question "+String.valueOf(i+1),i,"answer1","answer2","answer3","answer4");
                 tmpQuestions.add(tmpQuestion);
-            }
+            }*/
 
-            adapter = new QuizListAdapter(tmpQuestions, status);
+            adapter = new QuizListAdapter(GlobalData.getClientQuestions(), status);
 
         }
         viewPager2.setAdapter(adapter);
