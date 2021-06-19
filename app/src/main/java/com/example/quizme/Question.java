@@ -12,6 +12,8 @@ public class Question {
     private String answer2;
     private String answer3;
     private String answer4;
+    private int correctAns;
+    private int clientAns;
     private Uri imageUri;
     private int correctAnswer;
     private ArrayList<String> answers = new ArrayList<>();
@@ -118,4 +120,26 @@ public class Question {
     public ArrayList<String> getAnswers() {
         return answers;
     }
+
+    public int getCorrectAns() {
+        return correctAns;
+    }
+
+    public void setCorrectAns(int correctAns) {
+        this.correctAns = correctAns;
+    }
+
+    public int getClientAns() {
+        return clientAns;
+    }
+
+    public void setClientAns(int clientAns) {
+        this.clientAns = clientAns;
+    }
+
+    public boolean checkAnswer(){
+        if(this.correctAns == this.clientAns) return true;
+        return false;
+    }
+
 }

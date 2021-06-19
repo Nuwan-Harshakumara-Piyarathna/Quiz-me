@@ -23,6 +23,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     Button pickImage;
     Button addQuestion;
     Button viewQuestions;
+    Button uploadQuiz;
     Button questionCount;
     Button deleteImage;
     EditText questionTitle;
@@ -47,6 +48,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         questionImage = findViewById(R.id.quesImg);
         pickImage = findViewById(R.id.pickImage);
         viewQuestions = findViewById(R.id.viewList);
+        uploadQuiz = findViewById(R.id.submitQuiz);
         addQuestion = findViewById(R.id.addQuestion);
         questionTitle = findViewById(R.id.qId);
         questionCount = findViewById(R.id.questionCount);
@@ -97,6 +99,21 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
         });
 
+        uploadQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(GlobalData.getLength()>0) {
+                    Toast.makeText(CreateQuestionActivity.this,GlobalData.getProblems().toString(),Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(CreateQuestionActivity.this,"No Questions to Upload",Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
         deleteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,20 +159,18 @@ public class CreateQuestionActivity extends AppCompatActivity {
                    // ans4.requestFocus();
                     ans4.setError("Answer4 can not be empty");
                 }
-                if(correctAnswer == -1){
+                if(correctAnswer == -1) {
                     showCorrectAnswer.requestFocus();
                     showCorrectAnswer.setError("Select the Correct Answer");
                 }
 
-
-                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 ) {
+                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0) {
 
                     if (imageUri != null) {
                         tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,1);
 
                     } else {
                         tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,1);
-
                     }
 
                     GlobalData.addQuestion(tmpQuestion);

@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -23,6 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
@@ -74,7 +79,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         }
 
 
-
         holder.answer1.setText(tmpQuestion.getAnswer1().trim());
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
@@ -89,63 +93,115 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             holder.modifyQuestion.setVisibility(View.GONE);
             holder.submitQuiz.setVisibility(View.GONE);
             holder.copyQuizLink.setVisibility(View.GONE);
-        } else {
 
-            holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
+            if (position == (GlobalData.getLengthClient() - 1)) {
+                holder.finishQuiz.setVisibility(View.VISIBLE);
+                holder.finishQuiz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+
+                        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(view.getContext());
+                        builder.setTitle("Finish Quiz...!");
+                        builder.setMessage("Do you want to finish quiz?");
+
+
+                        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                Intent intent = new Intent(view.getContext(), QuizResultActivity.class);
+                                view.getContext().startActivity(intent);
+                                ((Activity) view.getContext()).finish();
+
+
+                            }
+                        });
+
+                        builder.show();
+
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+
+                    }
+                });
+            }
+            holder.ans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
-                public void onClick(View view) {
-                    GlobalData.deleteQuestion(position);
-                    GlobalData.reduceIndex(position);
-
-                    Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
-                    view.getContext().startActivity(intent);
-                    ((Activity) view.getContext()).finish();
-
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    //Log.e("selected",String.valueOf(i-2131230795));
+                    Question tmpQuestion = questions.get(position);
+                    tmpQuestion.setClientAns(i - 2131230795);
+                    questions.set(position, tmpQuestion);
+                    GlobalData.modifyClientQuestion(position, tmpQuestion);
+                    //Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
+                    //Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
                 }
             });
 
-            holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    GlobalData.setModifiedQuestion(questions.get(position));
-                    GlobalData.deleteQuestion(position);
-                    GlobalData.reduceIndex(position);
 
-                    Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
-                    view.getContext().startActivity(intent);
-                    ((Activity) view.getContext()).finish();
-
-                }
-            });
-
-            holder.submitQuiz.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            doPostRequest();
-                        }
-                    }).start();
-
-                }
-            });
-
-            holder.copyQuizLink.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("Copy Link", quizLink);
-                    clipboard.setPrimaryClip(clip);
-                    clip.getDescription();
-                    Toast.makeText(context, "Copied", Toast.LENGTH_SHORT);
-                }
-            });
         }
 
+        else{
 
+        holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalData.deleteQuestion(position);
+                GlobalData.reduceIndex(position);
+
+                Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
+                view.getContext().startActivity(intent);
+                ((Activity) view.getContext()).finish();
+
+            }
+        });
+
+        holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalData.setModifiedQuestion(questions.get(position));
+                GlobalData.deleteQuestion(position);
+                GlobalData.reduceIndex(position);
+
+                Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
+                view.getContext().startActivity(intent);
+                ((Activity) view.getContext()).finish();
+
+            }
+        });
+
+        holder.submitQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        doPostRequest();
+                    }
+                }).start();
+
+            }
+        });
+
+        holder.copyQuizLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copy Link", quizLink);
+                clipboard.setPrimaryClip(clip);
+                clip.getDescription();
+                Toast.makeText(context, "Copied", Toast.LENGTH_SHORT);
+            }
+        });
     }
+
+
+}
 
     private void doPostRequest() {
         Log.d("Okhttp3:", "doPostRequest function called");
@@ -162,6 +218,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 JSONArray ja = new JSONArray(question.getAnswers());
                 jo.put("answers", ja);
                 jo.put("correctAnswer", question.getCorrectAnswer());
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -218,45 +275,46 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         return questions.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView questionNumber;
-        public TextView question;
-        public ImageView quizImage;
-        public RadioButton answer1;
-        public RadioButton answer2;
-        public RadioButton answer3;
-        public RadioButton answer4;
-        public RadioGroup ans;
-        public Button deleteQuestion;
-        public Button modifyQuestion;
-        public Button submitQuiz;
-        public Button copyQuizLink;
+    public TextView questionNumber;
+    public TextView question;
+    public ImageView quizImage;
+    public RadioButton answer1;
+    public RadioButton answer2;
+    public RadioButton answer3;
+    public RadioButton answer4;
+    public RadioGroup ans;
+    public Button deleteQuestion;
+    public Button modifyQuestion;
+    public Button submitQuiz;
+    public Button copyQuizLink;
+    public Button finishQuiz;
 
+    public ViewHolder(View itemView) {
+        super(itemView);
 
-        public ViewHolder(View itemView) {
-            super(itemView);
+        view = itemView;
 
-            view = itemView;
+        this.questionNumber = itemView.findViewById(R.id.quizNum);
+        this.question = itemView.findViewById(R.id.singleQus);
+        this.quizImage = itemView.findViewById(R.id.quizImage);
+        this.ans = itemView.findViewById(R.id.mcq);
 
-            this.questionNumber = itemView.findViewById(R.id.quizNum);
-            this.question = itemView.findViewById(R.id.singleQus);
-            this.quizImage = itemView.findViewById(R.id.quizImage);
-            this.ans = itemView.findViewById(R.id.mcq);
+        this.answer1 = itemView.findViewById(R.id.ans1);
+        this.answer2 = itemView.findViewById(R.id.ans2);
+        this.answer3 = itemView.findViewById(R.id.ans3);
+        this.answer4 = itemView.findViewById(R.id.ans4);
 
-            this.answer1 = itemView.findViewById(R.id.ans1);
-            this.answer2 = itemView.findViewById(R.id.ans2);
-            this.answer3 = itemView.findViewById(R.id.ans3);
-            this.answer4 = itemView.findViewById(R.id.ans4);
+        this.deleteQuestion = itemView.findViewById(R.id.delQus);
+        this.modifyQuestion = itemView.findViewById(R.id.modQus);
+        this.submitQuiz = itemView.findViewById(R.id.subQus);
 
-            this.deleteQuestion = itemView.findViewById(R.id.delQus);
-            this.modifyQuestion = itemView.findViewById(R.id.modQus);
-            this.submitQuiz = itemView.findViewById(R.id.subQus);
+        this.copyQuizLink = itemView.findViewById(R.id.copyLink);
+        this.finishQuiz = itemView.findViewById(R.id.finishQuiz);
 
-            this.copyQuizLink = itemView.findViewById(R.id.copyLink);
-
-        }
     }
+}
 
 
 }

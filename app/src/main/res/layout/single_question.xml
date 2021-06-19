@@ -109,6 +109,14 @@
 
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/correctAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:text="TextView" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -122,24 +130,30 @@
                     android:id="@+id/modQus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/button_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:text="Modify Question"
-                    android:textStyle="italic" />
+                    android:layout_marginRight="3dp"
+                    android:text="MODIFY QUESTION" />
 
                 <Button
                     android:id="@+id/delQus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="DELETE QUESTION" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/finishQuiz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finish Quiz"
                     android:layout_gravity="center"
-                    android:background="@drawable/button_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:text="Delete Question"
-                    android:textStyle="italic" />
+                    android:visibility="gone"/>
             </LinearLayout>
             <Button
                 android:id="@+id/subQus"

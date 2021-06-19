@@ -12,6 +12,7 @@ public class GlobalData {
     private static int noOfProblems;
     private static ArrayList<Question> problems = new ArrayList<>();
     private static Question modifiedQuestion;
+    public static ArrayList<Question> clientQuestions = new ArrayList<>();
 
     public static Question getModifiedQuestion() {
         return modifiedQuestion;
@@ -52,8 +53,18 @@ public class GlobalData {
 
     }
 
+    public static void modifyClientQuestion(int index,Question question){
+
+        clientQuestions.set(index,question);
+
+    }
+
     public static int getLength(){
         return problems.size();
+    }
+
+    public  static  int getLengthClient(){
+        return  clientQuestions.size();
     }
 
     public static void reduceIndex(int index){
@@ -125,4 +136,28 @@ public class GlobalData {
         problems = new ArrayList<>();
         modifiedQuestion = null;
     }
+    public static void addClientQuestion(Question question){
+        clientQuestions.add(question);
+    }
+
+    public static ArrayList<Question> getClientQuestions(){
+        return clientQuestions;
+    }
+
+    public static void removeAllClientQuestions(){
+        clientQuestions.clear();
+    }
+
+    public  static int getMarks(){
+        int count =0;
+
+        for(int i = 0;i<clientQuestions.size();i++){
+
+            Question tmp = clientQuestions.get(i);
+            if(tmp.getClientAns() == tmp.getCorrectAns()) count++;
+
+        }
+        return count;
+    }
+
 }
