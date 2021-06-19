@@ -90,7 +90,9 @@ public class QuizDetailsActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month += 1;
                         String date = year + "-" + month + "-"+day;
-                        quiz_startDate = date;
+                        String newDate = year +"-"+((month<10)?"0"+month:month)+"-"+((day<10)?"0"+day:day);
+
+                        quiz_startDate = newDate;
                         startDate.setText(quiz_startDate);
                     }
                 },year,month,day);
@@ -153,21 +155,22 @@ public class QuizDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //get inputs
-                quiz_name = name.getText().toString();
-                quiz_startTime = startTime.getText().toString();
-                quiz_duration = duration.getText().toString();
+                quiz_name = name.getText().toString().trim();
+                quiz_startTime = startTime.getText().toString().trim();
+                quiz_startDate = startDate.getText().toString().trim();
+                quiz_duration = duration.getText().toString().trim();
 
 
-                if(quiz_name.trim().length() == 0){
+                if(quiz_name.length() == 0){
                     tName.setError("*Quiz name is Required");
                 }
-                if(quiz_startTime.trim().length() == 0){
+                if(quiz_startTime.length() == 0){
                     tStartTime.setError("*Start Time is Required");
                 }
-                if(quiz_startDate.trim().length() == 0){
+                if(quiz_startDate.length() == 0){
                     tStartDate.setError("*Start Date is Required");
                 }
-                if(quiz_duration.trim().length() == 0){
+                if(quiz_duration.length() == 0){
                     tDuration.setError("*Duration is Required");
                 }
                 if (!quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -178,7 +181,7 @@ public class QuizDetailsActivity extends AppCompatActivity {
                 }
 
                 Log.d("QUIZ: ","start = "+quiz_startTime);
-                if(quiz_name.trim().length() > 0 && quiz_startTime.trim().length() > 0 && quiz_startDate.trim().length() > 0 && quiz_duration.trim().length() > 0 && quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}") && quiz_startTime.matches("\\d{2}:\\d{2}")){
+                if(quiz_name.length() > 0 && quiz_startTime.length() > 0 && quiz_startDate.length() > 0 && quiz_duration.length() > 0 && quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}") && quiz_startTime.matches("\\d{2}:\\d{2}")){
                     GlobalData.setName(quiz_name);
                     GlobalData.setStartTime(quiz_startTime);
                     GlobalData.setStartDate(quiz_startDate);

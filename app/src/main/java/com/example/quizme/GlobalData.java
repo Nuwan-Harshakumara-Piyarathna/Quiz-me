@@ -67,7 +67,7 @@ public class GlobalData {
         }
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
@@ -75,7 +75,7 @@ public class GlobalData {
         name = input_name;
     }
 
-    public String getLink() {
+    public static String getLink() {
         return link;
     }
 
@@ -83,7 +83,7 @@ public class GlobalData {
         link = input_link;
     }
 
-    public String getStartDate() {
+    public static String getStartDate() {
         return startDate;
     }
 
@@ -91,7 +91,7 @@ public class GlobalData {
         startDate = input_startDate;
     }
 
-    public String getStartTime() {
+    public static String getStartTime() {
         return startTime;
     }
 
@@ -99,7 +99,7 @@ public class GlobalData {
         startTime = input_startTime;
     }
 
-    public String getDuration() {
+    public static String getDuration() {
         return duration;
     }
 
@@ -107,11 +107,22 @@ public class GlobalData {
         duration = input_duration;
     }
 
-    public int getNoOfProblems() {
+    public static int getNoOfProblems() {
         return noOfProblems;
     }
 
     public static void setNoOfProblems(int no) {
         noOfProblems = no;
+    }
+
+    public static void clear(){
+        name = "";
+        link = "";
+        startDate = "";
+        startTime = "";
+        duration = "";
+        noOfProblems = 0;
+        problems = new ArrayList<>();
+        modifiedQuestion = null;
     }
 }

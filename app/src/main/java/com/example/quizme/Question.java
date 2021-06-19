@@ -14,7 +14,7 @@ public class Question {
     private String answer4;
     private Uri imageUri;
     private int correctAnswer;
-    private ArrayList<String> answers;
+    private ArrayList<String> answers = new ArrayList<>();
 
     public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri,int correctAnswer) {
         this.question = question;
@@ -113,5 +113,9 @@ public class Question {
         this.answers.add(this.answer2);
         this.answers.add(this.answer3);
         this.answers.add(this.answer4);
+    }
+
+    public ArrayList<String> getAnswers() {
+        return answers;
     }
 }

@@ -56,7 +56,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
         ans3 = findViewById(R.id.qA3);
         ans4 = findViewById(R.id.qA4);
         selectAnswerSection = findViewById(R.id.correctAnswerRadioGroup);
-        setCorrectAnswer = findViewById(R.id.applyCorrectAnswer);
         showCorrectAnswer = findViewById(R.id.text_correct_answer);
 
 
@@ -74,7 +73,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
             ans3.setText(tmpQuestion.getAnswer3());
             ans4.setText(tmpQuestion.getAnswer4());
             imageUri = tmpQuestion.getImageUri();
-
+            correctAnswer = tmpQuestion.getCorrectAnswer();
+            selectAnswerSection.check(correctAnswer-1);
+            showCorrectAnswer.setText("Correct Answer = "+correctAnswer);
         }
 
         pickImage.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +168,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     ans3.setText("");
                     ans4.setText("");
                     correctAnswer = -1;
+                    showCorrectAnswer.setText("Correct Answer = "+(correctAnswer));
                    // Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
 
 

@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         QuizListAdapter adapter;
         ViewPager2 viewPager2 = findViewById(R.id.singleQ);
         if(status == 0) {
-            adapter = new QuizListAdapter(GlobalData.getProblems(), status);
+            adapter = new QuizListAdapter(GlobalData.getProblems(), status,this);
         }else{
 
             //creating dummy date
@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
                 tmpQuestions.add(tmpQuestion);
             }
 
-            adapter = new QuizListAdapter(tmpQuestions, status);
+            adapter = new QuizListAdapter(tmpQuestions, status,this);
 
         }
         viewPager2.setAdapter(adapter);
