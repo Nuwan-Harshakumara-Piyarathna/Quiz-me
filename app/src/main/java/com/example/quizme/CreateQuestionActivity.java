@@ -1,14 +1,7 @@
 package com.example.quizme;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -16,7 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -24,6 +23,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     Button pickImage;
     Button addQuestion;
     Button viewQuestions;
+    Button uploadQuiz;
     Button questionCount;
     Button deleteImage;
     EditText questionTitle;
@@ -32,6 +32,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
     EditText ans3;
     EditText ans4;
     Uri imageUri;
+    RadioGroup selectAnswerSection;
+    Button setCorrectAnswer;
+    int correctAnswer = -1;
+    TextView showCorrectAnswer;
 
     private static final int PICK_IMAGE = 100;
     //private  static  final  int PERMISSION_CODE = 1001;
@@ -44,6 +48,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         questionImage = findViewById(R.id.quesImg);
         pickImage = findViewById(R.id.pickImage);
         viewQuestions = findViewById(R.id.viewList);
+        uploadQuiz = findViewById(R.id.submitQuiz);
         addQuestion = findViewById(R.id.addQuestion);
         questionTitle = findViewById(R.id.qId);
         questionCount = findViewById(R.id.questionCount);
@@ -52,6 +57,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
         ans2 = findViewById(R.id.qA2);
         ans3 = findViewById(R.id.qA3);
         ans4 = findViewById(R.id.qA4);
+        selectAnswerSection = findViewById(R.id.correctAnswerRadioGroup);
+        showCorrectAnswer = findViewById(R.id.text_correct_answer);
+
 
         questionCount.setText("Question Count : "+GlobalData.getLength());
 
@@ -67,7 +75,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
             ans3.setText(tmpQuestion.getAnswer3());
             ans4.setText(tmpQuestion.getAnswer4());
             imageUri = tmpQuestion.getImageUri();
-
+            correctAnswer = tmpQuestion.getCorrectAnswer();
+            selectAnswerSection.check(correctAnswer-1);
+            showCorrectAnswer.setText("Correct Answer = "+correctAnswer);
         }
 
         pickImage.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +96,21 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     Intent intent = new Intent(CreateQuestionActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        uploadQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(GlobalData.getLength()>0) {
+                    Toast.makeText(CreateQuestionActivity.this,GlobalData.getProblems().toString(),Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(CreateQuestionActivity.this,"No Questions to Upload",Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
@@ -134,16 +159,18 @@ public class CreateQuestionActivity extends AppCompatActivity {
                    // ans4.requestFocus();
                     ans4.setError("Answer4 can not be empty");
                 }
+                if(correctAnswer == -1) {
+                    showCorrectAnswer.requestFocus();
+                    showCorrectAnswer.setError("Select the Correct Answer");
+                }
 
-
-                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 ) {
+                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0) {
 
                     if (imageUri != null) {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri);
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,1);
 
                     } else {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4);
-
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,1);
                     }
 
                     GlobalData.addQuestion(tmpQuestion);
@@ -155,6 +182,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     ans2.setText("");
                     ans3.setText("");
                     ans4.setText("");
+                    correctAnswer = -1;
+                    showCorrectAnswer.setText("Correct Answer = "+(correctAnswer));
                    // Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
 
 
@@ -178,5 +207,16 @@ public class CreateQuestionActivity extends AppCompatActivity {
             questionImage.setImageURI( imageUri);
 
         }
+    }
+
+    public void answerCheckButton(View view){
+        int radioId = selectAnswerSection.getCheckedRadioButtonId();
+
+        View radioButton = selectAnswerSection.findViewById(radioId);
+        correctAnswer = selectAnswerSection.indexOfChild(radioButton)+1;
+
+//        Toast.makeText(this,"Selected Radio Button = "+correctAnswer,Toast.LENGTH_SHORT).show();
+        showCorrectAnswer.setText("Correct Answer = "+(correctAnswer));
+        showCorrectAnswer.setError(null);
     }
 }

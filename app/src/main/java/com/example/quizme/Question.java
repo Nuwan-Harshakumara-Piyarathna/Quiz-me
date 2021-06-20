@@ -2,6 +2,8 @@ package com.example.quizme;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
+
 public class Question {
 
     private String question;
@@ -10,9 +12,13 @@ public class Question {
     private String answer2;
     private String answer3;
     private String answer4;
+    private int correctAns;
+    private int clientAns;
     private Uri imageUri;
+    private int correctAnswer;
+    private ArrayList<String> answers = new ArrayList<>();
 
-    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri) {
+    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri,int correctAnswer) {
         this.question = question;
         this.questionNum = questionNum;
         this.answer1 = answer1;
@@ -20,16 +26,19 @@ public class Question {
         this.answer3 = answer3;
         this.answer4 = answer4;
         this.imageUri = imageUri;
+        this.correctAnswer = correctAnswer;
+        setAnswerList();
     }
 
-    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4) {
+    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4,int correctAnswer) {
         this.question = question;
         this.questionNum = questionNum;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
-
+        this.correctAnswer = correctAnswer;
+        setAnswerList();
     }
 
     public Uri getImageUri() {
@@ -62,6 +71,7 @@ public class Question {
 
     public void setAnswer1(String answer1) {
         this.answer1 = answer1;
+        setAnswerList();
     }
 
     public String getAnswer2() {
@@ -70,6 +80,7 @@ public class Question {
 
     public void setAnswer2(String answer2) {
         this.answer2 = answer2;
+        setAnswerList();
     }
 
     public String getAnswer3() {
@@ -78,6 +89,7 @@ public class Question {
 
     public void setAnswer3(String answer3) {
         this.answer3 = answer3;
+        setAnswerList();
     }
 
     public String getAnswer4() {
@@ -86,5 +98,48 @@ public class Question {
 
     public void setAnswer4(String answer4) {
         this.answer4 = answer4;
+        setAnswerList();
     }
+
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public void setAnswerList(){
+        this.answers.clear();
+        this.answers.add(this.answer1);
+        this.answers.add(this.answer2);
+        this.answers.add(this.answer3);
+        this.answers.add(this.answer4);
+    }
+
+    public ArrayList<String> getAnswers() {
+        return answers;
+    }
+
+    public int getCorrectAns() {
+        return correctAns;
+    }
+
+    public void setCorrectAns(int correctAns) {
+        this.correctAns = correctAns;
+    }
+
+    public int getClientAns() {
+        return clientAns;
+    }
+
+    public void setClientAns(int clientAns) {
+        this.clientAns = clientAns;
+    }
+
+    public boolean checkAnswer(){
+        if(this.correctAns == this.clientAns) return true;
+        return false;
+    }
+
 }
