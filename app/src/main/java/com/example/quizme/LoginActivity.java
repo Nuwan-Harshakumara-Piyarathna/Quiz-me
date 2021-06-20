@@ -58,6 +58,12 @@ public class LoginActivity extends AppCompatActivity {
         button = findViewById(R.id.loginBtn);
         
     }
+    public void goReg(View v){
+
+        Intent intent = new Intent(this,SignUpActivity.class);
+        this.startActivity(intent);
+
+    }
 
     private boolean validateFields() {
 
@@ -82,8 +88,6 @@ public class LoginActivity extends AppCompatActivity {
         if(!validateFields()){
             return;
         }
-
-        RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
 
         final String userName = userText;
         final String password = passText;
@@ -131,17 +135,26 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 response = client.newCall(request).execute();
-                json = new JSONObject(response.body().string());
-
-            } catch (IOException | JSONException e) {
-
+                responseBody = response.body().string();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            try {
-                val = json.getString("jwt");
-            } catch (JSONException e) {
 
-                e.printStackTrace();
+            if(responseBody.equals("user not found")){
+                return "user not found";
+            }
+            else if(responseBody.equals("Incorrect userName or Password.")){
+                return "Incorrect userName or Password.";
+            }
+            if(response.code()==200) {
+                try {
+                    json = new JSONObject(response.body().string());
+                    val = json.getString("jwt");
+                } catch ( Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                return null;
             }
 
 
@@ -152,18 +165,33 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            try {
+            if(s==null){
+                Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if(s.equals("Incorrect userName or Password.")){
+                Toast toast=Toast.makeText(con, "Incorrect userName or Password.", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if(s.equals("user not found")){
+                Toast toast=Toast.makeText(con, "New User?Sign UP", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else {
 
-                SharedPreferences pref = con.getSharedPreferences("MyPreferences",Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("jwt",s);
-                editor.commit();
-                Intent intent = new Intent(con,HomeActivity.class);
-                con.startActivity(intent);
+                try {
+
+                    SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("jwt", s);
+                    editor.commit();
+                    Intent intent = new Intent(con, HomeActivity.class);
+                    con.startActivity(intent);
 
 
-            }catch (Exception e){
-                e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }

@@ -15,6 +15,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".CreateQuestionActivity" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
