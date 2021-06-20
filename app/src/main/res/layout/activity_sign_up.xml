@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
         android:padding="30dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/hello"
@@ -20,6 +22,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
             android:text="Sign Up"
+            android:gravity="center_horizontal"
             android:paddingBottom="10sp"
             android:textColor="#000000"
             android:textStyle="bold"
@@ -102,10 +105,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/btn_background"
             android:text="Sign Up"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:textColor="#4E4848"
+            android:textStyle="bold"
+            android:onClick="submitReg"/>
     </LinearLayout>
 
 </LinearLayout>
