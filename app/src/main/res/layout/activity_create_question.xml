@@ -165,15 +165,49 @@
                     android:hint="Answer 4"
                     android:inputType="textPersonName" />
 
-                <EditText
-                    android:id="@+id/cAnswer"
+                <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Correct Answer"
-                    android:inputType="textPersonName" />
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:id="@+id/correctAnswerRadioGroup"
+                    >
+                    <RadioButton
+                        android:id="@+id/answer_radio1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="answerCheckButton"
+                        />
+                    <RadioButton
+                        android:id="@+id/answer_radio2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="answerCheckButton"
+                        />
+                    <RadioButton
+                        android:id="@+id/answer_radio3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="answerCheckButton"
 
+                        />
+                    <RadioButton
+                        android:id="@+id/answer_radio4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="answerCheckButton"
+                        />
+                </RadioGroup>
+                <TextView
+                    android:id="@+id/text_correct_answer"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Correct Answer = Not selected"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    />
                 <Button
                     android:id="@+id/addQuestion"
                     android:layout_width="match_parent"

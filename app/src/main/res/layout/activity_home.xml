@@ -5,15 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".HomeActivity">
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/singleQ"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
 
     <TextView
         android:id="@+id/hello"
@@ -21,10 +14,20 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:gravity="center_horizontal"
-        android:text="LOGGED IN"
         android:paddingBottom="10sp"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:textSize="30sp" />
+        android:text="LOGGED IN"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/singleQ"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+    </androidx.viewpager2.widget.ViewPager2>
 
 </LinearLayout>
