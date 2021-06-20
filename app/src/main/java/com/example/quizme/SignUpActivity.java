@@ -1,26 +1,31 @@
 package com.example.quizme;
 
+import android.content.Context;
+import android.content.Intent;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.Button;
+import android.util.Log;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.quizme.databinding.ActivitySignUpBinding;
+import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -31,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_sign_up);
 
         //text field
         fName = findViewById(R.id.firstName);
@@ -83,6 +88,9 @@ public class SignUpActivity extends AppCompatActivity {
         if(passText.isEmpty()){
             passOne.setError("Password can't be empty");
             return false;
+        }else if(passText.length()<6 || passText.length()>15){
+            passOne.setError("Password is too short");
+            return false;
         }
 
         if(cPassText.isEmpty()){
@@ -95,5 +103,107 @@ public class SignUpActivity extends AppCompatActivity {
 
         return true;
     }
+    public void submitReg(View view) {
 
+        if (!validateFields()) {
+            return;
+        }
+
+        final String userName = userText;
+        final String password = passText;
+        final String fName = fNameText;
+        final String lName = lNameText;
+
+        WebRequest webRequest = new WebRequest(this);
+        webRequest.execute(userName, password, fName, lName);
+    }
+
+    private class WebRequest extends AsyncTask<String,String,String> {
+
+        Context con;
+
+        public WebRequest(Context con) {
+            this.con = con;
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            OkHttpClient client = new OkHttpClient();
+            MediaType Json = MediaType.parse("application/json;charset=utf-8");
+            JSONObject data = new JSONObject();
+            String val = "";
+
+            try {
+                data.put("userName", strings[0]);
+                data.put("password", strings[1]);
+                data.put("firstName", strings[2]);
+                data.put("lastName", strings[3]);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.i("data", data.toString());
+
+            RequestBody body = RequestBody.create(data.toString(), Json);
+
+            Request request = new Request.Builder().url(
+                    "https://quizmeonline.herokuapp.com/all/registration"
+            ).post(body).build();
+
+            Response response = null;
+            String responseBody = null;
+
+            try {
+                response = client.newCall(request).execute();
+                responseBody = response.body().string();
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+
+            Log.i("res", responseBody);
+            if (response.code() == 200) {
+
+                if (responseBody.equals("userName is already exist")) {
+                    return "UserName exists";
+                } else {
+                    return "OK";
+                }
+
+            }
+
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (s == null) {
+                Toast toast = Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                toast.show();
+            } else if (s.equals("UserName exists")) {
+                Toast toast = Toast.makeText(con, "User Name is already taken try with different User Name!", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                try {
+                    Intent intent = new Intent(con, LoginActivity.class);
+                    con.startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
 }
+
+
+
+
+

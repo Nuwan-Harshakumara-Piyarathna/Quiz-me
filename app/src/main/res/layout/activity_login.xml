@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             app:boxStrokeColor="@color/colorAccent"
+            android:layout_marginBottom="5dp"
             android:hint="User Name">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -63,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeColor="@color/colorAccent"
+            android:layout_marginBottom="5dp"
             android:hint="Password">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -92,6 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New User? SignUp"
+            android:onClick="goReg"
             android:textAlignment="center"
             android:layout_marginTop="8dp"
             android:textSize="14dp" />
