@@ -137,8 +137,8 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                     tmpQuestion.setClientAns(i - 2131230795);
                     questions.set(position, tmpQuestion);
                     GlobalData.modifyClientQuestion(position, tmpQuestion);
-                    //Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
-                    //Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
+                    Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
+                    Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
                 }
             });
 
