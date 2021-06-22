@@ -185,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("jwt", s);
                     editor.commit();
-                    Intent intent = new Intent(con, HomeActivity.class);
+                    Intent intent = new Intent(con, MainActivity.class);
                     con.startActivity(intent);
 
 
