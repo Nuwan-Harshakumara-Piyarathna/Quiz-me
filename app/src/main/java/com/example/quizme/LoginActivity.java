@@ -67,8 +67,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean validateFields() {
 
-        userText = userName.getText().toString();
-        passText = password.getText().toString();
+        userText = userName.getText().toString().trim();
+        passText = password.getText().toString().trim();
 
         if (userText.isEmpty()) {
             user.setError("User Name can't be Empty");

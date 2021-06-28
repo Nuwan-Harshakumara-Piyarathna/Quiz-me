@@ -103,12 +103,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(GlobalData.getLength()>0) {
-                    Toast.makeText(CreateQuestionActivity.this,GlobalData.getProblems().toString(),Toast.LENGTH_SHORT).show();
+                if(GlobalData.getLength() == 0) {
+                    Toast.makeText(CreateQuestionActivity.this,"No Questions to Upload",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(CreateQuestionActivity.this,"No Questions to Upload",Toast.LENGTH_SHORT).show();
-
+                    startActivity(new Intent(CreateQuestionActivity.this,PopUpSubmission.class));
                 }
 
             }
