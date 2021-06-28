@@ -83,6 +83,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
         holder.answer4.setText(tmpQuestion.getAnswer4().trim());
+        holder.correctAnswer.setVisibility(View.GONE);
         if (position != this.questions.size() - 1) {
             holder.submitQuiz.setVisibility(View.GONE);
             holder.copyQuizLink.setVisibility(View.GONE);
@@ -137,8 +138,8 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                     tmpQuestion.setClientAns(i - 2131230795);
                     questions.set(position, tmpQuestion);
                     GlobalData.modifyClientQuestion(position, tmpQuestion);
-                    //Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
-                    //Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
+                    Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
+                    Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
                 }
             });
 
@@ -146,6 +147,8 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         }
 
         else{
+
+        //holder.correctAnswer.setText("Correct Answer : "+questions.get(position).getCorrectAns());
 
         holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,6 +288,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public RadioButton answer3;
     public RadioButton answer4;
     public RadioGroup ans;
+    public TextView correctAnswer;
     public Button deleteQuestion;
     public Button modifyQuestion;
     public Button submitQuiz;
@@ -305,6 +309,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         this.answer2 = itemView.findViewById(R.id.ans2);
         this.answer3 = itemView.findViewById(R.id.ans3);
         this.answer4 = itemView.findViewById(R.id.ans4);
+        this.correctAnswer = itemView.findViewById(R.id.correctAnswer);
 
         this.deleteQuestion = itemView.findViewById(R.id.delQus);
         this.modifyQuestion = itemView.findViewById(R.id.modQus);
