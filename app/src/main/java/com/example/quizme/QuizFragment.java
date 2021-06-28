@@ -78,7 +78,7 @@ public class QuizFragment extends Fragment {
                             try{
 
                                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPreferences",getContext().MODE_PRIVATE);
-                                String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBZG1pbiIsImV4cCI6MTYyNDU4MDgxNSwiaWF0IjoxNjI0MzY0ODE1fQ.zq5N1sBPpHZWxJHw174zG3CLvazmAip7W9PvrPcXRb9NCGrH6C-R_75mZqkHIYMV8P0OKl342VhaDBV3IniPvg";
+                                String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI1MDcyMDE3LCJpYXQiOjE2MjQ4NTYwMTd9.uE9tGQyZKRc3KvKBQjHiRoM61fEGNx2DysN8fLAilHRm4yM5z9-68tA-5dBbxIkJ4HuNkniPUKY9dKIVN2oxrQ";
 
                                 //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
                             String Url = "https://quizmeonline.herokuapp.com/quiz/join/"+tmp;
