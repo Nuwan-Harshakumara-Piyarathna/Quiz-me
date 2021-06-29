@@ -9,6 +9,7 @@ public class GlobalData {
     private static String startDate;//yyyy-MM-dd format
     private static String startTime;//HH:mm format
     private static String duration;//in minutes
+    private static ArrayList<QuizResult> markList = new ArrayList<>();
     private static int noOfProblems;
     private static ArrayList<Question> problems = new ArrayList<>();
     private static Question modifiedQuestion;
@@ -158,6 +159,10 @@ public class GlobalData {
 
         }
         return count;
+    }
+
+    public static ArrayList<QuizResult> getMarkList() {
+        return markList;
     }
 
 }
