@@ -3,6 +3,8 @@ package com.example.quizme;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,19 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -61,7 +76,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         showCorrectAnswer = findViewById(R.id.text_correct_answer);
 
 
-        questionCount.setText("Question Count : "+GlobalData.getLength());
+        questionCount.setText("Question Count : " + GlobalData.getLength());
 
         if(GlobalData.getModifiedQuestion() != null){
 
@@ -77,7 +92,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
             imageUri = tmpQuestion.getImageUri();
             correctAnswer = tmpQuestion.getCorrectAnswer();
             selectAnswerSection.check(correctAnswer-1);
-            showCorrectAnswer.setText("Correct Answer = "+correctAnswer);
+            String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
+            showCorrectAnswer.setText(correct);
         }
 
         pickImage.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +123,12 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     Toast.makeText(CreateQuestionActivity.this,"No Questions to Upload",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    startActivity(new Intent(CreateQuestionActivity.this,PopUpSubmission.class));
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            doPostRequest();
+                        }
+                    }).start();
                 }
 
             }
@@ -182,7 +203,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     ans3.setText("");
                     ans4.setText("");
                     correctAnswer = -1;
-                    showCorrectAnswer.setText("Correct Answer = "+(correctAnswer));
+                    String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
+                    showCorrectAnswer.setText(correct);
                    // Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
 
 
@@ -190,6 +212,124 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void doPostRequest() {
+        Log.d("Okhttp3:", "doPostRequest function called");
+        String url = "https://quizmeonline.herokuapp.com/quiz/add";
+//        OkHttpClient client = new OkHttpClient();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS) // connect timeout
+                .writeTimeout(30, TimeUnit.SECONDS) // write timeout
+                .readTimeout(30, TimeUnit.SECONDS) // read timeout
+                .build();
+
+        MediaType JSON = MediaType.parse("application/json;charset=utf-8");
+
+        JSONArray questionsArray = new JSONArray();
+        for (Question question : GlobalData.getProblems()) {
+            JSONObject jo = new JSONObject();
+            try {
+                jo.put("question", question.getQuestion());
+                JSONArray ja = new JSONArray(question.getAnswers());
+                jo.put("answers", ja);
+                jo.put("correctAnswer", question.getCorrectAnswer());
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            questionsArray.put(jo);
+        }
+
+        JSONObject actualData = new JSONObject();
+
+        try {
+            actualData.put("name", GlobalData.getName());
+            actualData.put("link", GlobalData.getLink());
+            actualData.put("startDate", GlobalData.getStartDate());
+            actualData.put("startTime", GlobalData.getStartTime());
+            actualData.put("duration", GlobalData.getDuration());
+            actualData.put("noOfProblems", Math.max(1, GlobalData.getNoOfProblems()));
+            actualData.put("problems", questionsArray);
+        } catch (JSONException e) {
+            Log.d("Okhttp3:", "JSON Exception");
+            e.printStackTrace();
+        }
+
+
+        RequestBody body = RequestBody.create(JSON, actualData.toString());
+        Log.d("Okhttp3:", "Requestbody created");
+        Log.d("Okhttp3:", "body = \n" + body.toString());
+        Log.d("Okhttp3:", "actualData = \n" + actualData.toString());
+        Request request = new Request.Builder()
+                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI1MDcyMDE3LCJpYXQiOjE2MjQ4NTYwMTd9.uE9tGQyZKRc3KvKBQjHiRoM61fEGNx2DysN8fLAilHRm4yM5z9-68tA-5dBbxIkJ4HuNkniPUKY9dKIVN2oxrQ")
+                .url(url)
+                .post(body)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            Log.d("Okhttp3:", "request done, got the response");
+            Log.d("Okhttp3:", response.body().string());
+
+
+            final String toast_message;
+
+            if(response.code() == 200){
+
+                PopUpSubmission.quiz_link = GlobalData.getLink();
+
+                startActivity(new Intent(CreateQuestionActivity.this,PopUpSubmission.class));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        clearQuizData();
+                    }
+                });
+
+            }
+            else {
+                toast_message = "Something Went Wrong";
+                if (getApplicationContext() != null) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), toast_message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+
+
+        } catch (IOException e) {
+            Log.d("Okhttp3:", "IOEXCEPTION while request");
+            e.printStackTrace();
+        }
+    }
+
+    private void clearQuizData() {
+
+        //clear Quiz data
+        GlobalData.clear();
+
+        questionTitle.setText("");
+        ans1.setText("");
+        ans2.setText("");
+        ans3.setText("");
+        ans4.setText("");
+        questionCount.setText("Question Count : "+GlobalData.getLength());
+        QuizDetailsActivity.clearTexts();
+
+        correctAnswer = -1;
+        String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
+        showCorrectAnswer.setText(correct);
+
+        Toast.makeText(getApplicationContext(),"All Cleared",Toast.LENGTH_SHORT);
+        //TODO : clear image data
     }
 
     private void openGallery(){
@@ -215,7 +355,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
         correctAnswer = selectAnswerSection.indexOfChild(radioButton)+1;
 
 //        Toast.makeText(this,"Selected Radio Button = "+correctAnswer,Toast.LENGTH_SHORT).show();
-        showCorrectAnswer.setText("Correct Answer = "+(correctAnswer));
+        String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
+        showCorrectAnswer.setText(correct);
         showCorrectAnswer.setError(null);
     }
 }
