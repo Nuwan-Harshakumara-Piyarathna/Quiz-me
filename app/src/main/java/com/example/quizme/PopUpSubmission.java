@@ -20,6 +20,7 @@ public class PopUpSubmission extends Activity {
     Button home;
     Button copy;
     TextView quizId;
+    static String quiz_link;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class PopUpSubmission extends Activity {
         copy = findViewById(R.id.copytoclipboard);
         quizId = findViewById(R.id.quizId);
 
-        quizId.setText("Quiz ID : "+GlobalData.getLink());
+        quizId.setText("Quiz ID : "+quiz_link);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,7 @@ public class PopUpSubmission extends Activity {
             @Override
             public void onClick(View view) {
                 ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Copy Link", GlobalData.getLink());
+                ClipData clip = ClipData.newPlainText("Copy Link", quiz_link);
                 clipboard.setPrimaryClip(clip);
                 clip.getDescription();
                 Toast.makeText(getApplicationContext(), "Copied", Toast.LENGTH_SHORT);

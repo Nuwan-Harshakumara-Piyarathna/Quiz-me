@@ -26,8 +26,8 @@ import java.util.Calendar;
 
 public class QuizDetailsActivity extends AppCompatActivity {
 
-    Button nextBtn;
-    EditText name,startDate,startTime,duration;
+    private Button nextBtn;
+    private static EditText name,startDate,startTime,duration;
     TextInputLayout tName,tStartDate,tStartTime,tDuration;
     DatePickerDialog.OnDateSetListener setListener;
     String quiz_name,quiz_startTime,quiz_startDate,quiz_duration;
@@ -208,5 +208,12 @@ public class QuizDetailsActivity extends AppCompatActivity {
         for(int i = 0; i < len; i++)
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
+    }
+
+    static void clearTexts(){
+        name.setText("");
+        startTime.setText("");
+        startDate.setText("");
+        duration.setText("");
     }
 }
