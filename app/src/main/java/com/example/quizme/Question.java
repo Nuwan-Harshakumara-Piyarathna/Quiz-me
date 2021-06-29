@@ -15,10 +15,9 @@ public class Question {
     private int correctAns;
     private int clientAns;
     private Uri imageUri;
-    private int correctAnswer;
     private ArrayList<String> answers = new ArrayList<>();
 
-    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri,int correctAnswer) {
+    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri,int correctAns) {
         this.question = question;
         this.questionNum = questionNum;
         this.answer1 = answer1;
@@ -26,7 +25,7 @@ public class Question {
         this.answer3 = answer3;
         this.answer4 = answer4;
         this.imageUri = imageUri;
-        this.correctAns = correctAnswer;
+        this.correctAns = correctAns;
         setAnswerList();
     }
 

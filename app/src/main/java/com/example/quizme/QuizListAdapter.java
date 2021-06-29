@@ -6,6 +6,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +85,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
         holder.answer4.setText(tmpQuestion.getAnswer4().trim());
-        holder.correctAnswer.setVisibility(View.GONE);
         if (position != this.questions.size() - 1) {
             holder.submitQuiz.setVisibility(View.GONE);
             holder.copyQuizLink.setVisibility(View.GONE);
@@ -148,63 +149,61 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
         else{
 
-        //holder.correctAnswer.setText("Correct Answer : "+questions.get(position).getCorrectAns());
+            holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GlobalData.deleteQuestion(position);
+                    GlobalData.reduceIndex(position);
 
-        holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GlobalData.deleteQuestion(position);
-                GlobalData.reduceIndex(position);
+                    Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
+                    view.getContext().startActivity(intent);
+                    ((Activity) view.getContext()).finish();
 
-                Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
-                view.getContext().startActivity(intent);
-                ((Activity) view.getContext()).finish();
+                }
+            });
 
-            }
-        });
+            holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GlobalData.setModifiedQuestion(questions.get(position));
+                    GlobalData.deleteQuestion(position);
+                    GlobalData.reduceIndex(position);
 
-        holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GlobalData.setModifiedQuestion(questions.get(position));
-                GlobalData.deleteQuestion(position);
-                GlobalData.reduceIndex(position);
+                    Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
+                    view.getContext().startActivity(intent);
+                    ((Activity) view.getContext()).finish();
 
-                Intent intent = new Intent(view.getContext(), CreateQuestionActivity.class);
-                view.getContext().startActivity(intent);
-                ((Activity) view.getContext()).finish();
+                }
+            });
 
-            }
-        });
+            holder.submitQuiz.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        holder.submitQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            doPostRequest();
+                        }
+                    }).start();
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        doPostRequest();
-                    }
-                }).start();
+                }
+            });
 
-            }
-        });
+            holder.copyQuizLink.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Copy Link", quizLink);
+                    clipboard.setPrimaryClip(clip);
+                    clip.getDescription();
+                    Toast.makeText(context, "Copied", Toast.LENGTH_SHORT);
+                }
+            });
+        }
 
-        holder.copyQuizLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Copy Link", quizLink);
-                clipboard.setPrimaryClip(clip);
-                clip.getDescription();
-                Toast.makeText(context, "Copied", Toast.LENGTH_SHORT);
-            }
-        });
+
     }
-
-
-}
 
     private void doPostRequest() {
         Log.d("Okhttp3:", "doPostRequest function called");
@@ -250,7 +249,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         Log.d("Okhttp3:", "body = \n" + body.toString());
         Log.d("Okhttp3:", "actualData = \n" + actualData.toString());
         Request request = new Request.Builder()
-                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI0MzI3NTUwLCJpYXQiOjE2MjQxMTE1NTB9.4QURscJkD4tAJy3p2DlrL0RUrULSMSbCvWRIA9QUax29DN4Q3LYawSPWXj6LrKN-oQ52VQSM3Dvu7LKwVd1GYw")
+                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI1MDcyMDE3LCJpYXQiOjE2MjQ4NTYwMTd9.uE9tGQyZKRc3KvKBQjHiRoM61fEGNx2DysN8fLAilHRm4yM5z9-68tA-5dBbxIkJ4HuNkniPUKY9dKIVN2oxrQ")
                 .url(url)
                 .post(body)
                 .build();
@@ -262,10 +261,28 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
 
             submitted = 1;
+            final String toast_message;
+
+            if(response.code() == 200){
+                toast_message = "Quiz Created Succesfully";
+                //clear Quiz data
+                GlobalData.clear();
+            }
+            else {
+                toast_message = "Something Went Wrong";
+            }
+
+            if (context != null) {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, toast_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
 
-            //clear Quiz data
-            GlobalData.clear();
 
         } catch (IOException e) {
             Log.d("Okhttp3:", "IOEXCEPTION while request");
@@ -278,48 +295,46 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         return questions.size();
     }
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView questionNumber;
-    public TextView question;
-    public ImageView quizImage;
-    public RadioButton answer1;
-    public RadioButton answer2;
-    public RadioButton answer3;
-    public RadioButton answer4;
-    public RadioGroup ans;
-    public TextView correctAnswer;
-    public Button deleteQuestion;
-    public Button modifyQuestion;
-    public Button submitQuiz;
-    public Button copyQuizLink;
-    public Button finishQuiz;
+        public TextView questionNumber;
+        public TextView question;
+        public ImageView quizImage;
+        public RadioButton answer1;
+        public RadioButton answer2;
+        public RadioButton answer3;
+        public RadioButton answer4;
+        public RadioGroup ans;
+        public Button deleteQuestion;
+        public Button modifyQuestion;
+        public Button submitQuiz;
+        public Button copyQuizLink;
+        public Button finishQuiz;
 
-    public ViewHolder(View itemView) {
-        super(itemView);
+        public ViewHolder(View itemView) {
+            super(itemView);
 
-        view = itemView;
+            view = itemView;
 
-        this.questionNumber = itemView.findViewById(R.id.quizNum);
-        this.question = itemView.findViewById(R.id.singleQus);
-        this.quizImage = itemView.findViewById(R.id.quizImage);
-        this.ans = itemView.findViewById(R.id.mcq);
+            this.questionNumber = itemView.findViewById(R.id.quizNum);
+            this.question = itemView.findViewById(R.id.singleQus);
+            this.quizImage = itemView.findViewById(R.id.quizImage);
+            this.ans = itemView.findViewById(R.id.mcq);
 
-        this.answer1 = itemView.findViewById(R.id.ans1);
-        this.answer2 = itemView.findViewById(R.id.ans2);
-        this.answer3 = itemView.findViewById(R.id.ans3);
-        this.answer4 = itemView.findViewById(R.id.ans4);
-        this.correctAnswer = itemView.findViewById(R.id.correctAnswer);
+            this.answer1 = itemView.findViewById(R.id.ans1);
+            this.answer2 = itemView.findViewById(R.id.ans2);
+            this.answer3 = itemView.findViewById(R.id.ans3);
+            this.answer4 = itemView.findViewById(R.id.ans4);
 
-        this.deleteQuestion = itemView.findViewById(R.id.delQus);
-        this.modifyQuestion = itemView.findViewById(R.id.modQus);
-        this.submitQuiz = itemView.findViewById(R.id.subQus);
+            this.deleteQuestion = itemView.findViewById(R.id.delQus);
+            this.modifyQuestion = itemView.findViewById(R.id.modQus);
+            this.submitQuiz = itemView.findViewById(R.id.subQus);
 
-        this.copyQuizLink = itemView.findViewById(R.id.copyLink);
-        this.finishQuiz = itemView.findViewById(R.id.finishQuiz);
+            this.copyQuizLink = itemView.findViewById(R.id.copyLink);
+            this.finishQuiz = itemView.findViewById(R.id.finishQuiz);
 
+        }
     }
-}
 
 
 }
