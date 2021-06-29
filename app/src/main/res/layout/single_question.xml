@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#60A3D9"
-    android:orientation="vertical"
     android:paddingTop="70dp"
     android:visibility="visible">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:paddingBottom="15dp">
+        android:layout_centerVertical="true" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,14 +107,6 @@
 
             </RadioGroup>
 
-            <TextView
-                android:id="@+id/correctAnswer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="20dp"
-                android:text="TextView" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -155,29 +145,8 @@
                     android:layout_gravity="center"
                     android:visibility="gone"/>
             </LinearLayout>
-            <Button
-                android:id="@+id/subQus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/button_background"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="Submit Quiz"
-                android:textStyle="italic" />
 
-            <Button
-                android:id="@+id/copyLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/button_background"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Copy Quiz ID"
-                android:textStyle="italic" />
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>
