@@ -1,6 +1,8 @@
 package com.example.quizme;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -263,8 +265,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
         Log.d("Okhttp3:", "Requestbody created");
         Log.d("Okhttp3:", "body = \n" + body.toString());
         Log.d("Okhttp3:", "actualData = \n" + actualData.toString());
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        String jwt=pref.getString("jwt",null);
+        Log.d("Okhttp3:", "jwt = "+jwt);
         Request request = new Request.Builder()
-                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI1MDcyMDE3LCJpYXQiOjE2MjQ4NTYwMTd9.uE9tGQyZKRc3KvKBQjHiRoM61fEGNx2DysN8fLAilHRm4yM5z9-68tA-5dBbxIkJ4HuNkniPUKY9dKIVN2oxrQ")
+                .header("Authorization", "Bearer "+jwt)
                 .url(url)
                 .post(body)
                 .build();
