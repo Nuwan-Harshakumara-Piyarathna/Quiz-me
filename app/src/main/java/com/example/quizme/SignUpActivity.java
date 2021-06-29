@@ -64,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(fNameText.isEmpty()){
             fstName.setError("First Name can't be Empty");
             return false;
+
         }else if(fNameText.length()<4 || fNameText.length()>10){
             fstName.setError("First Name should have at least 4 characters");
             return false;
@@ -80,6 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(userText.isEmpty()){
             user.setError("User Name can't be Empty");
             return false;
+
         }else if(lNameText.length()<4 || lNameText.length()>10){
             fstName.setError("User Name should have at least 4 characters");
             return false;
@@ -192,6 +194,8 @@ public class SignUpActivity extends AppCompatActivity {
                 toast.show();
             } else {
                 try {
+                    Toast toast=Toast.makeText(con, "Registered Successfully", Toast.LENGTH_SHORT);
+                    toast.show();
                     Intent intent = new Intent(con, LoginActivity.class);
                     con.startActivity(intent);
                 } catch (Exception e) {
