@@ -15,10 +15,9 @@ public class Question {
     private int correctAns;
     private int clientAns;
     private Uri imageUri;
-    private int correctAnswer;
     private ArrayList<String> answers = new ArrayList<>();
 
-    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri,int correctAnswer) {
+    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, Uri imageUri,int correctAns) {
         this.question = question;
         this.questionNum = questionNum;
         this.answer1 = answer1;
@@ -26,18 +25,18 @@ public class Question {
         this.answer3 = answer3;
         this.answer4 = answer4;
         this.imageUri = imageUri;
-        this.correctAnswer = correctAnswer;
+        this.correctAns = correctAns;
         setAnswerList();
     }
 
-    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4,int correctAnswer) {
+    public Question(String question, int questionNum, String answer1, String answer2, String answer3, String answer4,int correctAns) {
         this.question = question;
         this.questionNum = questionNum;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
-        this.correctAnswer = correctAnswer;
+        this.correctAns = correctAns;
         setAnswerList();
     }
 
@@ -102,11 +101,11 @@ public class Question {
     }
 
     public int getCorrectAnswer() {
-        return correctAnswer;
+        return correctAns;
     }
 
     public void setCorrectAnswer(int correctAnswer) {
-        this.correctAnswer = correctAnswer;
+        this.correctAns = correctAnswer;
     }
 
     public void setAnswerList(){

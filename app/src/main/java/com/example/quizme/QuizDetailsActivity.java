@@ -26,8 +26,8 @@ import java.util.Calendar;
 
 public class QuizDetailsActivity extends AppCompatActivity {
 
-    Button nextBtn;
-    EditText name,startDate,startTime,duration;
+    private Button nextBtn;
+    private static EditText name,startDate,startTime,duration;
     TextInputLayout tName,tStartDate,tStartTime,tDuration;
     DatePickerDialog.OnDateSetListener setListener;
     String quiz_name,quiz_startTime,quiz_startDate,quiz_duration;
@@ -69,7 +69,7 @@ public class QuizDetailsActivity extends AppCompatActivity {
                         //set hour and minute
                         calendar.set(0,0,0,hour,minute);
                         //set selected time on text View
-                        SimpleDateFormat format1 = new SimpleDateFormat("HH:mm aa");
+                        SimpleDateFormat format1 = new SimpleDateFormat("HH:mm");
                         startTime.setText(format1.format(calendar.getTime()));
                     }
                 },24,0,false);
@@ -188,7 +188,7 @@ public class QuizDetailsActivity extends AppCompatActivity {
                     GlobalData.setDuration(quiz_duration);
 
                     //create link
-                    GlobalData.setLink(randomString(15));
+                    GlobalData.setLink(randomString(6));
 
                     Intent in = new Intent(QuizDetailsActivity.this, CreateQuestionActivity.class);
                     in.putExtra("status",0);
@@ -208,5 +208,12 @@ public class QuizDetailsActivity extends AppCompatActivity {
         for(int i = 0; i < len; i++)
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
+    }
+
+    static void clearTexts(){
+        name.setText("");
+        startTime.setText("");
+        startDate.setText("");
+        duration.setText("");
     }
 }

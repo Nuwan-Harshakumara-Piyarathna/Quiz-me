@@ -2,6 +2,7 @@ package com.example.quizme;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,9 +75,20 @@ public class QuizFragment extends Fragment {
                             Toast.makeText(getContext(), "Question Id is empty", Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            try{
+
+                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPreferences",getContext().MODE_PRIVATE);
+                                String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI1MDcyMDE3LCJpYXQiOjE2MjQ4NTYwMTd9.uE9tGQyZKRc3KvKBQjHiRoM61fEGNx2DysN8fLAilHRm4yM5z9-68tA-5dBbxIkJ4HuNkniPUKY9dKIVN2oxrQ";
+
+                                //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
                             String Url = "https://quizmeonline.herokuapp.com/quiz/join/"+tmp;
-                            String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhdGh1cmEiLCJleHAiOjE2MjQyOTcyNDIsImlhdCI6MTYyNDA4MTI0Mn0.87Li1pOc4xl1Iv7uz82veO38cN_MGHV6m7MP4mZDVshgEqq9W-WlCuxPQJc3_O_uApb5sH6ib9BobZSxXCDF-g";
                             getQuiz(Url,token);
+                            }
+                            catch(Exception e){
+                                e.printStackTrace();
+                            }
+
+
 
                         }
 
@@ -125,16 +137,20 @@ public class QuizFragment extends Fragment {
 
                         try {
 
+                            //Toast.makeText(getContext(), "Hi", Toast.LENGTH_SHORT).show();
+
                             JSONArray questions = (JSONArray) response.get("problems");
                             for(int i=0;i<questions.length();i++){
 
                                 singleQuestion = (JSONObject) questions.get(i);
                                 answers = (JSONArray) singleQuestion.get("answers");
                                 correctAnswer = singleQuestion.getInt("correctAnswer");
+
                                 title = singleQuestion.getString("question");
                                 Log.e("title",title);
                                 Question tmpQuestion = new Question(title,i,answers.getString(0),answers.getString(1),answers.getString(2),answers.getString(3),correctAnswer);
                                 GlobalData.addClientQuestion(tmpQuestion);
+                                Log.e("corretA",String.valueOf(tmpQuestion.getCorrectAns()));
 
 
                             }
