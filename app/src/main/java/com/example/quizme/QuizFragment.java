@@ -1,5 +1,6 @@
 package com.example.quizme;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -87,8 +88,8 @@ public class QuizFragment extends Fragment {
                         else {
                             try{
 
-                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPreferences",getContext().MODE_PRIVATE);
-                                String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI1MDcyMDE3LCJpYXQiOjE2MjQ4NTYwMTd9.uE9tGQyZKRc3KvKBQjHiRoM61fEGNx2DysN8fLAilHRm4yM5z9-68tA-5dBbxIkJ4HuNkniPUKY9dKIVN2oxrQ";
+                                SharedPreferences pref = getContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                                String token=pref.getString("jwt",null);
 
                                 //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
                             String Url = "https://quizmeonline.herokuapp.com/quiz/join/"+tmp;
