@@ -14,6 +14,7 @@ public class GlobalData {
     private static ArrayList<Question> problems = new ArrayList<>();
     private static Question modifiedQuestion;
     public static ArrayList<Question> clientQuestions = new ArrayList<>();
+    private static LeaderBoard[] leaderBoards;
 
     public static Question getModifiedQuestion() {
         return modifiedQuestion;
@@ -165,4 +166,26 @@ public class GlobalData {
         return markList;
     }
 
+    public static LeaderBoard[] getLeaderBoards() {
+        return leaderBoards;
+    }
+
+    public static void setLeaderBoards(LeaderBoard[] leaderBoards) {
+
+        GlobalData.leaderBoards = new LeaderBoard[leaderBoards.length];
+        GlobalData.leaderBoards = leaderBoards;
+    }
+
+    public static String getLeaderBoardName(int index){
+        return leaderBoards[index].getQuizName();
+
+    }
+
+    public static int getLeaderBoardLength(){
+        return leaderBoards.length;
+    }
+
+    public static LeaderBoard getLeaderBoard(int index){
+        return leaderBoards[index];
+    }
 }
