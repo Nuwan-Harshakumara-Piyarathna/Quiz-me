@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuizDetailsActivity" android:label="Quiz Details"></activity>
-
-        <activity android:name=".QuizResultActivity"></activity>
+        <activity android:name=".LeaderBoardActivity"></activity>
+        <activity
+            android:name=".QuizDetailsActivity"
+            android:label="Quiz Details" />
+        <activity android:name=".QuizResultActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".CreateQuestionActivity" />
         <activity android:name=".HomeActivity" />
@@ -27,9 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PopUpSubmission" android:theme="@style/AppTheme.CustomTheme"/>
+        <activity
+            android:name=".PopUpSubmission"
+            android:theme="@style/AppTheme.CustomTheme" />
     </application>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>
