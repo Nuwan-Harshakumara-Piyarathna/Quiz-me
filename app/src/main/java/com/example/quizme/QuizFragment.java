@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -41,6 +42,15 @@ public class QuizFragment extends Fragment {
 
         Button qBtn =  (Button) quizFrag.findViewById(R.id.quizBtn);
         qBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), QuizDetailsActivity.class);
+                in.putExtra("status",0);
+                startActivity(in);
+            }
+        });
+        CardView createCard = (CardView) quizFrag.findViewById(R.id.create_card);
+        createCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(getActivity(), QuizDetailsActivity.class);
