@@ -43,11 +43,11 @@ import okhttp3.Response;
 public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.ViewHolder> {
 
 
-    ArrayList<QuizResult> markList;
+    LeaderBoard leaderBoard;
 
 
-    public LeaderBoardAdapter(ArrayList<QuizResult> markList) {
-        this.markList = markList;
+    public LeaderBoardAdapter(LeaderBoard leaderBoard) {
+        this.leaderBoard=leaderBoard;
     }
 
 
@@ -62,8 +62,10 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        holder.name.setText(markList.get(position).getParticipantName());
-        holder.marks.setText(String.valueOf(markList.get(position).getMarks()));
+        SingleResult singleResult = leaderBoard.getSingleResult(position);
+
+        holder.name.setText(singleResult.getUser());
+        holder.marks.setText(String.valueOf(singleResult.getMarks()));
 
     }
 
@@ -71,7 +73,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
     @Override
     public int getItemCount() {
-        return markList.size();
+        return leaderBoard.getLBLength();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
