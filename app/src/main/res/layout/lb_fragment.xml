@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,88 +7,10 @@
     android:background = "#FFFFFF"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/qNamesRev"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_back_24"
-                android:padding="15dp"
-                android:layout_centerVertical="true"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="leaderboard"
-            android:textStyle="bold"
-            android:textSize="35sp"
-            android:fontFamily="sans-serif-black"
-            android:textAllCaps="true"
-            android:paddingLeft="10dp"
-            android:paddingBottom="20dp"/>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#00000000"
-                    app:cardElevation="8dp">
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="75dp"
-                        android:background="@drawable/card_color">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="monospace"
-                            android:padding="10dp"
-                            android:text="Quiz 1"
-                            android:textColor="#000000"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
-
-                        <Button
-                            android:id="@+id/getRes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/btn_background"
-                            android:padding="2dp"
-                            android:text="Open" />
-
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-        </ScrollView>
-
-
-    </LinearLayout>
-
-</ScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
