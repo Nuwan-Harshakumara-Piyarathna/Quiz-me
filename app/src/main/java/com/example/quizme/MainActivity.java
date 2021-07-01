@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                                 for(int j=0;j<tmpMarkList.length();j++){
 
                                     tmp = (JSONObject)tmpMarkList.get(j);
-                                    tmpResultList[j] = new SingleResult(tmp.getString("user"),(float)tmp.getDouble("marks"));
+                                    tmpResultList[j] = new SingleResult(tmp.getString("name"),(float)tmp.getDouble("marks"));
                                 }
 
 
