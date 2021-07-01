@@ -96,6 +96,14 @@ public class QuizDetailsActivity extends AppCompatActivity {
                         //set selected time on text View
                         SimpleDateFormat format1 = new SimpleDateFormat("HH:mm");
                         startTime.setText(format1.format(calendar.getTime()));
+                        quiz_startTime = startTime.getText().toString().trim();
+                        tStartTime.setError(null);
+                        if(quiz_startTime.length() == 0){
+                            tStartTime.setError("*Start Time is Required");
+                        }
+                        if (quiz_startTime.length() != 0 && !quiz_startTime.matches("\\d{2}:\\d{2}")) {
+                            tStartTime.setError("*Start Time wrong format");
+                        }
                     }
                 },24,0,false);
                 //display previous selected time
@@ -119,6 +127,14 @@ public class QuizDetailsActivity extends AppCompatActivity {
 
                         quiz_startDate = newDate;
                         startDate.setText(quiz_startDate);
+                        quiz_startDate = startDate.getText().toString().trim();
+                        tStartDate.setError(null);
+                        if(quiz_startDate.length() == 0){
+                            tStartDate.setError("*Start Date is Required");
+                        }
+                        if (quiz_startDate.length() != 0 && !quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                            tStartDate.setError("*Start Date wrong format");
+                        }
                     }
                 },year,month,day);
                 datePickerDialog.show();

@@ -210,10 +210,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0) {
 
                     if (imageUri != null) {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,1);
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,correctAnswer);
 
                     } else {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,1);
+                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,correctAnswer);
                     }
 
                     GlobalData.addQuestion(tmpQuestion);
