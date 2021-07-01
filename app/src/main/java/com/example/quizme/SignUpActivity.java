@@ -3,6 +3,8 @@ package com.example.quizme;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.quizme.utility.NetworkChangeListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -32,6 +36,23 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText fName,lName,userName,passwordOne,passwordTwo;
     private TextInputLayout fstName,lstName,user,passOne,passTwo;
     String fNameText,lNameText,userText,passText,cPassText;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

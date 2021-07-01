@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,8 +17,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 
+import com.example.quizme.utility.NetworkChangeListener;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.SecureRandom;
@@ -31,7 +35,25 @@ public class QuizDetailsActivity extends AppCompatActivity {
     TextInputLayout tName,tStartDate,tStartTime,tDuration;
     DatePickerDialog.OnDateSetListener setListener;
     String quiz_name,quiz_startTime,quiz_startDate,quiz_duration;
+    ImageButton calenderPicker,watch;
     int hour,minute;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +71,15 @@ public class QuizDetailsActivity extends AppCompatActivity {
         tStartTime = findViewById(R.id.outlinedTextField_startTime);
         tDuration = findViewById(R.id.outlinedTextField_duration);
 
+        calenderPicker = findViewById(R.id.calender);
+        watch = findViewById(R.id.watch);
+
         Calendar calender = Calendar.getInstance();
         final int year = calender.get(Calendar.YEAR);
         final int month = calender.get(Calendar.MONTH);
         final int day = calender.get(Calendar.DAY_OF_MONTH);
 
-        startTime.setOnClickListener(new View.OnClickListener() {
+        watch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //initialize time picker dialog
@@ -82,7 +107,7 @@ public class QuizDetailsActivity extends AppCompatActivity {
 
 
 
-        startDate.setOnClickListener(new View.OnClickListener() {
+        calenderPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(QuizDetailsActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -173,10 +198,19 @@ public class QuizDetailsActivity extends AppCompatActivity {
                 if(quiz_duration.length() == 0){
                     tDuration.setError("*Duration is Required");
                 }
-                if (!quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                if(quiz_duration.length() == 0){
+                    tDuration.setError("*Duration is Required");
+                }
+                if(quiz_startDate.length() == 0){
+                    tStartDate.setError("*Start Date is Required");
+                }
+                if(quiz_startTime.length() == 0){
+                    tStartTime.setError("*Start Time is Required");
+                }
+                if (quiz_startDate.length() != 0 && !quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
                     tStartDate.setError("*Start Date wrong format");
                 }
-                if (!quiz_startTime.matches("\\d{2}:\\d{2}")) {
+                if (quiz_startTime.length() != 0 && !quiz_startTime.matches("\\d{2}:\\d{2}")) {
                     tStartTime.setError("*Start Time wrong format");
                 }
 
