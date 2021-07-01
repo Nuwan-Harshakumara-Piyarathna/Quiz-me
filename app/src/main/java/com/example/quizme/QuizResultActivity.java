@@ -2,13 +2,34 @@ package com.example.quizme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.quizme.utility.NetworkChangeListener;
 
 public class QuizResultActivity extends AppCompatActivity {
 
     TextView marks;
     TextView totalMarks;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

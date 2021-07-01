@@ -1,11 +1,15 @@
 package com.example.quizme;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.quizme.utility.NetworkChangeListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -39,9 +44,10 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText userName,password;
     private TextInputLayout user,pass;
     String userText,passText;
-
+    LoadingDialog loadDialog;
     Button button;
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +62,52 @@ public class LoginActivity extends AppCompatActivity {
         user = findViewById(R.id.loginUsername);
         pass = findViewById(R.id.loginPassword);
         button = findViewById(R.id.loginBtn);
-
+        loadDialog = new LoadingDialog(LoginActivity.this);
     }
     public void goReg(View v){
 
         Intent intent = new Intent(this,SignUpActivity.class);
         this.startActivity(intent);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to Exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        LoginActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
     }
 
     private boolean validateFields() {
@@ -92,8 +137,12 @@ public class LoginActivity extends AppCompatActivity {
         final String userName = userText;
         final String password = passText;
 
-        WebRequest webRequest = new WebRequest(this);
+        loadDialog = new LoadingDialog(LoginActivity.this);
+        loadDialog.startLoadingDialog();
+
+        WebRequest webRequest = new WebRequest(this,loadDialog);
         webRequest.execute(userName,password);
+
 
 
     }
@@ -101,8 +150,11 @@ public class LoginActivity extends AppCompatActivity {
     private class WebRequest extends AsyncTask<String,String,String> {
 
         Context con;
-        public WebRequest(Context con){
+        LoadingDialog ld;
+
+        public WebRequest(Context con, LoadingDialog ld){
             this.con=con;
+            this.ld=ld;
         }
 
 
@@ -164,7 +216,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            ld.dismissDialog();
             if(s==null){
                 Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
                 toast.show();
@@ -200,6 +252,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
+
     }
 }
 

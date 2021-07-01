@@ -6,4 +6,10 @@
     <color name="hint_color">#9A1E1E</color>
     <color name="primaryGray">#655555</color>
     <color name="bottomNav">#344955</color>
+
+<!--    Connection colors-->
+    <color name="colorOnPrimaryConnection">#fff</color>
+    <color name="colorPrimaryConnection">#554911</color>
+    <color name="colorOnPrimaryLightConnection">#EEE3AB</color>
+    <color name="colorAccentConnection">#665815</color>
 </resources>
