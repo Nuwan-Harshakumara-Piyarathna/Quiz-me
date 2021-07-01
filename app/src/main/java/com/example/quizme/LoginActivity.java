@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText userName,password;
     private TextInputLayout user,pass;
     String userText,passText;
-
+    LoadingDialog loadDialog;
     Button button;
 
 
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         user = findViewById(R.id.loginUsername);
         pass = findViewById(R.id.loginPassword);
         button = findViewById(R.id.loginBtn);
-
+        loadDialog = new LoadingDialog(LoginActivity.this);
     }
     public void goReg(View v){
 
@@ -92,8 +92,12 @@ public class LoginActivity extends AppCompatActivity {
         final String userName = userText;
         final String password = passText;
 
-        WebRequest webRequest = new WebRequest(this);
+        loadDialog = new LoadingDialog(LoginActivity.this);
+        loadDialog.startLoadingDialog();
+
+        WebRequest webRequest = new WebRequest(this,loadDialog);
         webRequest.execute(userName,password);
+
 
 
     }
@@ -101,8 +105,11 @@ public class LoginActivity extends AppCompatActivity {
     private class WebRequest extends AsyncTask<String,String,String> {
 
         Context con;
-        public WebRequest(Context con){
+        LoadingDialog ld;
+
+        public WebRequest(Context con, LoadingDialog ld){
             this.con=con;
+            this.ld=ld;
         }
 
 
@@ -164,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            ld.dismissDialog();
             if(s==null){
                 Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
                 toast.show();
