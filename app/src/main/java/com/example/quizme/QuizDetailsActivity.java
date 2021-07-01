@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 
+import com.example.quizme.utility.NetworkChangeListener;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.SecureRandom;
@@ -34,6 +37,23 @@ public class QuizDetailsActivity extends AppCompatActivity {
     String quiz_name,quiz_startTime,quiz_startDate,quiz_duration;
     ImageButton calenderPicker,watch;
     int hour,minute;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
