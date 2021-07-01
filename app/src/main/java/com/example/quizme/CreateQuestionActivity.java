@@ -239,7 +239,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
     private void doPostRequest() {
         Log.d("Okhttp3:", "doPostRequest function called");
-        String url = "https://quizmeonline.herokuapp.com/quiz/add";
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        String baseURL =pref.getString("baseURL",null);
+        String url = baseURL + "/quiz/add";
 //        OkHttpClient client = new OkHttpClient();
 
         OkHttpClient client = new OkHttpClient.Builder()
@@ -286,7 +288,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
         Log.d("Okhttp3:", "Requestbody created");
         Log.d("Okhttp3:", "body = \n" + body.toString());
         Log.d("Okhttp3:", "actualData = \n" + actualData.toString());
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         String jwt=pref.getString("jwt",null);
         Log.d("Okhttp3:", "jwt = "+jwt);
         Request request = new Request.Builder()
