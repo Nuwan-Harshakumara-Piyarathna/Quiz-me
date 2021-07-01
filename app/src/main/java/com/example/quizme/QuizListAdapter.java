@@ -126,7 +126,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     //Log.e("selected",String.valueOf(i-2131230795));
                     Question tmpQuestion = questions.get(position);
-                    tmpQuestion.setClientAns(i - 2131230795);
+                    tmpQuestion.setClientAns(i - 2131230796);
                     questions.set(position, tmpQuestion);
                     GlobalData.modifyClientQuestion(position, tmpQuestion);
                     Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
