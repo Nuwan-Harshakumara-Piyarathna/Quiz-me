@@ -82,6 +82,7 @@ public class QuizFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         String tmp = qId.getText().toString().trim();
+                        GlobalData.setQuizId(tmp);
                         if(tmp.length() == 0) {
                             Toast.makeText(getContext(), "Question Id is empty", Toast.LENGTH_SHORT).show();
                         }
@@ -90,9 +91,11 @@ public class QuizFragment extends Fragment {
 
                                 SharedPreferences pref = getContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
                                 String token=pref.getString("jwt",null);
+                                String baseURL=pref.getString("baseURL",null);
 
                                 //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
-                            String Url = "https://quizmeonline.herokuapp.com/quiz/join/"+tmp;
+                            String Url = baseURL+"/quiz/join/"+tmp;
+                                //Toast.makeText(getContext(), Url, Toast.LENGTH_SHORT).show();
                             getQuiz(Url,token);
                             }
                             catch(Exception e){
@@ -147,8 +150,7 @@ public class QuizFragment extends Fragment {
 
 
                         try {
-
-                            //Toast.makeText(getContext(), "Hi", Toast.LENGTH_SHORT).show();
+                            
 
                             JSONArray questions = (JSONArray) response.get("problems");
                             for(int i=0;i<questions.length();i++){

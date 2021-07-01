@@ -54,6 +54,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("baseURL", "https://quizmeonline.herokuapp.com");
+        editor.commit();
+
         //text field
         userName = findViewById(R.id.name);
         password = findViewById(R.id.pass);
@@ -177,8 +182,13 @@ public class LoginActivity extends AppCompatActivity {
 
             RequestBody body = RequestBody.create(data.toString(), Json);
 
+
+
+            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL =pref.getString("baseURL",null);
+
             Request request = new Request.Builder().url(
-                    "https://quizmeonline.herokuapp.com/all/login"
+                    baseURL+"/all/login"
             ).post(body).build();
 
             Response response = null;
