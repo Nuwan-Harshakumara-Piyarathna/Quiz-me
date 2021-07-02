@@ -2,6 +2,7 @@ package com.example.quizme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -21,6 +22,8 @@ import android.widget.ImageButton;
 import android.widget.TimePicker;
 
 import com.example.quizme.utility.NetworkChangeListener;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.SecureRandom;
@@ -246,7 +249,6 @@ public class QuizDetailsActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
