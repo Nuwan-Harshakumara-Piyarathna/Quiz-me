@@ -21,6 +21,9 @@
             android:label="Quiz Details" />
         <activity android:name=".QuizResultActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".HostedQuizActivity" />
+        <activity android:name=".EditQuestionActivity" />
+        <activity android:name=".EditQuizActivity" />
         <activity android:name=".CreateQuestionActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".PastQuizActivity" />

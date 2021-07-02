@@ -76,7 +76,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             holder.quizImage.setImageURI(tmpQuestion.getImageUri());
         }
 
-
         holder.answer1.setText(tmpQuestion.getAnswer1().trim());
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
