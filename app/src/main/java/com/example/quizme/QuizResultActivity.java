@@ -53,6 +53,8 @@ public class QuizResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_result);
 
+        GlobalData.stopTimer();
+
         WebRequest webRequest = new WebRequest(getApplicationContext());
         webRequest.execute();
 
