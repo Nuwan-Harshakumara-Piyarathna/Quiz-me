@@ -17,6 +17,7 @@
             android:id="@+id/schedule_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
             android:layout_margin="20dp">
 
             <LinearLayout
@@ -114,6 +115,7 @@
                         android:layout_height="wrap_content"
                         android:text="Forget your password?"
                         android:clickable="true"
+                        android:visibility="invisible"
                         android:textColor="@drawable/text_click"
                         android:layout_marginTop="5dp"
                         android:textAlignment="center"

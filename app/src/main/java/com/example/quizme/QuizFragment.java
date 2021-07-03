@@ -60,8 +60,9 @@ public class QuizFragment extends Fragment {
             }
         });
 
+        CardView joinCard = (CardView) quizFrag.findViewById(R.id.join_card);
         Button takeQuiz = (Button) quizFrag.findViewById(R.id.takeQuiz);
-        takeQuiz.setOnClickListener(new View.OnClickListener() {
+        joinCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
