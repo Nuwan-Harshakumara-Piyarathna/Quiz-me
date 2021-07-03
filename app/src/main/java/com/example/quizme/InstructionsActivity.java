@@ -90,6 +90,8 @@ public class InstructionsActivity extends Activity {
         listDataHeader.add(getResources().getString(R.string.instructions_activity_header_8));
         listDataHeader.add(getResources().getString(R.string.instructions_activity_header_9));
         listDataHeader.add(getResources().getString(R.string.instructions_activity_header_10));
+        listDataHeader.add(getResources().getString(R.string.instructions_activity_header_11));
+
         // Adding child data
         List<String> instruction1 = new ArrayList<>();
         instruction1.add(getResources().getString(R.string.instructions_activity_header_1_child_data));
@@ -111,6 +113,8 @@ public class InstructionsActivity extends Activity {
         instruction9.add(getResources().getString(R.string.instructions_activity_header_9_child_data));
         List<String> instruction10 = new ArrayList<>();
         instruction10.add(getResources().getString(R.string.instructions_activity_header_10_child_data));
+        List<String> instruction11 = new ArrayList<>();
+        instruction11.add(getResources().getString(R.string.instructions_activity_header_11_child_data));
         listDataChild.put(listDataHeader.get(0), instruction1);
         listDataChild.put(listDataHeader.get(1), instruction2);
         listDataChild.put(listDataHeader.get(2), instruction3);
@@ -121,5 +125,6 @@ public class InstructionsActivity extends Activity {
         listDataChild.put(listDataHeader.get(7), instruction8);
         listDataChild.put(listDataHeader.get(8), instruction9);
         listDataChild.put(listDataHeader.get(9), instruction10);
+        listDataChild.put(listDataHeader.get(10), instruction11);
     }
 }

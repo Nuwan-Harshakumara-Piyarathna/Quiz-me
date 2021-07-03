@@ -45,10 +45,6 @@
     <color name="activity_profile_weight_value_text_color">#ffffff</color>
     <color name="activity_profile_next_button_text_color">#ffffff</color>
 
-    <!--fragment_settings.xml-->
-    <color name="fragment_settings_background_color">#534bae</color>
-    <color name="fragment_settings_text_color">#ffffff</color>
-
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="orange">#ff7f00</color>
