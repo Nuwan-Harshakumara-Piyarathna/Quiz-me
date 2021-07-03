@@ -93,6 +93,14 @@ public class EditQuestionActivity extends AppCompatActivity {
         this.startActivity(intent);
 
     }
+    public void backHome(View v) {
+
+        Intent intent = new Intent(getApplicationContext(), HostedQuizActivity.class);
+        startActivity(intent);
+
+    }
+
+
 
     private class WebRequest extends AsyncTask<String, String, String> {
 

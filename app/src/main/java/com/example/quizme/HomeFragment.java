@@ -25,25 +25,6 @@ public class HomeFragment extends Fragment {
         CardView schedule_card = homeFrag.findViewById(R.id.schedule_card);
         CardView past_card = homeFrag.findViewById(R.id.past_card);
 
-        CardView scheduleCard = homeFrag.findViewById(R.id.schedule_card);
-        CardView pastQuizCard = homeFrag.findViewById(R.id.past_card);
-
-        scheduleCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), HostedQuizActivity.class);
-                getContext().startActivity(intent);
-            }
-        });
-
-        past_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), PastQuizActivity.class);
-                getContext().startActivity(intent);
-            }
-        });
-
         schBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +51,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        pastQuizCard.setOnClickListener(new View.OnClickListener() {
+        past_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), PastQuizActivity.class);
