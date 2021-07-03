@@ -75,14 +75,13 @@ public class EditQuizActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String quiz= intent.getExtras().getString("quiz",null);
         int Qnum = intent.getExtras().getInt("Qnum",-1);
-        JSONObject json = null;
+
         JSONArray problems =  null;
         JSONArray answers =  null;
         int correctAns = 0;
         String question=null,ans1=null,ans2=null,ans3=null,ans4=null;
         try {
-            json = new JSONObject(quiz);
-            problems = json.getJSONArray("problems");
+            problems = new JSONArray(quiz);
             question = problems.getJSONObject(Qnum).getString("question");
             answers = problems.getJSONObject(Qnum).getJSONArray("answers");
             correctAns = problems.getJSONObject(Qnum).getInt("correctAnswer");
@@ -158,8 +157,6 @@ public class EditQuizActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
 
     }

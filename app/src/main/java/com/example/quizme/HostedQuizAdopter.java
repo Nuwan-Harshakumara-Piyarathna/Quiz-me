@@ -44,8 +44,9 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
         holder.schBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent in = new Intent(view.getContext(), EditQuestionActivity.class);
+                        Intent in = new Intent(view.getContext(), EditQuizDetailsActivity.class);
                         in.putExtra("quiz",hostedQuizModels.get(position).getQuiz().toString());
+                        in.putExtra("quizID",position);
                         view.getContext().startActivity(in);
                     }
         });

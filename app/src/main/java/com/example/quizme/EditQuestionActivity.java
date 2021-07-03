@@ -1,12 +1,18 @@
 package com.example.quizme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.quizme.utility.NetworkChangeListener;
@@ -15,11 +21,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class EditQuestionActivity extends AppCompatActivity {
 
+    EditQuestionadapter adapter;
+    ViewPager2 viewPager2;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+    int quizID;
+    String mongoID;
 
     @Override
     protected void onStart() {
@@ -40,27 +56,14 @@ public class EditQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_questions);
+
         Intent intent = getIntent();
-        String quiz= intent.getExtras().getString("quiz",null);
-        JSONObject json = null;
-        JSONArray problems =  null;
-        try {
-            json = new JSONObject(quiz);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-             problems = json.getJSONArray("problems");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        quizID = intent.getExtras().getInt("quizID");
+        WebRequest webRequest = new WebRequest(this);
+        webRequest.execute();
 
-        EditQuestionadapter adapter;
-        ViewPager2 viewPager2 = findViewById(R.id.singleQ);
 
-        adapter = new EditQuestionadapter(problems, json,this);
-
-        viewPager2.setAdapter(adapter);
+        viewPager2 = findViewById(R.id.singleQ);
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -80,9 +83,93 @@ public class EditQuestionActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void newQuestion(View v){
+
+        Intent intent = new Intent(this, NewQuestionEditActivity.class);
+        intent.putExtra("quizId",mongoID);
+        this.startActivity(intent);
+
+    }
+
+    private class WebRequest extends AsyncTask<String, String, String> {
+
+        Context con;
+
+        public WebRequest(Context con) {
+            this.con = con;
+        }
 
 
+        @Override
+        protected String doInBackground(String... strings) {
 
+
+            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String jwt = pref.getString("jwt", null);
+            final String token = "Bearer " + jwt;
+
+            OkHttpClient client = new OkHttpClient();
+            MediaType Json = MediaType.parse("application/json;charset=utf-8");
+            JSONObject data = new JSONObject();
+            String val = "";
+
+            RequestBody body = RequestBody.create(data.toString(), Json);
+
+            okhttp3.Request request = new okhttp3.Request.Builder().url(
+                    "https://quizmeonline.herokuapp.com/quiz/find/created/quizzes"
+            ).header("Authorization", token).build();
+
+
+            Response response = null;
+            String responseBody = null;
+
+
+            try {
+                response = client.newCall(request).execute();
+                responseBody = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (response.code() == 200) {
+
+                return responseBody;
+
+            }
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            JSONObject json = null;
+            JSONArray val = null;
+
+            try {
+                json = new JSONObject(s);
+                val = json.getJSONArray("createdQuizzes");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+           JSONArray problems = null;
+            try {
+                problems = val.getJSONObject(quizID).getJSONArray("problems");
+                mongoID = val.getJSONObject(quizID).getString("id");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            adapter = new EditQuestionadapter(problems,con);
+
+            viewPager2.setAdapter(adapter);
+
+
+        }
     }
 
 
