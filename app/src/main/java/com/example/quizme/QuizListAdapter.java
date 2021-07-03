@@ -101,26 +101,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                         GlobalData.setQuizStatus(1);
                         String label = "Confirm";
 
-                        Date endT = GlobalData.getEndTime();
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                        Date currentT = new Date();
-                        String currentDate = dateFormat.format(currentT);
-                        try {
-                            Date d1 = dateFormat.parse(currentDate);
-                            if(d1.compareTo(endT) >0){
-                                Log.i("message","Quiz is over");
-                                GlobalData.setQuizStatus(0);
-                                builder.setTitle("Time is over...!");
-                                builder.setMessage("Can not submit the quiz now");
-                                label = "OK";
-                            }
-
-
-
-
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
 
 
 
@@ -130,11 +110,10 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
                                 Intent intent;
 
-                                if(GlobalData.getQuizStatus() == 1){
                                     intent = new Intent(view.getContext(), QuizResultActivity.class);
                                     view.getContext().startActivity(intent);
                                     ((Activity) view.getContext()).finish();
-                                }
+
 
 
 

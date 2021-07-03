@@ -7,10 +7,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.quizme.utility.NetworkChangeListener;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -42,8 +50,56 @@ public class HomeActivity extends AppCompatActivity {
         QuizListAdapter adapter;
         ViewPager2 viewPager2 = findViewById(R.id.singleQ);
         if(status == 0) {
+
             adapter = new QuizListAdapter(GlobalData.getProblems(), status,this);
+
         }else{
+
+
+            CountDownTimer timer = new CountDownTimer(GlobalData.getQuizDuration()*60*1000,60*1000){
+
+                @Override
+                public void onTick(long l) {
+
+
+
+
+                    Date endT = GlobalData.getEndTime();
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    Date currentT = new Date();
+                    String currentDate = dateFormat.format(currentT);
+                    try {
+                        Date d1 = dateFormat.parse(currentDate);
+                        if(d1.compareTo(endT) ==0){
+                            Intent intent = new Intent(HomeActivity.this,QuizResultActivity.class);
+                            Toast.makeText(HomeActivity.this,"Quiz is over,submitting the quiz...",Toast.LENGTH_LONG).show();
+                            startActivity(intent);
+
+                            finish();
+
+                        }
+
+
+
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onFinish() {
+                    Intent intent = new Intent(HomeActivity.this,QuizResultActivity.class);
+                    Toast.makeText(HomeActivity.this,"Quiz is over,submitting the quiz...",Toast.LENGTH_LONG).show();
+                    startActivity(intent);
+
+                }
+            };
+            GlobalData.setCountDownTimer(timer);
+            timer.start();
+
+
 
             //creating dummy date
             /*ArrayList<Question> tmpQuestions = new ArrayList<>();
