@@ -1,6 +1,8 @@
 package com.example.quizme;
 
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +54,18 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
                     }
         });
 
+        holder.quizID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copy Link", hostedQuizModels.get(position).getQuizID());
+                clipboard.setPrimaryClip(clip);
+                clip.getDescription();
+                Toast.makeText(view.getContext(), "Copied", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override
@@ -61,6 +76,7 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewName,textViewDate,textViewTime;
+        Button quizID;
         Button schBtn;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
@@ -68,6 +84,7 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
             textViewName = itemView.findViewById(R.id.text_name);
             textViewDate = itemView.findViewById(R.id.text_date);
             textViewTime = itemView.findViewById(R.id.text_time);
+            quizID = itemView.findViewById(R.id.copytoclipboard);
             schBtn = itemView.findViewById(R.id.editBtn);
         }
 
