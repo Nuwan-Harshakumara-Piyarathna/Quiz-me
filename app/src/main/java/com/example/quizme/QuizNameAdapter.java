@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class QuizNameAdapter extends RecyclerView.Adapter<QuizNameAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView quizName;
-        public Button open;
+        public CardView open;
 
         public ViewHolder(View itemView) {
             super(itemView);

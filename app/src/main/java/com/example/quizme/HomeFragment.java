@@ -20,10 +20,19 @@ public class HomeFragment extends Fragment {
 
         ViewGroup homeFrag = (ViewGroup)inflater.inflate(R.layout.home_fragment, container, false);
         Button qBtn = homeFrag.findViewById(R.id.quizTake);
+        Button schBtn = homeFrag.findViewById(R.id.scheduleBtn);
         qBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), PastQuizActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
+
+        schBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), HostedQuizActivity.class);
                 getContext().startActivity(intent);
             }
         });

@@ -1,6 +1,7 @@
 package com.example.quizme;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GlobalData {
 
@@ -16,6 +17,8 @@ public class GlobalData {
     public static ArrayList<Question> clientQuestions = new ArrayList<>();
     private static LeaderBoard[] leaderBoards;
     private static String QuizId;
+    private static Date endTime;
+    private static int quizStatus;
 
 
     public static Question getModifiedQuestion() {
@@ -197,5 +200,21 @@ public class GlobalData {
 
     public static void setQuizId(String quizId) {
         QuizId = quizId;
+    }
+
+    public static Date getEndTime() {
+        return endTime;
+    }
+
+    public static void setEndTime(Date endTime) {
+        GlobalData.endTime = endTime;
+    }
+
+    public static int getQuizStatus() {
+        return quizStatus;
+    }
+
+    public static void setQuizStatus(int quizStatus) {
+        GlobalData.quizStatus = quizStatus;
     }
 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,9 +68,9 @@ public class QuizFragment extends Fragment {
 
         CardView joinCard = (CardView) quizFrag.findViewById(R.id.join_card);
         Button takeQuiz = (Button) quizFrag.findViewById(R.id.takeQuiz);
-        joinCard.setOnClickListener(new View.OnClickListener() {
+        takeQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
 
                 GlobalData.removeAllClientQuestions();
 
@@ -148,12 +154,40 @@ public class QuizFragment extends Fragment {
                         String title;
                         JSONArray answers;
                         int correctAnswer;
+                        String startTime;
+                        String startDate;
+                        int duration;
 
 
                         try {
                             
 
                             JSONArray questions = (JSONArray) response.get("problems");
+                            startTime = response.getString("startTime");
+                            startDate = response.getString("startDate");
+                            duration = response.getInt("duration");
+
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                            Date date = new Date();
+
+                            String currentDate = dateFormat.format(date);
+                            String sDate = startDate+" "+startTime;
+
+                            //compare date
+
+                            Date d1 = dateFormat.parse(currentDate);
+                            Date d2 = dateFormat.parse(sDate);
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(d2);
+                            calendar.add(Calendar.MINUTE,duration);
+                            Date d3 = calendar.getTime();
+                            GlobalData.setEndTime(d3);
+                            Log.i("day1",d1.toString());
+                            Log.i("day2",d2.toString());
+                            Log.i("day3",d3.toString());
+
+
+
                             for(int i=0;i<questions.length();i++){
 
                                 singleQuestion = (JSONObject) questions.get(i);
@@ -168,12 +202,27 @@ public class QuizFragment extends Fragment {
 
 
                             }
-                            Intent in = new Intent(getActivity(), HomeActivity.class);
-                            in.putExtra("status",1);
-                            startActivity(in);
+                            if ((d1.compareTo(d2) >=0) && (d1.compareTo(d3) <=0)) {
+                                Log.i("message","Quiz day");
+                                Log.e("status",".............hi..............");
+                                Intent in = new Intent(getActivity(), HomeActivity.class);
+                                in.putExtra("status",1);
+                                startActivity(in);
+                            }
+                            else if(d1.compareTo(d2) <0){
+                                Log.i("message","Cannot join");
+                                Toast.makeText(getContext(),"Quiz not started yet",Toast.LENGTH_LONG).show();
+                            }
+                            else if(d1.compareTo(d3) >0){
+                                Log.i("message","Quiz is over");
+                                Toast.makeText(getContext(),"Quiz is over,can not join now",Toast.LENGTH_LONG).show();
+                            }
 
 
-                        } catch (JSONException e) {
+
+
+
+                        } catch (JSONException | ParseException e) {
                             e.printStackTrace();
                         }
 

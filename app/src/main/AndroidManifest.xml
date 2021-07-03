@@ -44,6 +44,15 @@
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".HostedQuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditQuestionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditQuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
