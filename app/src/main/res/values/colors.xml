@@ -12,4 +12,6 @@
     <color name="colorPrimaryConnection">#554911</color>
     <color name="colorOnPrimaryLightConnection">#EEE3AB</color>
     <color name="colorAccentConnection">#665815</color>
+    <color name="pink">#FF007F</color>
+
 </resources>
