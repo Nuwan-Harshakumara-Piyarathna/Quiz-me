@@ -30,7 +30,11 @@ import java.io.IOException;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -89,20 +93,53 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 holder.finishQuiz.setVisibility(View.VISIBLE);
                 holder.finishQuiz.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(final View view) {
+                    public void onClick(final View view){
 
                         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(view.getContext());
                         builder.setTitle("Finish Quiz...!");
                         builder.setMessage("Do you want to finish quiz?");
+                        GlobalData.setQuizStatus(1);
+                        String label = "Confirm";
+
+                        Date endT = GlobalData.getEndTime();
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        Date currentT = new Date();
+                        String currentDate = dateFormat.format(currentT);
+                        try {
+                            Date d1 = dateFormat.parse(currentDate);
+                            if(d1.compareTo(endT) >0){
+                                Log.i("message","Quiz is over");
+                                GlobalData.setQuizStatus(0);
+                                builder.setTitle("Time is over...!");
+                                builder.setMessage("Can not submit the quiz now");
+                                label = "OK";
+                            }
 
 
-                        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+                        builder.setPositiveButton(label, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                Intent intent = new Intent(view.getContext(), QuizResultActivity.class);
-                                view.getContext().startActivity(intent);
-                                ((Activity) view.getContext()).finish();
+                                Intent intent;
+
+                                if(GlobalData.getQuizStatus() == 1){
+                                    intent = new Intent(view.getContext(), QuizResultActivity.class);
+                                    view.getContext().startActivity(intent);
+                                    ((Activity) view.getContext()).finish();
+                                }
+
+
+
+
+
 
 
                             }
