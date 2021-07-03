@@ -54,6 +54,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("baseURL", "http://quizme-env.eba-iz7bmwvh.us-east-1.elasticbeanstalk.com");
+        editor.commit();
+
         //text field
         userName = findViewById(R.id.name);
         password = findViewById(R.id.pass);
@@ -68,30 +73,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this,SignUpActivity.class);
         this.startActivity(intent);
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("Are you sure you want to Exit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        LoginActivity.super.onBackPressed();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
 
     }
 
@@ -177,8 +158,14 @@ public class LoginActivity extends AppCompatActivity {
 
             RequestBody body = RequestBody.create(data.toString(), Json);
 
+
+
+            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL =pref.getString("baseURL",null);
+            String url = baseURL+"/all/login";
+            Log.d("URL : ",url);
             Request request = new Request.Builder().url(
-                    "https://quizmeonline.herokuapp.com/all/login"
+                    url
             ).post(body).build();
 
             Response response = null;

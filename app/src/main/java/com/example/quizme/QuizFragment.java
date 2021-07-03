@@ -1,5 +1,6 @@
 package com.example.quizme;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -59,8 +60,9 @@ public class QuizFragment extends Fragment {
             }
         });
 
+        CardView joinCard = (CardView) quizFrag.findViewById(R.id.join_card);
         Button takeQuiz = (Button) quizFrag.findViewById(R.id.takeQuiz);
-        takeQuiz.setOnClickListener(new View.OnClickListener() {
+        joinCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -81,17 +83,20 @@ public class QuizFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         String tmp = qId.getText().toString().trim();
+                        GlobalData.setQuizId(tmp);
                         if(tmp.length() == 0) {
                             Toast.makeText(getContext(), "Question Id is empty", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             try{
 
-                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPreferences",getContext().MODE_PRIVATE);
-                                String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXVkaXlhIiwiZXhwIjoxNjI1MDcyMDE3LCJpYXQiOjE2MjQ4NTYwMTd9.uE9tGQyZKRc3KvKBQjHiRoM61fEGNx2DysN8fLAilHRm4yM5z9-68tA-5dBbxIkJ4HuNkniPUKY9dKIVN2oxrQ";
+                                SharedPreferences pref = getContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                                String token=pref.getString("jwt",null);
+                                String baseURL=pref.getString("baseURL",null);
 
                                 //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
-                            String Url = "https://quizmeonline.herokuapp.com/quiz/join/"+tmp;
+                            String Url = baseURL+"/quiz/join/"+tmp;
+                                //Toast.makeText(getContext(), Url, Toast.LENGTH_SHORT).show();
                             getQuiz(Url,token);
                             }
                             catch(Exception e){
@@ -146,8 +151,7 @@ public class QuizFragment extends Fragment {
 
 
                         try {
-
-                            //Toast.makeText(getContext(), "Hi", Toast.LENGTH_SHORT).show();
+                            
 
                             JSONArray questions = (JSONArray) response.get("problems");
                             for(int i=0;i<questions.length();i++){

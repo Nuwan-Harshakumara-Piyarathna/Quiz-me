@@ -15,6 +15,8 @@ public class GlobalData {
     private static Question modifiedQuestion;
     public static ArrayList<Question> clientQuestions = new ArrayList<>();
     private static LeaderBoard[] leaderBoards;
+    private static String QuizId;
+
 
     public static Question getModifiedQuestion() {
         return modifiedQuestion;
@@ -187,5 +189,13 @@ public class GlobalData {
 
     public static LeaderBoard getLeaderBoard(int index){
         return leaderBoards[index];
+    }
+
+    public static String getQuizId() {
+        return QuizId;
+    }
+
+    public static void setQuizId(String quizId) {
+        QuizId = quizId;
     }
 }

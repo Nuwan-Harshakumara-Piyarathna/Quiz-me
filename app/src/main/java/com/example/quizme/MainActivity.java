@@ -15,6 +15,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(networkChangeListener,filter);
+        registerReceiver(networkChangeListener, filter);
 
         super.onStart();
     }
@@ -53,6 +54,34 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(networkChangeListener);
 
         super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to Exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //finish();
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
     }
 
     @Override
@@ -72,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
                     new HomeFragment()).commit();
         }
     }
-
 
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -98,14 +126,13 @@ public class MainActivity extends AppCompatActivity {
             };
 
 
-    private void getPastQuizzes(String URL){
-
+    private void getPastQuizzes(String URL) {
 
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-        String token=pref.getString("jwt",null);
+        String token = pref.getString("jwt", null);
         final String auth = "Bearer " + token;
         final String tkn = token;
 
@@ -130,16 +157,14 @@ public class MainActivity extends AppCompatActivity {
                         LeaderBoard tmpL;
 
 
-
-                      try {
-
+                        try {
 
 
-                            for(int i=0;i<response.length();i++){
+                            for (int i = 0; i < response.length(); i++) {
 
                                 tmpLeaderBoard = (JSONObject) response.get(i);
                                 name = tmpLeaderBoard.getString("name");
-                                Log.e("QuizName",name);
+                                Log.e("QuizName", name);
                                 tmpMarkList = (JSONArray) tmpLeaderBoard.get("leaderboard");
                                 tmpResultList = new SingleResult[tmpMarkList.length()];
                                 SingleResult singleResult;
@@ -147,20 +172,19 @@ public class MainActivity extends AppCompatActivity {
                                 float mark;
                                 JSONObject tmp;
 
-                                for(int j=0;j<tmpMarkList.length();j++){
+                                for (int j = 0; j < tmpMarkList.length(); j++) {
 
                                     tmp = (JSONObject)tmpMarkList.get(j);
-                                    tmpResultList[j] = new SingleResult(tmp.getString("user"),(float)tmp.getDouble("marks"));
+                                    tmpResultList[j] = new SingleResult(tmp.getString("name"),(float)tmp.getDouble("marks"));
                                 }
 
 
-                                tmpLdrBoard[i] = new LeaderBoard(name,tmpResultList);
+                                tmpLdrBoard[i] = new LeaderBoard(name, tmpResultList);
 
 
                             }
 
                             GlobalData.setLeaderBoards(tmpLdrBoard);
-
 
 
                         } catch (JSONException e) {
@@ -172,12 +196,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this,error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("regError",error.getMessage());
+                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("regError", error.getMessage());
 
 
                     }
-                }){
+                }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();

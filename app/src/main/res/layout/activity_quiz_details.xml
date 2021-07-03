@@ -5,182 +5,206 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:gravity="center"
     tools:context=".QuizDetailsActivity"
     android:background="#FEEAE6">
 
-    <ScrollView
-        android:layout_width="fill_parent"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/schedule_card"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/qdAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp">
+            android:layout_height="?attr/actionBarSize"
+            app:title="New Quiz"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            android:background="#344955"
+            app:titleTextColor="#F9AA33"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
 
-            <LinearLayout
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/schedule_card"
                 android:layout_width="match_parent"
+                app:cardCornerRadius="8dp"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:layout_margin="10dp">
-
-                <TextView
-                    android:id="@+id/hello"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center_horizontal"
-                    android:text="NEW QUIZ"
-                    android:paddingBottom="10sp"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="30sp" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:hint="Quiz Name"
-
-                    app:counterEnabled="true"
-                    app:counterMaxLength="25"
-                    app:endIconMode="clear_text"
-                    android:theme="@style/Theme.MaterialComponents.DayNight"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLength="26"
-                        />
-
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/outlinedTextField_startDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:hint="Start Date"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="10"
-
-                        android:theme="@style/Theme.MaterialComponents.DayNight"
-                        app:backgroundTint="@color/colorPrimary"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editText_startDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="date"
-                            android:maxLength="11"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <ImageButton
-                        android:id="@+id/calender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_baseline_calendar_today_24"
-                        android:layout_centerVertical="true"
-                        android:layout_margin="5dp"
-                        android:text="Button"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/outlinedTextField_startTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:hint="Start Time"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="5"
-                        android:theme="@style/Theme.MaterialComponents.DayNight"
-                        app:backgroundTint="@color/colorPrimary"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/editText_startTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="time"
-                            android:maxLength="6"
-                            />
-
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <ImageButton
-                        android:id="@+id/watch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_baseline_access_time_24"
-                        android:layout_centerVertical="true"
-                        android:layout_margin="5dp"
-                        android:text="Button"/>
-                </RelativeLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField_duration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:hint="Duration (minutes)"
-                    android:theme="@style/Theme.MaterialComponents.DayNight"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText_duration"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
+                android:layout_margin="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.widget.Button
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:id="@+id/hello"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:text="Next"
-                        android:background="@drawable/btn_background"
-                        android:textColor="#F9AA33"
-                        android:textSize="15sp"
-                        android:id="@+id/btnQuizNext"
-                        />
-                </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </ScrollView>
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="center_horizontal"
+                        android:text="NEW QUIZ"
+                        android:paddingBottom="10sp"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:textSize="30sp" />
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/outlinedTextField_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:hint="Quiz Name"
+
+                        app:counterEnabled="true"
+                        app:counterMaxLength="25"
+                        app:endIconMode="clear_text"
+                        android:theme="@style/Theme.MaterialComponents.DayNight"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editText_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="26"
+                            />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/outlinedTextField_startDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="32dp"
+                            android:hint="Start Date"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="10"
+
+                            android:theme="@style/Theme.MaterialComponents.DayNight"
+                            app:backgroundTint="@color/colorPrimary"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editText_startDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:inputType="date"
+                                android:maxLength="11"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageButton
+                            android:id="@+id/calender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_calendar_today_24"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="5dp"
+                            android:text="Button"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/outlinedTextField_startTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="32dp"
+                            android:hint="Start Time"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="5"
+                            android:theme="@style/Theme.MaterialComponents.DayNight"
+                            app:backgroundTint="@color/colorPrimary"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/editText_startTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:inputType="time"
+                                android:maxLength="6"
+                                />
+
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageButton
+                            android:id="@+id/watch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_access_time_24"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="5dp"
+                            android:text="Button"/>
+                    </RelativeLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/outlinedTextField_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:hint="Duration (minutes)"
+                        android:theme="@style/Theme.MaterialComponents.DayNight"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editText_duration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.widget.Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:text="Next"
+                            android:background="@drawable/btn_background"
+                            android:textColor="#F9AA33"
+                            android:textSize="15sp"
+                            android:id="@+id/btnQuizNext"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </ScrollView>
+</LinearLayout>
 </LinearLayout>
