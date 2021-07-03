@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
@@ -21,6 +22,9 @@ public class HomeFragment extends Fragment {
         ViewGroup homeFrag = (ViewGroup)inflater.inflate(R.layout.home_fragment, container, false);
         Button qBtn = homeFrag.findViewById(R.id.quizTake);
         Button schBtn = homeFrag.findViewById(R.id.scheduleBtn);
+        CardView schedule_card = homeFrag.findViewById(R.id.schedule_card);
+        CardView past_card = homeFrag.findViewById(R.id.past_card);
+
         qBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,7 +33,23 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        past_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), PastQuizActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
+
         schBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), HostedQuizActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
+
+        schedule_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), HostedQuizActivity.class);
