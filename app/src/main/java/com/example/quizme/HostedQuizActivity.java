@@ -38,7 +38,8 @@ public class HostedQuizActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<HostedQuizModel> HostedQuizModels;
     HostedQuizAdopter HostedQuizAdopter;
-    LoadingDialog loadDialog;
+    LoadingDialog ld;
+
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
@@ -60,10 +61,9 @@ public class HostedQuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loadDialog = new LoadingDialog(HostedQuizActivity.this);
-        loadDialog.startLoadingDialog();
-
-        WebRequest webRequest = new WebRequest(this,loadDialog);
+        ld = new LoadingDialog(this);
+        ld.startLoadingDialog();
+        WebRequest webRequest = new WebRequest(this);
         webRequest.execute();
 
         setContentView(R.layout.hosted_quiz_activity);
@@ -74,11 +74,9 @@ public class HostedQuizActivity extends AppCompatActivity {
     private class WebRequest extends AsyncTask<String, String, String> {
 
         Context con;
-        LoadingDialog ld;
 
-        public WebRequest(Context con, LoadingDialog ld){
-            this.con=con;
-            this.ld=ld;
+        public WebRequest(Context con) {
+            this.con = con;
         }
 
 
@@ -126,6 +124,8 @@ public class HostedQuizActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            ld.dismissDialog();
             Log.i("schedule",s);
             JSONObject json = null;
             JSONArray val=null;
@@ -158,7 +158,7 @@ public class HostedQuizActivity extends AppCompatActivity {
                 }
                 HostedQuizModels.add(model);
             }
-            ld.dismissDialog();
+
             LinearLayoutManager layoutManager = new LinearLayoutManager(HostedQuizActivity.this, LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());

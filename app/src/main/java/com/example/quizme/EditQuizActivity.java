@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
@@ -46,6 +48,9 @@ public class EditQuizActivity extends AppCompatActivity {
     TextView corrAns;
     RadioGroup rg;
     int newCorrAns;
+    LoadingDialog loadDialog;
+    String mongoId;
+    int Qnum;
 
     private static final int PICK_IMAGE = 100;
     //private  static  final  int PERMISSION_CODE = 1001;
@@ -74,7 +79,8 @@ public class EditQuizActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String quiz= intent.getExtras().getString("quiz",null);
-        int Qnum = intent.getExtras().getInt("Qnum",-1);
+        Qnum = intent.getExtras().getInt("Qnum",-1);
+        mongoId= intent.getExtras().getString("mongoId",null);
 
         JSONArray problems =  null;
         JSONArray answers =  null;
@@ -89,7 +95,7 @@ public class EditQuizActivity extends AppCompatActivity {
             ans2 = answers.get(1).toString();
             ans3 = answers.get(2).toString();
             ans4 = answers.get(3).toString();
-            Log.i("obj",answers.get(0).toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -128,7 +134,7 @@ public class EditQuizActivity extends AppCompatActivity {
 
 
         //select new corrected answer
-
+        newCorrAns = correctAns;
 
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -169,5 +175,145 @@ public class EditQuizActivity extends AppCompatActivity {
         final String answer3 = Qa3.getText().toString();
         final String answer4 = Qa4.getText().toString();
         final int corrAnswer = newCorrAns;
+        Boolean check = true;
+
+        if(question.trim().length() == 0){
+            //questionTitle.requestFocus();
+            Qid.setError("Question name can not be empty");
+            check =  false;
+        }
+        if(answer1.trim().length() == 0){
+            //ans1.requestFocus();
+            Qa1.setError("Answer1 can not be empty");
+            check =  false;
+        }
+        if(answer2.trim().length() == 0){
+            //ans2.requestFocus();
+            Qa2.setError("Answer2 can not be empty");
+            check =  false;
+        }
+        if(answer3.trim().length() == 0){
+            //ans3.requestFocus();
+            Qa3.setError("Answer3 can not be empty");
+            check =  false;
+        }
+        if(answer4.trim().length() == 0){
+            // ans4.requestFocus();
+            Qa4.setError("Answer4 can not be empty");
+            check =  false;
+        }
+
+        if(check) {
+
+            ArrayList answers = new ArrayList();
+            answers.add(answer1);
+            answers.add(answer2);
+            answers.add(answer3);
+            answers.add(answer4);
+
+
+            JSONObject data = new JSONObject();
+            JSONArray answerJson = new JSONArray(answers);
+
+            try {
+                data.put("question", question);
+                data.put("answers", answerJson);
+                data.put("correctAnswer", corrAnswer);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            loadDialog = new LoadingDialog(this);
+            loadDialog.startLoadingDialog();
+            WebRequest webReq = new WebRequest(this, loadDialog, data);
+            webReq.execute();
+        }
+
     }
+
+    public void viewQuestions(View v){
+
+        Intent in = new Intent(this, EditQuestionActivity.class);
+        SharedPreferences pref = this.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        pref = this.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        int qId=pref.getInt("globalQuizID",-1);
+        in.putExtra("quizID",qId);
+        this.startActivity(in);
+
+    }
+
+    private class WebRequest extends AsyncTask<String,String,String> {
+
+        Context con;
+        LoadingDialog ld;
+        JSONObject data;
+
+        public WebRequest(Context con, LoadingDialog ld,JSONObject data){
+            this.con=con;
+            this.ld=ld;
+            this.data =  data;
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            OkHttpClient client = new OkHttpClient();
+            MediaType Json = MediaType.parse("application/json;charset=utf-8");
+
+            RequestBody body = RequestBody.create(data.toString(), Json);
+
+
+            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String jwt = pref.getString("jwt", null);
+            final String token = "Bearer " + jwt;
+            String baseURL =pref.getString("baseURL",null);
+            String index = String.valueOf(Qnum);
+            String url ="https://quizmeonline.herokuapp.com/quiz/update/problem?id="+mongoId +"&index="+index ;
+            Request request = new Request.Builder().url(
+                    url
+            ).header("Authorization", token).post(body).build();
+
+            Response response = null;
+            String responseBody = null;
+            JSONObject json = null;
+
+            try {
+                response = client.newCall(request).execute();
+                responseBody = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(response.code()==200) {
+
+                return responseBody;
+
+            }
+            //Log.i("response",responseBody);
+            //Log.i("data",data.toString());
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            ld.dismissDialog();
+            if(s==null){
+                Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else{
+                Toast toast=Toast.makeText(con, "Question Successsfully Updated", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+        }
+
+    }
+
+
 }

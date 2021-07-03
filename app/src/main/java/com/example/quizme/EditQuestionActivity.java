@@ -164,7 +164,7 @@ public class EditQuestionActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            adapter = new EditQuestionadapter(problems,con);
+            adapter = new EditQuestionadapter(problems,con,mongoID,quizID);
 
             viewPager2.setAdapter(adapter);
 
