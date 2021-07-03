@@ -230,9 +230,9 @@ public class MainActivity extends AppCompatActivity {
     public void installButton90to90() {
         final AllAngleExpandableButton button = findViewById(R.id.button_expandable_90_90);
         final List<ButtonData> buttonDatas = new ArrayList<>();
-        int[] drawable = {R.drawable.plus, R.drawable.book, R.drawable.privacy};
-        int[] color = {R.color.blue, R.color.red, R.color.green};
-        for (int i = 0; i < 3; i++) {
+        int[] drawable = {R.drawable.menu, R.drawable.book, R.drawable.privacy, R.drawable.ic_baseline_logout_24};
+        int[] color = {R.color.textColor, R.color.blue, R.color.green, R.color.red};
+        for (int i = 0; i < 4; i++) {
             ButtonData buttonData;
             if (i == 0) {
                 buttonData = ButtonData.buildIconButton(getApplicationContext(), drawable[i], 15);
@@ -259,6 +259,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case 2: {
                         Intent intent = new Intent(getApplicationContext(), PrivacyPolicyActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 3: {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                         break;
                     }
