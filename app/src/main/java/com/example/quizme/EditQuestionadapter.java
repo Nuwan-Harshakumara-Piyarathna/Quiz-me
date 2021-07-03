@@ -140,18 +140,18 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
 
         @Override
         protected String doInBackground(String... strings) {
+            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL =pref.getString("baseURL",null);
 
             OkHttpClient client = new OkHttpClient();
             MediaType Json = MediaType.parse("application/json;charset=utf-8");
 
             RequestBody body = RequestBody.create(data.toString(), Json);
 
-            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
             String jwt = pref.getString("jwt", null);
             final String token = "Bearer " + jwt;
-            String baseURL =pref.getString("baseURL",null);
             String index = String.valueOf(Qnum);
-            String url ="https://quizmeonline.herokuapp.com/quiz/delete/problem?id="+mongoId +"&index="+index ;
+            String url = baseURL + "/quiz/delete/problem?id="+mongoId +"&index="+index ;
             Request request = new Request.Builder().url(
                     url
             ).header("Authorization", token).post(body).build();

@@ -99,7 +99,11 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        String url = "https://quizmeonline.herokuapp.com/quiz/find/leaderboards";
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        String baseURL =pref.getString("baseURL",null);
+        String url = baseURL + "/quiz/find/leaderboards";
+
         getPastQuizzes(url);
 
         if (savedInstanceState == null) {

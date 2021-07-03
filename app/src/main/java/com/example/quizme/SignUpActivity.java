@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -158,6 +159,10 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL =pref.getString("baseURL",null);
+            String url = baseURL + "/all/registration";
+
             OkHttpClient client = new OkHttpClient();
             MediaType Json = MediaType.parse("application/json;charset=utf-8");
             JSONObject data = new JSONObject();
@@ -177,7 +182,7 @@ public class SignUpActivity extends AppCompatActivity {
             RequestBody body = RequestBody.create(data.toString(), Json);
 
             Request request = new Request.Builder().url(
-                    "https://quizmeonline.herokuapp.com/all/registration"
+                    url
             ).post(body).build();
 
             Response response = null;

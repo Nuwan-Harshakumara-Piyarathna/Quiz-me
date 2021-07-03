@@ -270,7 +270,7 @@ public class EditQuizActivity extends AppCompatActivity {
             final String token = "Bearer " + jwt;
             String baseURL =pref.getString("baseURL",null);
             String index = String.valueOf(Qnum);
-            String url ="https://quizmeonline.herokuapp.com/quiz/update/problem?id="+mongoId +"&index="+index ;
+            String url = baseURL + "/quiz/update/problem?id="+mongoId +"&index="+index ;
             Request request = new Request.Builder().url(
                     url
             ).header("Authorization", token).post(body).build();

@@ -146,8 +146,7 @@ public class NewQuestionEditActivity extends AppCompatActivity {
     private void doPostRequest() {
         Log.d("Okhttp3:", "doPostRequest function called");
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-//        String baseURL = pref.getString("baseURL", null);
-        String baseURL = "http://quizmeonline.herokuapp.com";
+        String baseURL = pref.getString("baseURL", null);
         String url = baseURL + "/quiz/add/problems?id=" +mongoQid;
 
         OkHttpClient client = new OkHttpClient.Builder()
