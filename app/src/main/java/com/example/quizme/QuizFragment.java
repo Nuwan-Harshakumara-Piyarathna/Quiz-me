@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
 
 public class QuizFragment extends Fragment {
 
@@ -91,7 +93,7 @@ public class QuizFragment extends Fragment {
                         String tmp = qId.getText().toString().trim();
                         GlobalData.setQuizId(tmp);
                         if(tmp.length() == 0) {
-                            Toast.makeText(getContext(), "Question Id is empty", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Quiz Id is empty", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             try{
@@ -150,6 +152,7 @@ public class QuizFragment extends Fragment {
                         //Toast.makeText(getContext(),response.toString(),Toast.LENGTH_SHORT).show();
                         //Log.e("response",response.toString());
 
+
                         JSONObject singleQuestion;
                         String title;
                         JSONArray answers;
@@ -166,6 +169,7 @@ public class QuizFragment extends Fragment {
                             startTime = response.getString("startTime");
                             startDate = response.getString("startDate");
                             duration = response.getInt("duration");
+                            GlobalData.setQuizDuration(duration);
 
                             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                             Date date = new Date();
@@ -204,7 +208,7 @@ public class QuizFragment extends Fragment {
                             }
                             if ((d1.compareTo(d2) >=0) && (d1.compareTo(d3) <=0)) {
                                 Log.i("message","Quiz day");
-                                Log.e("status",".............hi..............");
+
                                 Intent in = new Intent(getActivity(), HomeActivity.class);
                                 in.putExtra("status",1);
                                 startActivity(in);
@@ -231,7 +235,7 @@ public class QuizFragment extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Quiz not found!", Toast.LENGTH_LONG).show();
 
 
                     }

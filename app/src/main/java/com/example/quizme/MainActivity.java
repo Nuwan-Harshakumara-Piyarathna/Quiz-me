@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,13 +29,18 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.quizme.utility.NetworkChangeListener;
+import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
+import com.fangxu.allangleexpandablebutton.ButtonData;
+import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -100,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
         }
+        installButton90to90();
     }
 
 
@@ -214,6 +221,58 @@ public class MainActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(jsonObjectRequest);
         //loadDialog.dismissDialog();
+    }
+
+    public void installButton90to90() {
+        final AllAngleExpandableButton button = findViewById(R.id.button_expandable_90_90);
+        final List<ButtonData> buttonDatas = new ArrayList<>();
+        int[] drawable = {R.drawable.plus, R.drawable.book, R.drawable.privacy};
+        int[] color = {R.color.blue, R.color.red, R.color.green};
+        for (int i = 0; i < 3; i++) {
+            ButtonData buttonData;
+            if (i == 0) {
+                buttonData = ButtonData.buildIconButton(getApplicationContext(), drawable[i], 15);
+            } else {
+                buttonData = ButtonData.buildIconButton(getApplicationContext(), drawable[i], 0);
+            }
+            buttonData.setBackgroundColorId(getApplicationContext(), color[i]);
+            buttonData.setIconPaddingDp(15);
+            buttonDatas.add(buttonData);
+        }
+        button.setButtonDatas(buttonDatas);
+        setListener(button);
+    }
+
+    private void setListener(AllAngleExpandableButton button) {
+        button.setButtonEventListener(new ButtonEventListener() {
+            @Override
+            public void onButtonClicked(int index) {
+                switch (index) {
+                    case 1: {
+                        Intent intent = new Intent(getApplicationContext(), InstructionsActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 2: {
+                        Intent intent = new Intent(getApplicationContext(), PrivacyPolicyActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    default: {
+                    }
+                }
+            }
+
+            @Override
+            public void onExpand() {
+                // showToast("onExpand");
+            }
+
+            @Override
+            public void onCollapse() {
+                // showToast("onCollapse");
+            }
+        });
     }
 
 
