@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,6 +16,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -24,16 +29,44 @@ import okhttp3.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
+        int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        status = 0;
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("baseURL", "http://quizme-env-1.eba-iz7bmwvh.us-east-1.elasticbeanstalk.com");
         editor.commit();
+
+        CountDownTimer timer = new CountDownTimer(4000,10){
+
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent;
+                if(status == 0){
+                intent = new Intent(SplashActivity.this,LoginActivity.class);
+
+                }
+                else{
+                    intent = new Intent(SplashActivity.this,MainActivity.class);
+
+                }
+                startActivity(intent);
+                finish();
+
+            }
+        };
+        timer.start();
 
 
         String token = pref.getString("jwt",null);
@@ -42,14 +75,14 @@ public class SplashActivity extends AppCompatActivity {
             webRequest.execute();
         }
 
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent loginIntent = new Intent(SplashActivity.this,LoginActivity.class);
                 startActivity(loginIntent);
                 finish();
             }
-        },3500);
+        },3500);*/
     }
 
     private class WebRequest extends AsyncTask<String,String,String> {
@@ -125,22 +158,21 @@ public class SplashActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if(s==null){
-                Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
-                toast.show();
+                Log.i("message","Something Went Wrong Try Again Later!");
+
             }
             else if(s.equals("false")){
                 Log.i("loginStatus",s);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent loginIntent = new Intent(SplashActivity.this,MainActivity.class);
-                        //startActivity(loginIntent);
-                        //finish();
+
+                        status = 1;
                     }
-                },4500);
+            else if(s.equals("true")){
+                Log.i("loginStatus",s);
             }
 
             }
+
+
 
 
 
