@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         user = findViewById(R.id.loginUsername);
         pass = findViewById(R.id.loginPassword);
         button = findViewById(R.id.loginBtn);
-        loadDialog = new LoadingDialog(LoginActivity.this);
+
     }
     public void goReg(View v){
 

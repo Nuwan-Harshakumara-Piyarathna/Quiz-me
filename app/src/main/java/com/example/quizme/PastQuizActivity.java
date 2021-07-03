@@ -37,7 +37,7 @@ public class PastQuizActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<PastQuizModel> pastQuizModels;
     PastQuizAdopter pastQuizAdopter;
-
+    LoadingDialog loadDialog;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
@@ -59,7 +59,11 @@ public class PastQuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        PastQuizActivity.WebRequest webRequest = new WebRequest(this);
+        loadDialog = new LoadingDialog(PastQuizActivity.this);
+        loadDialog.startLoadingDialog();
+
+
+        PastQuizActivity.WebRequest webRequest = new WebRequest(this,loadDialog);
         webRequest.execute();
 
         setContentView(R.layout.activity_past_quiz);
@@ -70,9 +74,11 @@ public class PastQuizActivity extends AppCompatActivity {
     private class WebRequest extends AsyncTask<String, String, String> {
 
         Context con;
+        LoadingDialog ld;
 
-        public WebRequest(Context con) {
-            this.con = con;
+        public WebRequest(Context con, LoadingDialog ld){
+            this.con=con;
+            this.ld=ld;
         }
 
 
@@ -152,7 +158,7 @@ public class PastQuizActivity extends AppCompatActivity {
                 }
                 pastQuizModels.add(model);
             }
-
+            ld.dismissDialog();
             LinearLayoutManager layoutManager = new LinearLayoutManager(PastQuizActivity.this, LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
