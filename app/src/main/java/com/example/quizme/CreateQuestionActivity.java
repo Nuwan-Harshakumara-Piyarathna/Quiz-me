@@ -54,7 +54,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
     EditText ans4;
     Uri imageUri;
     RadioGroup selectAnswerSection;
-    Button setCorrectAnswer;
     int correctAnswer = -1;
     TextView showCorrectAnswer;
 
@@ -228,6 +227,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     correctAnswer = -1;
                     String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
                     showCorrectAnswer.setText(correct);
+                    selectAnswerSection.clearCheck();
                    // Log.e("sample question", GlobalData.getQuestion(0).getImageUri().toString());
 
 
@@ -242,7 +242,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         String baseURL =pref.getString("baseURL",null);
         String url = baseURL + "/quiz/add";
-//        OkHttpClient client = new OkHttpClient();
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS) // connect timeout
@@ -354,6 +353,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         correctAnswer = -1;
         String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
         showCorrectAnswer.setText(correct);
+        selectAnswerSection.clearCheck();
 
         Toast.makeText(getApplicationContext(),"All Cleared",Toast.LENGTH_SHORT);
         //TODO : clear image data

@@ -40,7 +40,7 @@ public class EditQuestionActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(networkChangeListener,filter);
+        registerReceiver(networkChangeListener, filter);
 
         super.onStart();
     }
@@ -85,10 +85,10 @@ public class EditQuestionActivity extends AppCompatActivity {
 
     }
 
-    public void newQuestion(View v){
+    public void newQuestion(View v) {
 
         Intent intent = new Intent(this, NewQuestionEditActivity.class);
-        intent.putExtra("quizId",mongoID);
+        intent.putExtra("quizId", mongoID);
         this.startActivity(intent);
 
     }
@@ -104,9 +104,10 @@ public class EditQuestionActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL = pref.getString("baseURL", null);
+            String url = baseURL + "/quiz/find/created/quizzes";
 
-
-            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
             String jwt = pref.getString("jwt", null);
             final String token = "Bearer " + jwt;
 
@@ -118,7 +119,7 @@ public class EditQuestionActivity extends AppCompatActivity {
             RequestBody body = RequestBody.create(data.toString(), Json);
 
             okhttp3.Request request = new okhttp3.Request.Builder().url(
-                    "https://quizmeonline.herokuapp.com/quiz/find/created/quizzes"
+                    url
             ).header("Authorization", token).build();
 
 
@@ -156,7 +157,7 @@ public class EditQuestionActivity extends AppCompatActivity {
             }
 
 
-           JSONArray problems = null;
+            JSONArray problems = null;
             try {
                 problems = val.getJSONObject(quizID).getJSONArray("problems");
                 mongoID = val.getJSONObject(quizID).getString("id");
@@ -164,7 +165,7 @@ public class EditQuestionActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            adapter = new EditQuestionadapter(problems,con,mongoID,quizID);
+            adapter = new EditQuestionadapter(problems, con, mongoID, quizID);
 
             viewPager2.setAdapter(adapter);
 

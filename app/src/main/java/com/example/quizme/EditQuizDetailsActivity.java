@@ -322,7 +322,7 @@ public class EditQuizDetailsActivity extends AppCompatActivity {
                 String jwt = pref.getString("jwt", null);
                 final String token = "Bearer " + jwt;
                 String baseURL =pref.getString("baseURL",null);
-                String url ="https://quizmeonline.herokuapp.com/quiz/update/details?id="+quizId;
+                String url = baseURL + "/quiz/update/details?id="+quizId;
                 Request request = new Request.Builder().url(
                         url
                 ).header("Authorization", token).post(body).build();
