@@ -44,7 +44,7 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:text="Quiz: "
-                        android:textSize="20dp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -55,13 +55,13 @@
                         android:gravity="start"
                         android:text="Marks"
                         android:textColor="@android:color/background_dark"
-                        android:textSize="20dp"
+                        android:textSize="22sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
                     android:paddingTop="5dp"
@@ -89,6 +89,8 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -128,9 +130,40 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
+                    android:paddingTop="5dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="4"
+                        android:gravity="start"
+                        android:text="Quiz ID: "
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/copytoclipboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Copy"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        app:icon="@drawable/ic_baseline_content_copy_24"
+                        app:iconGravity="textEnd"
+                        android:layout_gravity="left"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
                     android:gravity="end"
                     >
-
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/editBtn"

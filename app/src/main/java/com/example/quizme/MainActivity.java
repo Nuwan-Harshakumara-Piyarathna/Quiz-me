@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         String baseURL =pref.getString("baseURL",null);
         String url = baseURL + "/quiz/find/leaderboards";
-
         getPastQuizzes(url);
 
         if (savedInstanceState == null) {
@@ -113,6 +112,16 @@ public class MainActivity extends AppCompatActivity {
         installButton90to90();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        String jwt = pref.getString("jwt",null);
+        if(jwt==null){
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+    }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -263,6 +272,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case 3: {
+                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("jwt", null);
+                        editor.commit();
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                         break;

@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -148,6 +149,11 @@ public class EditQuestionActivity extends AppCompatActivity {
             super.onPostExecute(s);
             JSONObject json = null;
             JSONArray val = null;
+
+            if(s==null){
+                Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
 
             try {
                 json = new JSONObject(s);
