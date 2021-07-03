@@ -106,7 +106,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             GlobalData.setModifiedQuestion(null);
 
             questionTitle.setText(tmpQuestion.getQuestion());
-            questionImage.setImageURI(tmpQuestion.getImageUri());
+//            questionImage.setImageURI(tmpQuestion.getImageUri());
             ans1.setText(tmpQuestion.getAnswer1());
             ans2.setText(tmpQuestion.getAnswer2());
             ans3.setText(tmpQuestion.getAnswer3());
@@ -206,7 +206,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     showCorrectAnswer.setError("Select the Correct Answer");
                 }
 
-                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0) {
+                if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 && correctAnswer != -1) {
 
 //                    if (imageUri != null) {
 //                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,correctAnswer);
@@ -218,7 +218,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
                     GlobalData.addQuestion(tmpQuestion);
                     questionCount.setText("Question Count : "+GlobalData.getLength());
-                    questionImage.setImageURI(null);
+//                    questionImage.setImageURI(null);
 //                    imageUri = null;
                     questionTitle.setText("");
                     ans1.setText("");
