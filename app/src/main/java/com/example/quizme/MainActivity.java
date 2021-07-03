@@ -46,6 +46,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+    LoadingDialog loadDialog;
 
     @Override
     protected void onStart() {
@@ -99,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         String url = "https://quizmeonline.herokuapp.com/quiz/find/leaderboards";
-
         getPastQuizzes(url);
 
         if (savedInstanceState == null) {
@@ -135,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void getPastQuizzes(String URL) {
 
-
+        loadDialog = new LoadingDialog(MainActivity.this);
+        loadDialog.startLoadingDialog();
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             GlobalData.setLeaderBoards(tmpLdrBoard);
-
+                            loadDialog.dismissDialog();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -219,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Add the request to the RequestQueue.
         queue.add(jsonObjectRequest);
-
+        //loadDialog.dismissDialog();
     }
 
     public void installButton90to90() {

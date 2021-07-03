@@ -1,5 +1,7 @@
 package com.example.quizme;
 
+import android.os.CountDownTimer;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,6 +21,8 @@ public class GlobalData {
     private static String QuizId;
     private static Date endTime;
     private static int quizStatus;
+    private static int quizDuration;
+    private static CountDownTimer countDownTimer = null;
 
 
     public static Question getModifiedQuestion() {
@@ -216,5 +220,24 @@ public class GlobalData {
 
     public static void setQuizStatus(int quizStatus) {
         GlobalData.quizStatus = quizStatus;
+    }
+
+    public static int getQuizDuration() {
+        return quizDuration;
+    }
+
+    public static void setQuizDuration(int quizDuration) {
+        GlobalData.quizDuration = quizDuration;
+    }
+
+    public static CountDownTimer getCountDownTimer() {
+        return countDownTimer;
+    }
+
+    public static void setCountDownTimer(CountDownTimer countDownTimer) {
+        GlobalData.countDownTimer = countDownTimer;
+    }
+    public static void stopTimer(){
+        if(countDownTimer != null) countDownTimer.cancel();
     }
 }

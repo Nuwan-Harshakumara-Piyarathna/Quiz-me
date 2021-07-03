@@ -13,7 +13,6 @@
     <color name="colorOnPrimaryLightConnection">#EEE3AB</color>
     <color name="colorAccentConnection">#665815</color>
 
-
 <!--    nirogya-->
     <color name="primaryColor">#512da8</color>
     <color name="primaryLightColor">#8559da</color>
@@ -48,9 +47,10 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="orange">#ff7f00</color>
-    <color name="pink">#f08080</color>
     <color name="blue">#3498db</color>
     <color name="red">#db3434</color>
     <color name="green">#11b900</color>
     <color name="yellow">#ffff00</color>
+    <color name="pink">#FF007F</color>
+
 </resources>

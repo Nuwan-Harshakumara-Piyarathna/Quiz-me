@@ -53,8 +53,14 @@
             android:name=".EditQuizActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".EditQuizDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewQuestionEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

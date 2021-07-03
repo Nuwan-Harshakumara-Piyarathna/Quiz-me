@@ -16,7 +16,7 @@ public class QuizNameAdapter extends RecyclerView.Adapter<QuizNameAdapter.ViewHo
 
 
     String[] quizNames;
-
+    String[] dateList;
 
     public QuizNameAdapter(String[] quizNames) {
         this.quizNames = quizNames;

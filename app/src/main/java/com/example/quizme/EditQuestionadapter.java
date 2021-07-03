@@ -46,12 +46,11 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
     JSONArray problems;
     View view;
     Context context;
-    JSONObject json;
 
 
-    public EditQuestionadapter( JSONArray problems, JSONObject json, Context context) {
+
+    public EditQuestionadapter( JSONArray problems, Context context) {
         this.problems = problems;
-        this.json = json;
         this.context = context;
     }
 
@@ -97,8 +96,8 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(view.getContext(), EditQuizActivity.class);
-                in.putExtra("quiz",json.toString());
-                Log.i("quiz",json.toString());
+                in.putExtra("quiz",problems.toString());
+                Log.i("quiz",problems.toString());
                 in.putExtra("Qnum",position);
                 view.getContext().startActivity(in);
             }
