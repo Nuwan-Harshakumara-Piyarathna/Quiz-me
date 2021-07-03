@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation 'com.android.volley:volley:1.2.0'
     implementation "com.airbnb.android:lottie:3.4.0"
+    compile 'com.github.uin3566:AllAngleExpandableButton:v1.2.0'
 
 
 }

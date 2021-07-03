@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,13 +29,18 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.quizme.utility.NetworkChangeListener;
+import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
+import com.fangxu.allangleexpandablebutton.ButtonData;
+import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -213,6 +219,81 @@ public class MainActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(jsonObjectRequest);
 
+    }
+
+    public void installButton90to90() {
+        final AllAngleExpandableButton button = findViewById(R.id.button_expandable_90_90);
+        final List<ButtonData> buttonDatas = new ArrayList<>();
+        int[] drawable = {R.drawable.plus, R.drawable.mark, R.drawable.settings, R.drawable.heart};
+        int[] color = {R.color.blue, R.color.red, R.color.green, R.color.yellow};
+        for (int i = 0; i < 4; i++) {
+            ButtonData buttonData;
+            if (i == 0) {
+                buttonData = ButtonData.buildIconButton(getActivity(), drawable[i], 15);
+            } else {
+                buttonData = ButtonData.buildIconButton(getActivity(), drawable[i], 0);
+            }
+            buttonData.setBackgroundColorId(getActivity(), color[i]);
+            buttonDatas.add(buttonData);
+        }
+        button.setButtonDatas(buttonDatas);
+        setListener(button);
+    }
+
+    private void setListener(AllAngleExpandableButton button) {
+        button.setButtonEventListener(new ButtonEventListener() {
+            @Override
+            public void onButtonClicked(int index) {
+                switch (index) {
+                    case 1: {
+                        Intent intent = new Intent(getActivity(), AchievementActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 2:
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                        alertDialogBuilder.setMessage(getResources().getString(R.string.steps_fragment_reset_data_dialog_message));
+                        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.steps_fragment_reset_data_dialog_ok_button),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        nirogyaDataSource.resetPedomter(defaultTableRowIndexValue, null, defaultStepGoal, null, null, null, null, defaultSensitivity);
+                                        btnStop.setVisibility(View.GONE);
+                                        btnStart.setVisibility(View.VISIBLE);
+                                        sensorManager.unregisterListener(StepsFragment.this);
+                                        numSteps = 0;
+                                        countSteps.setText(initialCountValue);
+                                        calories_burnt.setText(initialCountValue);
+                                        miles.setText(initialCountValue);
+                                    }
+                                });
+                        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.steps_fragment_reset_data_dialog_cancel_button), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                        break;
+                    case 3:
+                        Intent intent = new Intent(getActivity(), InstructionsActivity.class);
+                        startActivity(intent);
+                        break;
+                    default: {
+                    }
+                }
+            }
+
+            @Override
+            public void onExpand() {
+                // showToast("onExpand");
+            }
+
+            @Override
+            public void onCollapse() {
+                // showToast("onCollapse");
+            }
+        });
     }
 
 
