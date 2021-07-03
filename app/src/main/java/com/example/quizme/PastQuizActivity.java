@@ -131,6 +131,11 @@ public class PastQuizActivity extends AppCompatActivity {
                 JSONObject json = null;
                 JSONArray val=null;
 
+                if(s==null){
+                    Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
                 try {
                     json = new JSONObject(s);
                     val = json.getJSONArray("pastQuizzes");

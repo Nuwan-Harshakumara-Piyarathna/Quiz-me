@@ -12,15 +12,25 @@ public class HostedQuizModel {
     String time;
     String date;
     String quizName;
+    String quizID;
     JSONObject quiz;
 
 
-    public HostedQuizModel(String time, String date, String quizName,JSONObject quiz) {
+    public HostedQuizModel(String time, String date, String quizName,JSONObject quiz,String quizID) {
         this.time = time;
         this.date = date;
         this.quizName = quizName;
         this.quiz = quiz;
+        this.quizID = quizID;
 
+    }
+
+    public String getQuizID() {
+        return quizID;
+    }
+
+    public void setQuizID(String quizID) {
+        this.quizID = quizID;
     }
 
     public String getTime() {
