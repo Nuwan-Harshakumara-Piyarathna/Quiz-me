@@ -241,7 +241,7 @@ public class QuizDetailsActivity extends AppCompatActivity {
                     GlobalData.setDuration(quiz_duration);
 
                     //create link
-                    GlobalData.setLink(randomString(6));
+                    GlobalData.setLink(randomString(7));
 
                     Intent in = new Intent(QuizDetailsActivity.this, CreateQuestionActivity.class);
                     in.putExtra("status",0);

@@ -1,0 +1,242 @@
+Index: app/src/main/java/com/example/quizme/HomeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quizme;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\npublic class HomeFragment extends Fragment {\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n\r\n\r\n        ViewGroup homeFrag = (ViewGroup)inflater.inflate(R.layout.home_fragment, container, false);\r\n        Button qBtn = homeFrag.findViewById(R.id.quizTake);\r\n        Button schBtn = homeFrag.findViewById(R.id.scheduleBtn);\r\n        qBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(getContext(), PastQuizActivity.class);\r\n                getContext().startActivity(intent);\r\n            }\r\n        });\r\n\r\n        schBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(getContext(), HostedQuizActivity.class);\r\n                getContext().startActivity(intent);\r\n            }\r\n        });\r\n        return  homeFrag;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/quizme/HomeFragment.java	(revision 6b4a6100291fb7cdba60c983326444da7e399290)
++++ app/src/main/java/com/example/quizme/HomeFragment.java	(date 1625331686250)
+@@ -9,6 +9,7 @@
+ 
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
++import androidx.cardview.widget.CardView;
+ import androidx.fragment.app.Fragment;
+ 
+ public class HomeFragment extends Fragment {
+@@ -21,10 +22,13 @@
+         ViewGroup homeFrag = (ViewGroup)inflater.inflate(R.layout.home_fragment, container, false);
+         Button qBtn = homeFrag.findViewById(R.id.quizTake);
+         Button schBtn = homeFrag.findViewById(R.id.scheduleBtn);
+-        qBtn.setOnClickListener(new View.OnClickListener() {
++        CardView scheduleCard = homeFrag.findViewById(R.id.schedule_card);
++        CardView pastQuizCard = homeFrag.findViewById(R.id.past_card);
++
++        scheduleCard.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+-                Intent intent = new Intent(getContext(), PastQuizActivity.class);
++                Intent intent = new Intent(getContext(), HostedQuizActivity.class);
+                 getContext().startActivity(intent);
+             }
+         });
+@@ -36,6 +40,24 @@
+                 getContext().startActivity(intent);
+             }
+         });
++
++        qBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                Intent intent = new Intent(getContext(), PastQuizActivity.class);
++                getContext().startActivity(intent);
++            }
++        });
++
++
++
++        pastQuizCard.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                Intent intent = new Intent(getContext(), PastQuizActivity.class);
++                getContext().startActivity(intent);
++            }
++        });
+         return  homeFrag;
+     }
+ }
+Index: app/src/main/java/com/example/quizme/QuizFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quizme;\r\n\r\nimport android.content.Context;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.os.Bundle;\r\nimport android.os.CountDownTimer;\r\nimport android.text.format.DateUtils;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.android.volley.AuthFailureError;\r\nimport com.android.volley.Request;\r\nimport com.android.volley.RequestQueue;\r\nimport com.android.volley.Response;\r\nimport com.android.volley.VolleyError;\r\nimport com.android.volley.toolbox.JsonObjectRequest;\r\nimport com.android.volley.toolbox.Volley;\r\nimport com.google.android.material.dialog.MaterialAlertDialogBuilder;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.text.DateFormat;\r\nimport java.text.ParseException;\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.Calendar;\r\nimport java.util.Date;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\nimport java.util.Timer;\r\n\r\npublic class QuizFragment extends Fragment {\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n        View quizFrag = inflater.inflate(R.layout.quiz_fragment, container, false);\r\n\r\n        Button qBtn =  (Button) quizFrag.findViewById(R.id.quizBtn);\r\n        qBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent in = new Intent(getActivity(), QuizDetailsActivity.class);\r\n                in.putExtra(\"status\",0);\r\n                startActivity(in);\r\n            }\r\n        });\r\n        CardView createCard = (CardView) quizFrag.findViewById(R.id.create_card);\r\n        createCard.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent in = new Intent(getActivity(), QuizDetailsActivity.class);\r\n                in.putExtra(\"status\",0);\r\n                startActivity(in);\r\n            }\r\n        });\r\n\r\n        CardView joinCard = (CardView) quizFrag.findViewById(R.id.join_card);\r\n        Button takeQuiz = (Button) quizFrag.findViewById(R.id.takeQuiz);\r\n        takeQuiz.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view){\r\n\r\n                GlobalData.removeAllClientQuestions();\r\n\r\n                final View quizId = getLayoutInflater().inflate(R.layout.get_quiz_id,null);\r\n\r\n\r\n                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());\r\n                builder.setTitle(\"Enter Quiz Id\");\r\n                builder.setView(quizId);\r\n\r\n                final EditText qId = quizId.findViewById(R.id.quizId);\r\n\r\n\r\n                builder.setPositiveButton(\"Join\", new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialogInterface, int i) {\r\n\r\n                        String tmp = qId.getText().toString().trim();\r\n                        GlobalData.setQuizId(tmp);\r\n                        if(tmp.length() == 0) {\r\n                            Toast.makeText(getContext(), \"Quiz Id is empty\", Toast.LENGTH_SHORT).show();\r\n                        }\r\n                        else {\r\n                            try{\r\n\r\n                                SharedPreferences pref = getContext().getSharedPreferences(\"MyPreferences\", Context.MODE_PRIVATE);\r\n                                String token=pref.getString(\"jwt\",null);\r\n                                String baseURL=pref.getString(\"baseURL\",null);\r\n\r\n                                //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();\r\n                            String Url = baseURL+\"/quiz/join/\"+tmp;\r\n                                //Toast.makeText(getContext(), Url, Toast.LENGTH_SHORT).show();\r\n                            getQuiz(Url,token);\r\n                            }\r\n                            catch(Exception e){\r\n                                e.printStackTrace();\r\n                            }\r\n\r\n\r\n\r\n                        }\r\n\r\n                    }\r\n                });\r\n\r\n\r\n\r\n                builder.show();\r\n\r\n            }\r\n        });\r\n\r\n        return  quizFrag;\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n    private void getQuiz(String URL,String token){\r\n\r\n\r\n        // Instantiate the RequestQueue.\r\n        RequestQueue queue = Volley.newRequestQueue(getContext());\r\n        final String auth = \"Bearer \" + token;\r\n        final String tkn = token;\r\n\r\n        // Request a string response from the provided URL.\r\n        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest\r\n                (Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {\r\n\r\n                    @Override\r\n                    public void onResponse(JSONObject response) {\r\n\r\n\r\n                        //Log.e(\"stdres\",response.toString());\r\n                        //Toast.makeText(getContext(),response.toString(),Toast.LENGTH_SHORT).show();\r\n                        //Log.e(\"response\",response.toString());\r\n\r\n\r\n                        JSONObject singleQuestion;\r\n                        String title;\r\n                        JSONArray answers;\r\n                        int correctAnswer;\r\n                        String startTime;\r\n                        String startDate;\r\n                        int duration;\r\n\r\n\r\n                        try {\r\n                            \r\n\r\n                            JSONArray questions = (JSONArray) response.get(\"problems\");\r\n                            startTime = response.getString(\"startTime\");\r\n                            startDate = response.getString(\"startDate\");\r\n                            duration = response.getInt(\"duration\");\r\n                            GlobalData.setQuizDuration(duration);\r\n\r\n                            DateFormat dateFormat = new SimpleDateFormat(\"yyyy-MM-dd HH:mm\");\r\n                            Date date = new Date();\r\n\r\n                            String currentDate = dateFormat.format(date);\r\n                            String sDate = startDate+\" \"+startTime;\r\n\r\n                            //compare date\r\n\r\n                            Date d1 = dateFormat.parse(currentDate);\r\n                            Date d2 = dateFormat.parse(sDate);\r\n                            Calendar calendar = Calendar.getInstance();\r\n                            calendar.setTime(d2);\r\n                            calendar.add(Calendar.MINUTE,duration);\r\n                            Date d3 = calendar.getTime();\r\n                            GlobalData.setEndTime(d3);\r\n                            Log.i(\"day1\",d1.toString());\r\n                            Log.i(\"day2\",d2.toString());\r\n                            Log.i(\"day3\",d3.toString());\r\n\r\n\r\n\r\n                            for(int i=0;i<questions.length();i++){\r\n\r\n                                singleQuestion = (JSONObject) questions.get(i);\r\n                                answers = (JSONArray) singleQuestion.get(\"answers\");\r\n                                correctAnswer = singleQuestion.getInt(\"correctAnswer\");\r\n\r\n                                title = singleQuestion.getString(\"question\");\r\n                                Log.e(\"title\",title);\r\n                                Question tmpQuestion = new Question(title,i,answers.getString(0),answers.getString(1),answers.getString(2),answers.getString(3),correctAnswer);\r\n                                GlobalData.addClientQuestion(tmpQuestion);\r\n                                Log.e(\"corretA\",String.valueOf(tmpQuestion.getCorrectAns()));\r\n\r\n\r\n                            }\r\n                            if ((d1.compareTo(d2) >=0) && (d1.compareTo(d3) <=0)) {\r\n                                Log.i(\"message\",\"Quiz day\");\r\n\r\n                                Intent in = new Intent(getActivity(), HomeActivity.class);\r\n                                in.putExtra(\"status\",1);\r\n                                startActivity(in);\r\n                            }\r\n                            else if(d1.compareTo(d2) <0){\r\n                                Log.i(\"message\",\"Cannot join\");\r\n                                Toast.makeText(getContext(),\"Quiz not started yet\",Toast.LENGTH_LONG).show();\r\n                            }\r\n                            else if(d1.compareTo(d3) >0){\r\n                                Log.i(\"message\",\"Quiz is over\");\r\n                                Toast.makeText(getContext(),\"Quiz is over,can not join now\",Toast.LENGTH_LONG).show();\r\n                            }\r\n\r\n\r\n\r\n\r\n\r\n                        } catch (JSONException | ParseException e) {\r\n                            e.printStackTrace();\r\n                        }\r\n\r\n                    }\r\n                }, new Response.ErrorListener() {\r\n\r\n                    @Override\r\n                    public void onErrorResponse(VolleyError error) {\r\n                        Toast.makeText(getContext(),\"Quiz not found!\", Toast.LENGTH_LONG).show();\r\n\r\n\r\n                    }\r\n                }){\r\n            @Override\r\n            public Map<String, String> getHeaders() throws AuthFailureError {\r\n                Map<String, String> params = new HashMap<String, String>();\r\n                params.put(\"Authorization\", auth);\r\n                return params;\r\n            }\r\n        };\r\n\r\n        // Add the request to the RequestQueue.\r\n        queue.add(jsonObjectRequest);\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/quizme/QuizFragment.java	(revision 6b4a6100291fb7cdba60c983326444da7e399290)
++++ app/src/main/java/com/example/quizme/QuizFragment.java	(date 1625330622851)
+@@ -125,6 +125,61 @@
+             }
+         });
+ 
++        joinCard.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view){
++
++                GlobalData.removeAllClientQuestions();
++
++                final View quizId = getLayoutInflater().inflate(R.layout.get_quiz_id,null);
++
++
++                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
++                builder.setTitle("Enter Quiz Id");
++                builder.setView(quizId);
++
++                final EditText qId = quizId.findViewById(R.id.quizId);
++
++
++                builder.setPositiveButton("Join", new DialogInterface.OnClickListener() {
++                    @Override
++                    public void onClick(DialogInterface dialogInterface, int i) {
++
++                        String tmp = qId.getText().toString().trim();
++                        GlobalData.setQuizId(tmp);
++                        if(tmp.length() == 0) {
++                            Toast.makeText(getContext(), "Quiz Id is empty", Toast.LENGTH_SHORT).show();
++                        }
++                        else {
++                            try{
++
++                                SharedPreferences pref = getContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
++                                String token=pref.getString("jwt",null);
++                                String baseURL=pref.getString("baseURL",null);
++
++                                //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
++                                String Url = baseURL+"/quiz/join/"+tmp;
++                                //Toast.makeText(getContext(), Url, Toast.LENGTH_SHORT).show();
++                                getQuiz(Url,token);
++                            }
++                            catch(Exception e){
++                                e.printStackTrace();
++                            }
++
++
++
++                        }
++
++                    }
++                });
++
++
++
++                builder.show();
++
++            }
++        });
++
+         return  quizFrag;
+ 
+ 
+Index: app/src/main/java/com/example/quizme/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quizme;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.app.ActivityManager;\r\nimport android.content.Context;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.content.IntentFilter;\r\nimport android.content.SharedPreferences;\r\nimport android.net.ConnectivityManager;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.util.Log;\r\nimport android.view.Menu;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.Toast;\r\n\r\nimport com.android.volley.AuthFailureError;\r\nimport com.android.volley.Request;\r\nimport com.android.volley.RequestQueue;\r\nimport com.android.volley.Response;\r\nimport com.android.volley.VolleyError;\r\nimport com.android.volley.toolbox.JsonArrayRequest;\r\nimport com.android.volley.toolbox.JsonObjectRequest;\r\nimport com.android.volley.toolbox.Volley;\r\nimport com.example.quizme.utility.NetworkChangeListener;\r\nimport com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;\r\nimport com.fangxu.allangleexpandablebutton.ButtonData;\r\nimport com.fangxu.allangleexpandablebutton.ButtonEventListener;\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    NetworkChangeListener networkChangeListener = new NetworkChangeListener();\r\n    LoadingDialog loadDialog;\r\n\r\n    @Override\r\n    protected void onStart() {\r\n        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);\r\n        registerReceiver(networkChangeListener, filter);\r\n\r\n        super.onStart();\r\n    }\r\n\r\n    @Override\r\n    protected void onStop() {\r\n        unregisterReceiver(networkChangeListener);\r\n\r\n        super.onStop();\r\n    }\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);\r\n        AlertDialog.Builder builder = new AlertDialog.Builder(this);\r\n\r\n        builder.setMessage(\"Are you sure you want to Exit?\")\r\n                .setCancelable(false)\r\n                .setPositiveButton(\"Yes\", new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialogInterface, int i) {\r\n                        //finish();\r\n                        finishAffinity();\r\n                        System.exit(0);\r\n                    }\r\n                })\r\n                .setNegativeButton(\"No\", new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialogInterface, int i) {\r\n                        dialogInterface.cancel();\r\n                    }\r\n                });\r\n\r\n        AlertDialog alertDialog = builder.create();\r\n        alertDialog.show();\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);\r\n        bottomNav.setOnNavigationItemSelectedListener(navListener);\r\n\r\n        String url = \"https://quizmeonline.herokuapp.com/quiz/find/leaderboards\";\r\n        getPastQuizzes(url);\r\n\r\n        if (savedInstanceState == null) {\r\n            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,\r\n                    new HomeFragment()).commit();\r\n        }\r\n        installButton90to90();\r\n    }\r\n\r\n\r\n    private final BottomNavigationView.OnNavigationItemSelectedListener navListener =\r\n            new BottomNavigationView.OnNavigationItemSelectedListener() {\r\n                @Override\r\n                public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                    Fragment selectedFragment = null;\r\n                    switch (item.getItemId()) {\r\n                        case R.id.nav_home:\r\n                            selectedFragment = new HomeFragment();\r\n                            break;\r\n                        case R.id.nav_quiz:\r\n                            selectedFragment = new QuizFragment();\r\n                            break;\r\n                        case R.id.nav_leaderboard:\r\n                            selectedFragment = new LBFragment();\r\n                            break;\r\n                    }\r\n                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,\r\n                            selectedFragment).commit();\r\n                    return true;\r\n                }\r\n            };\r\n\r\n\r\n    private void getPastQuizzes(String URL) {\r\n\r\n        loadDialog = new LoadingDialog(MainActivity.this);\r\n        loadDialog.startLoadingDialog();\r\n        // Instantiate the RequestQueue.\r\n        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);\r\n        SharedPreferences pref = getApplicationContext().getSharedPreferences(\"MyPreferences\", Context.MODE_PRIVATE);\r\n        String token = pref.getString(\"jwt\", null);\r\n        final String auth = \"Bearer \" + token;\r\n        final String tkn = token;\r\n\r\n        // Request a string response from the provided URL.\r\n        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest\r\n                (Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {\r\n\r\n                    @Override\r\n                    public void onResponse(JSONArray response) {\r\n\r\n                        //Log.e(\"...Quizzes\",response.toString());\r\n                        //Toast.makeText(getContext(),response.toString(),Toast.LENGTH_SHORT).show();\r\n                        //Log.e(\"response\",response.toString());\r\n\r\n                        JSONObject tmpLeaderBoard;\r\n                        String title;\r\n                        JSONArray leaderBoards;\r\n                        String name;\r\n                        JSONArray tmpMarkList;\r\n                        SingleResult[] tmpResultList;\r\n                        LeaderBoard[] tmpLdrBoard = new LeaderBoard[response.length()];\r\n                        LeaderBoard tmpL;\r\n\r\n\r\n                        try {\r\n\r\n\r\n                            for (int i = 0; i < response.length(); i++) {\r\n\r\n                                tmpLeaderBoard = (JSONObject) response.get(i);\r\n                                name = tmpLeaderBoard.getString(\"name\");\r\n                                Log.e(\"QuizName\", name);\r\n                                tmpMarkList = (JSONArray) tmpLeaderBoard.get(\"leaderboard\");\r\n                                tmpResultList = new SingleResult[tmpMarkList.length()];\r\n                                SingleResult singleResult;\r\n                                String user;\r\n                                float mark;\r\n                                JSONObject tmp;\r\n\r\n                                for (int j = 0; j < tmpMarkList.length(); j++) {\r\n\r\n                                    tmp = (JSONObject)tmpMarkList.get(j);\r\n                                    tmpResultList[j] = new SingleResult(tmp.getString(\"name\"),(float)tmp.getDouble(\"marks\"));\r\n                                }\r\n\r\n\r\n                                tmpLdrBoard[i] = new LeaderBoard(name, tmpResultList);\r\n\r\n\r\n                            }\r\n\r\n                            GlobalData.setLeaderBoards(tmpLdrBoard);\r\n                            loadDialog.dismissDialog();\r\n\r\n                        } catch (JSONException e) {\r\n                            e.printStackTrace();\r\n                        }\r\n\r\n                    }\r\n                }, new Response.ErrorListener() {\r\n\r\n                    @Override\r\n                    public void onErrorResponse(VolleyError error) {\r\n                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();\r\n                        Log.e(\"regError\", error.getMessage());\r\n\r\n\r\n                    }\r\n                }) {\r\n            @Override\r\n            public Map<String, String> getHeaders() throws AuthFailureError {\r\n                Map<String, String> params = new HashMap<String, String>();\r\n                params.put(\"Authorization\", auth);\r\n                return params;\r\n            }\r\n        };\r\n\r\n        // Add the request to the RequestQueue.\r\n        queue.add(jsonObjectRequest);\r\n        //loadDialog.dismissDialog();\r\n    }\r\n\r\n    public void installButton90to90() {\r\n        final AllAngleExpandableButton button = findViewById(R.id.button_expandable_90_90);\r\n        final List<ButtonData> buttonDatas = new ArrayList<>();\r\n        int[] drawable = {R.drawable.plus, R.drawable.book, R.drawable.privacy};\r\n        int[] color = {R.color.blue, R.color.red, R.color.green};\r\n        for (int i = 0; i < 3; i++) {\r\n            ButtonData buttonData;\r\n            if (i == 0) {\r\n                buttonData = ButtonData.buildIconButton(getApplicationContext(), drawable[i], 15);\r\n            } else {\r\n                buttonData = ButtonData.buildIconButton(getApplicationContext(), drawable[i], 0);\r\n            }\r\n            buttonData.setBackgroundColorId(getApplicationContext(), color[i]);\r\n            buttonData.setIconPaddingDp(15);\r\n            buttonDatas.add(buttonData);\r\n        }\r\n        button.setButtonDatas(buttonDatas);\r\n        setListener(button);\r\n    }\r\n\r\n    private void setListener(AllAngleExpandableButton button) {\r\n        button.setButtonEventListener(new ButtonEventListener() {\r\n            @Override\r\n            public void onButtonClicked(int index) {\r\n                switch (index) {\r\n                    case 1: {\r\n                        Intent intent = new Intent(getApplicationContext(), InstructionsActivity.class);\r\n                        startActivity(intent);\r\n                        break;\r\n                    }\r\n                    case 2: {\r\n                        Intent intent = new Intent(getApplicationContext(), PrivacyPolicyActivity.class);\r\n                        startActivity(intent);\r\n                        break;\r\n                    }\r\n                    default: {\r\n                    }\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onExpand() {\r\n                // showToast(\"onExpand\");\r\n            }\r\n\r\n            @Override\r\n            public void onCollapse() {\r\n                // showToast(\"onCollapse\");\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/quizme/MainActivity.java	(revision 6b4a6100291fb7cdba60c983326444da7e399290)
++++ app/src/main/java/com/example/quizme/MainActivity.java	(date 1625331845705)
+@@ -226,9 +226,9 @@
+     public void installButton90to90() {
+         final AllAngleExpandableButton button = findViewById(R.id.button_expandable_90_90);
+         final List<ButtonData> buttonDatas = new ArrayList<>();
+-        int[] drawable = {R.drawable.plus, R.drawable.book, R.drawable.privacy};
+-        int[] color = {R.color.blue, R.color.red, R.color.green};
+-        for (int i = 0; i < 3; i++) {
++        int[] drawable = {R.drawable.menu, R.drawable.book, R.drawable.privacy, R.drawable.ic_baseline_logout_24};
++        int[] color = {R.color.textColor, R.color.blue, R.color.green, R.color.red};
++        for (int i = 0; i < 4; i++) {
+             ButtonData buttonData;
+             if (i == 0) {
+                 buttonData = ButtonData.buildIconButton(getApplicationContext(), drawable[i], 15);
+@@ -257,6 +257,11 @@
+                         Intent intent = new Intent(getApplicationContext(), PrivacyPolicyActivity.class);
+                         startActivity(intent);
+                         break;
++                    }
++                    case 3: {
++                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
++                        startActivity(intent);
++                        break;
+                     }
+                     default: {
+                     }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"false\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 6b4a6100291fb7cdba60c983326444da7e399290)
++++ .idea/misc.xml	(date 1625329619452)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <color name=\"colorPrimary\">#6200EE</color>\r\n    <color name=\"colorPrimaryDark\">#344955</color>\r\n    <color name=\"colorAccent\">#03DAC5</color>\r\n    <color name=\"hint_color\">#9A1E1E</color>\r\n    <color name=\"primaryGray\">#655555</color>\r\n    <color name=\"bottomNav\">#344955</color>\r\n\r\n<!--    Connection colors-->\r\n    <color name=\"colorOnPrimaryConnection\">#fff</color>\r\n    <color name=\"colorPrimaryConnection\">#554911</color>\r\n    <color name=\"colorOnPrimaryLightConnection\">#EEE3AB</color>\r\n    <color name=\"colorAccentConnection\">#665815</color>\r\n\r\n<!--    nirogya-->\r\n    <color name=\"primaryColor\">#512da8</color>\r\n    <color name=\"primaryLightColor\">#8559da</color>\r\n    <color name=\"primaryDarkColor\">#140078</color>\r\n    <color name=\"primaryTextColor\">#ffffff</color>\r\n\r\n    <color name=\"status_bar_color\">#140078</color>\r\n    <!--activity_instructions.xml-->\r\n    <color name=\"activity_instructions_cache_color_hint\">#000000</color>\r\n\r\n    <!--activity_instructions_list_view_headers.xml-->\r\n    <color name=\"activity_instructions_list_view_headers_background\">#534bae</color>\r\n    <color name=\"activity_instructions_list_view_headers_text_color\">#ffffff</color>\r\n\r\n    <!--activity_instructions_list_view_values.xml-->\r\n    <color name=\"activity_instructions_list_view_value_background\">#534bae</color>\r\n    <color name=\"activity_instructions_list_view_value_text_color\">#ffffff</color>\r\n\r\n    <!--activity_privacy_policy.xml-->\r\n    <color name=\"activity_privacy_policy_text_color\">#ffffff</color>\r\n\r\n    <!--activity_profile.xml-->\r\n    <color name=\"activity_profile_background_color\">#1a237e</color>\r\n    <color name=\"activity_profile_header_color\">#54C571</color>\r\n    <color name=\"activity_profile_decription_name_text_color\">#ffffff</color>\r\n    <color name=\"activity_profile_height_caption_text_color\">#ffffff</color>\r\n    <color name=\"activity_profile_weight_caption_text_color\">#ffffff</color>\r\n    <color name=\"activity_profile_height_value_text_color\">#ffffff</color>\r\n    <color name=\"activity_profile_weight_value_text_color\">#ffffff</color>\r\n    <color name=\"activity_profile_next_button_text_color\">#ffffff</color>\r\n\r\n    <color name=\"white\">#ffffff</color>\r\n    <color name=\"black\">#000000</color>\r\n    <color name=\"orange\">#ff7f00</color>\r\n    <color name=\"blue\">#3498db</color>\r\n    <color name=\"red\">#db3434</color>\r\n    <color name=\"green\">#11b900</color>\r\n    <color name=\"yellow\">#ffff00</color>\r\n    <color name=\"pink\">#FF007F</color>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision 6b4a6100291fb7cdba60c983326444da7e399290)
++++ app/src/main/res/values/colors.xml	(date 1625329322228)
+@@ -52,5 +52,6 @@
+     <color name="green">#11b900</color>
+     <color name="yellow">#ffff00</color>
+     <color name="pink">#FF007F</color>
++    <color name="textColor">#F9AA33</color>
+ 
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/drawable/menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/menu.xml	(date 1625329322245)
++++ app/src/main/res/drawable/menu.xml	(date 1625329322245)
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#344955"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M3,18h18v-2L3,16v2zM3,13h18v-2L3,11v2zM3,6v2h18L21,6L3,6z"/>
++</vector>
+Index: app/src/main/res/drawable/ic_baseline_logout_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_baseline_logout_24.xml	(date 1625331551191)
++++ app/src/main/res/drawable/ic_baseline_logout_24.xml	(date 1625331551191)
+@@ -0,0 +1,5 @@
++<vector android:autoMirrored="true" android:height="24dp"
++    android:tint="#121213" android:viewportHeight="24"
++    android:viewportWidth="24" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M17,7l-1.41,1.41L18.17,11H8v2h10.17l-2.58,2.58L17,17l5,-5zM4,5h8V3H4c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h8v-2H4V5z"/>
++</vector>
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.3\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.quizme\"\r\n        minSdkVersion 19\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n\r\n        renderscriptTargetApi 29\r\n        renderscriptSupportModeEnabled true\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    buildFeatures {\r\n        viewBinding true\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.3.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.recyclerview:recyclerview:1.2.1'\r\n    implementation 'androidx.viewpager2:viewpager2:1.0.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'androidx.navigation:navigation-fragment:2.3.5'\r\n    implementation 'androidx.navigation:navigation-ui:2.3.5'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation 'com.google.android.material:material:1.0.0-beta01'\r\n    implementation 'com.google.android.material:material:1.2.0-alpha05'\r\n    implementation 'com.squareup.okhttp3:okhttp:4.9.0'\r\n\r\n    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'\r\n    implementation 'com.android.volley:volley:1.2.0'\r\n    implementation \"com.airbnb.android:lottie:3.4.0\"\r\n    compile 'com.github.uin3566:AllAngleExpandableButton:v1.2.0'\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 6b4a6100291fb7cdba60c983326444da7e399290)
++++ app/build.gradle	(date 1625329529617)
+@@ -48,7 +48,7 @@
+     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+     implementation 'com.android.volley:volley:1.2.0'
+     implementation "com.airbnb.android:lottie:3.4.0"
+-    compile 'com.github.uin3566:AllAngleExpandableButton:v1.2.0'
++    implementation 'com.github.uin3566:AllAngleExpandableButton:v1.2.0'
+ 
+ 
+ }
+\ No newline at end of file

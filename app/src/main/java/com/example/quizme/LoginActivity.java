@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
         //text field
         userName = findViewById(R.id.name);
         password = findViewById(R.id.pass);

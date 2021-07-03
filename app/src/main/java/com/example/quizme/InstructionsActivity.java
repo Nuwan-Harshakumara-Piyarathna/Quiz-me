@@ -1,6 +1,8 @@
 package com.example.quizme;
 
 import android.app.Activity;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.example.quizme.adapters.ExpandableListAdapter;
+import com.example.quizme.utility.NetworkChangeListener;
 
 public class InstructionsActivity extends Activity {
 
@@ -23,6 +26,23 @@ public class InstructionsActivity extends Activity {
     private ExpandableListView expandableListView;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

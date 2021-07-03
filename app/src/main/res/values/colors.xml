@@ -52,5 +52,6 @@
     <color name="green">#11b900</color>
     <color name="yellow">#ffff00</color>
     <color name="pink">#FF007F</color>
+    <color name="textColor">#F9AA33</color>
 
 </resources>

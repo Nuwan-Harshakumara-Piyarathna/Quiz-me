@@ -125,6 +125,61 @@ public class QuizFragment extends Fragment {
             }
         });
 
+        joinCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+
+                GlobalData.removeAllClientQuestions();
+
+                final View quizId = getLayoutInflater().inflate(R.layout.get_quiz_id,null);
+
+
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+                builder.setTitle("Enter Quiz Id");
+                builder.setView(quizId);
+
+                final EditText qId = quizId.findViewById(R.id.quizId);
+
+
+                builder.setPositiveButton("Join", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        String tmp = qId.getText().toString().trim();
+                        GlobalData.setQuizId(tmp);
+                        if(tmp.length() == 0) {
+                            Toast.makeText(getContext(), "Quiz Id is empty", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            try{
+
+                                SharedPreferences pref = getContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                                String token=pref.getString("jwt",null);
+                                String baseURL=pref.getString("baseURL",null);
+
+                                //Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
+                                String Url = baseURL+"/quiz/join/"+tmp;
+                                //Toast.makeText(getContext(), Url, Toast.LENGTH_SHORT).show();
+                                getQuiz(Url,token);
+                            }
+                            catch(Exception e){
+                                e.printStackTrace();
+                            }
+
+
+
+                        }
+
+                    }
+                });
+
+
+
+                builder.show();
+
+            }
+        });
+
         return  quizFrag;
 
 

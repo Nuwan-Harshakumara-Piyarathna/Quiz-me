@@ -85,9 +85,10 @@ public class PastQuizActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL =pref.getString("baseURL",null);
+            String url = baseURL + "/quiz/find/past/quizzes";
 
-
-            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
             String jwt = pref.getString("jwt", null);
             final String token = "Bearer " + jwt;
 
@@ -99,7 +100,7 @@ public class PastQuizActivity extends AppCompatActivity {
             RequestBody body = RequestBody.create(data.toString(), Json);
 
             okhttp3.Request request = new okhttp3.Request.Builder().url(
-                    "https://quizmeonline.herokuapp.com/quiz/find/past/quizzes"
+                    url
             ).header("Authorization", token).build();
 
 
