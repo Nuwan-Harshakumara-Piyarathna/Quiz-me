@@ -38,6 +38,7 @@ public class HostedQuizActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<HostedQuizModel> HostedQuizModels;
     HostedQuizAdopter HostedQuizAdopter;
+    LoadingDialog ld;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
@@ -60,6 +61,8 @@ public class HostedQuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ld = new LoadingDialog(this);
+        ld.startLoadingDialog();
         WebRequest webRequest = new WebRequest(this);
         webRequest.execute();
 
@@ -121,6 +124,8 @@ public class HostedQuizActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            ld.dismissDialog();
             Log.i("schedule",s);
             JSONObject json = null;
             JSONArray val=null;

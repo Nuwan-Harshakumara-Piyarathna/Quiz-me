@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("baseURL", "http://quizme-env.eba-iz7bmwvh.us-east-1.elasticbeanstalk.com");
+        editor.putString("baseURL", "https://quizmeonline.herokuapp.com");
         editor.commit();
 
         //text field
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         user = findViewById(R.id.loginUsername);
         pass = findViewById(R.id.loginPassword);
         button = findViewById(R.id.loginBtn);
-        loadDialog = new LoadingDialog(LoginActivity.this);
+
     }
     public void goReg(View v){
 

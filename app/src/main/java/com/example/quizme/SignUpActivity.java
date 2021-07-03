@@ -36,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText fName,lName,userName,passwordOne,passwordTwo;
     private TextInputLayout fstName,lstName,user,passOne,passTwo;
     String fNameText,lNameText,userText,passText,cPassText;
-
+    LoadingDialog loadDialog;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
@@ -72,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
         user = findViewById(R.id.loginUsername);
         passOne =findViewById(R.id.loginPassword);
         passTwo = findViewById(R.id.confirmPassword);
-
+        loadDialog = new LoadingDialog(SignUpActivity.this);
     }
 
     private boolean validateFields(){
@@ -137,16 +137,21 @@ public class SignUpActivity extends AppCompatActivity {
         final String fName = fNameText;
         final String lName = lNameText;
 
-        WebRequest webRequest = new WebRequest(this);
+        loadDialog = new LoadingDialog(SignUpActivity.this);
+        loadDialog.startLoadingDialog();
+
+        WebRequest webRequest = new WebRequest(this,loadDialog);
         webRequest.execute(userName, password, fName, lName);
     }
 
     private class WebRequest extends AsyncTask<String,String,String> {
 
+        LoadingDialog ld;
         Context con;
 
-        public WebRequest(Context con) {
-            this.con = con;
+        public WebRequest(Context con, LoadingDialog ld){
+            this.con=con;
+            this.ld=ld;
         }
 
 
@@ -206,7 +211,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            ld.dismissDialog();
             if (s == null) {
                 Toast toast = Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
                 toast.show();

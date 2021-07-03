@@ -6,7 +6,9 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -46,13 +48,17 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
     JSONArray problems;
     View view;
     Context context;
-    JSONObject json;
+    String mongoId;
+    int quizId;
+    int Qnum;
+    LoadingDialog ld;
 
 
-    public EditQuestionadapter( JSONArray problems, JSONObject json, Context context) {
+    public EditQuestionadapter( JSONArray problems, Context context,String id,int qID) {
         this.problems = problems;
-        this.json = json;
         this.context = context;
+        this.mongoId = id;
+        this.quizId = qID;
     }
 
 
@@ -69,7 +75,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
 
         EditQuestion tmpQuestion = null;
         try {
-            int Qnum = position;
+            Qnum = position;
             tmpQuestion = new EditQuestion(
                     problems.getJSONObject(position).get("question").toString(),
                     Qnum,
@@ -97,16 +103,102 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(view.getContext(), EditQuizActivity.class);
-                in.putExtra("quiz",json.toString());
-                Log.i("quiz",json.toString());
+                in.putExtra("quiz",problems.toString());
+                in.putExtra("mongoId",mongoId);
                 in.putExtra("Qnum",position);
                 view.getContext().startActivity(in);
+            }
+        });
+
+        holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ld = new LoadingDialog((Activity)context);
+                ld.startLoadingDialog();
+                WebRequest webRequest = new WebRequest(view.getContext(),ld);
+                webRequest.execute();
+
             }
         });
 
 
 
     }
+
+    private class WebRequest extends AsyncTask<String,String,String> {
+
+        Context con;
+        LoadingDialog ld;
+        JSONObject data = new JSONObject();
+
+        public WebRequest(Context con, LoadingDialog ld){
+            this.con=con;
+            this.ld=ld;
+
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            OkHttpClient client = new OkHttpClient();
+            MediaType Json = MediaType.parse("application/json;charset=utf-8");
+
+            RequestBody body = RequestBody.create(data.toString(), Json);
+
+            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String jwt = pref.getString("jwt", null);
+            final String token = "Bearer " + jwt;
+            String baseURL =pref.getString("baseURL",null);
+            String index = String.valueOf(Qnum);
+            String url ="https://quizmeonline.herokuapp.com/quiz/delete/problem?id="+mongoId +"&index="+index ;
+            Request request = new Request.Builder().url(
+                    url
+            ).header("Authorization", token).post(body).build();
+
+            Response response = null;
+            String responseBody = null;
+            JSONObject json = null;
+
+            try {
+                response = client.newCall(request).execute();
+                responseBody = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(response.code()==200) {
+
+                return responseBody;
+
+            }
+            Log.i("response",responseBody);
+            //Log.i("data",data.toString());
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            ld.dismissDialog();
+            if(s==null){
+                Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else{
+                Toast toast=Toast.makeText(con, "Question Successsfully deleted", Toast.LENGTH_SHORT);
+                toast.show();
+                Intent in = new Intent(view.getContext(), EditQuestionActivity.class);
+                in.putExtra("quizID",quizId);
+                view.getContext().startActivity(in);
+            }
+
+        }
+
+    }
+
 
 
 

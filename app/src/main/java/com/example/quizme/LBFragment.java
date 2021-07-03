@@ -23,10 +23,10 @@ public class LBFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup lbFrag = (ViewGroup)inflater.inflate(R.layout.lb_fragment, container, false);
 
-
         RecyclerView recyclerView = lbFrag.findViewById(R.id.qNamesRev);
 
         String[] names = new String[GlobalData.getLeaderBoardLength()];
+
         QuizResult quizResult;
         for(int i=0;i<GlobalData.getLeaderBoardLength();i++){
             names[i] = GlobalData.getLeaderBoardName(i);
