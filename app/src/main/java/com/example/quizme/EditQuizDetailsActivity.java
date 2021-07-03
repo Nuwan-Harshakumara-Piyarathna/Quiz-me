@@ -2,9 +2,12 @@ package com.example.quizme;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,8 +26,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class EditQuizDetailsActivity extends AppCompatActivity {
 
@@ -36,7 +47,7 @@ public class EditQuizDetailsActivity extends AppCompatActivity {
     String quiz_startTime,quiz_startDate,quiz_name,quiz_duration;
     TextInputLayout tName,tStartDate,tStartTime,tDuration;
     int quizID;
-
+    LoadingDialog loadDialog;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
@@ -213,6 +224,11 @@ public class EditQuizDetailsActivity extends AppCompatActivity {
     public void goQuestions(View view) {
         Intent in = new Intent(this, EditQuestionActivity.class);
         in.putExtra("quizID",quizID);
+        SharedPreferences pref = this.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        //used in view questions button in EditQuizActivity
+        editor.putInt("globalQuizID", quizID);
+        editor.commit();
         this.startActivity(in);
     }
 
@@ -225,25 +241,26 @@ public class EditQuizDetailsActivity extends AppCompatActivity {
         quiz_duration = quizDuration.getText().toString().trim();
 
 
-        if(quiz_name.length() == 0){
+        if (quiz_name.length() == 0) {
             tName.setError("*Quiz name is Required");
         }
-        if(quiz_startTime.length() == 0){
+        if (quiz_startTime.length() == 0) {
             tStartTime.setError("*Start Time is Required");
+
         }
-        if(quiz_startDate.length() == 0){
+        if (quiz_startDate.length() == 0) {
             tStartDate.setError("*Start Date is Required");
         }
-        if(quiz_duration.length() == 0){
+        if (quiz_duration.length() == 0) {
             tDuration.setError("*Duration is Required");
         }
-        if(quiz_duration.length() == 0){
+        if (quiz_duration.length() == 0) {
             tDuration.setError("*Duration is Required");
         }
-        if(quiz_startDate.length() == 0){
+        if (quiz_startDate.length() == 0) {
             tStartDate.setError("*Start Date is Required");
         }
-        if(quiz_startTime.length() == 0){
+        if (quiz_startTime.length() == 0) {
             tStartTime.setError("*Start Time is Required");
         }
         if (quiz_startDate.length() != 0 && !quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -253,23 +270,99 @@ public class EditQuizDetailsActivity extends AppCompatActivity {
             tStartTime.setError("*Start Time wrong format");
         }
 
-        JSONObject data = new JSONObject();
+        if (quiz_name.length() > 0 &&
+                quiz_startTime.length() > 0 &&
+                quiz_startDate.length() > 0 &&
+                quiz_duration.length() > 0 &&
+                quiz_startDate.matches("\\d{4}-\\d{2}-\\d{2}") &&
+                quiz_startTime.matches("\\d{2}:\\d{2}")) {
+            JSONObject data = new JSONObject();
 
-        try {
-            data.put("id", quizId);
-            data.put("name",quiz_name);
-            data.put("startTime",quiz_startTime);
-            data.put("startDate",quiz_startDate);
-            data.put("duration",quiz_duration);
+            try {
+                data.put("id", quizId);
+                data.put("name", quiz_name);
+                data.put("startTime", quiz_startTime);
+                data.put("startDate", quiz_startDate);
+                data.put("duration", quiz_duration);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            loadDialog = new LoadingDialog(this);
+            loadDialog.startLoadingDialog();
+            WebRequest webReq = new WebRequest(this,loadDialog,data);
+            webReq.execute();
         }
-
-        Log.i("gkjnkh",data.toString());
-
-
     }
 
+
+        private class WebRequest extends AsyncTask<String,String,String> {
+
+            Context con;
+            LoadingDialog ld;
+            JSONObject data;
+
+            public WebRequest(Context con, LoadingDialog ld,JSONObject data){
+                this.con=con;
+                this.ld=ld;
+                this.data =  data;
+            }
+
+
+            @Override
+            protected String doInBackground(String... strings) {
+
+                OkHttpClient client = new OkHttpClient();
+                MediaType Json = MediaType.parse("application/json;charset=utf-8");
+
+                RequestBody body = RequestBody.create(data.toString(), Json);
+
+
+                SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                String jwt = pref.getString("jwt", null);
+                final String token = "Bearer " + jwt;
+                String baseURL =pref.getString("baseURL",null);
+                String url ="https://quizmeonline.herokuapp.com/quiz/update/details?id="+quizId;
+                Request request = new Request.Builder().url(
+                        url
+                ).header("Authorization", token).post(body).build();
+
+                Response response = null;
+                String responseBody = null;
+                JSONObject json = null;
+
+                try {
+                    response = client.newCall(request).execute();
+                    responseBody = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if(response.code()==200) {
+
+                    return responseBody;
+
+                }
+
+                return null;
+
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                ld.dismissDialog();
+                if(s==null){
+                    Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else{
+                    Toast toast=Toast.makeText(con, "Quiz Details Successsfully Updated", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+            }
+
+        }
 
 }
