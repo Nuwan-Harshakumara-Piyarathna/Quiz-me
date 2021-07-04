@@ -30,6 +30,7 @@ import okhttp3.Response;
 public class SplashActivity extends AppCompatActivity {
 
         int status;
+        CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         editor.putString("baseURL", "http://quizme-env-1.eba-iz7bmwvh.us-east-1.elasticbeanstalk.com");
         editor.commit();
 
-        CountDownTimer timer = new CountDownTimer(4000,10){
+        timer = new CountDownTimer(6000,15){
 
             @Override
             public void onTick(long l) {
@@ -66,7 +67,7 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         };
-        timer.start();
+
 
 
         String token = pref.getString("jwt",null);
@@ -170,7 +171,9 @@ public class SplashActivity extends AppCompatActivity {
                 Log.i("loginStatus",s);
             }
 
-            }
+            timer.start();
+
+        }
 
 
 
