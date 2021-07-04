@@ -29,10 +29,22 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        app:tint="@android:color/white"
-        android:backgroundTint="@color/pink"
+        app:tint="@android:color/black"
+        android:backgroundTint="@color/textColor"
         app:srcCompat="@drawable/plus_icon"
         android:onClick="newQuestion"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        app:tint="@android:color/black"
+        android:backgroundTint="@color/textColor"
+        android:src="@drawable/ic_baseline_home_24"
+        />
 
 
 </RelativeLayout>

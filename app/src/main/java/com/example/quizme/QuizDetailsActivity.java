@@ -1,8 +1,8 @@
 package com.example.quizme;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -62,6 +62,7 @@ public class QuizDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_details);
+
 
         nextBtn = findViewById(R.id.btnQuizNext);
         name = findViewById(R.id.editText_name);
