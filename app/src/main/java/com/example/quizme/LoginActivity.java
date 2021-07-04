@@ -54,10 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("baseURL", "http://quizme-env-1.eba-iz7bmwvh.us-east-1.elasticbeanstalk.com");
-        editor.commit();
 
         //text field
         userName = findViewById(R.id.name);
