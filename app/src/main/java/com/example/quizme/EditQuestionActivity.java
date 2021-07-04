@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.quizme.utility.NetworkChangeListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +83,13 @@ public class EditQuestionActivity extends AppCompatActivity {
                 super.onPageScrollStateChanged(state);
             }
         });
-
+        FloatingActionButton home = findViewById(R.id.floating_home_button);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
 
     }
 
@@ -93,13 +100,6 @@ public class EditQuestionActivity extends AppCompatActivity {
         this.startActivity(intent);
 
     }
-    public void backHome(View v) {
-
-        Intent intent = new Intent(getApplicationContext(), HostedQuizActivity.class);
-        startActivity(intent);
-
-    }
-
 
 
     private class WebRequest extends AsyncTask<String, String, String> {

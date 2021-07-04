@@ -10,6 +10,8 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +32,7 @@ public class QuizResultActivity extends AppCompatActivity {
 
     TextView marks;
     TextView totalMarks;
-
+    Button home;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
@@ -58,11 +60,19 @@ public class QuizResultActivity extends AppCompatActivity {
         WebRequest webRequest = new WebRequest(getApplicationContext());
         webRequest.execute();
 
+        home = findViewById(R.id.gotohome);
         marks = findViewById(R.id.marks);
         totalMarks = findViewById(R.id.totalMarks);
 
         marks.setText(String.valueOf(GlobalData.getMarks()));
         totalMarks.setText(String.valueOf(GlobalData.getLengthClient()));
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
 
     }
 

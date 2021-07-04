@@ -56,6 +56,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     RadioGroup selectAnswerSection;
     int correctAnswer = -1;
     TextView showCorrectAnswer;
+    LoadingDialog loadDialog;
 
     private static final int PICK_IMAGE = 100;
     //private  static  final  int PERMISSION_CODE = 1001;
@@ -145,6 +146,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     Toast.makeText(CreateQuestionActivity.this,"No Questions to Upload",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    loadDialog = new LoadingDialog(CreateQuestionActivity.this);
+                    loadDialog.startLoadingDialog();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -307,7 +310,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             if(response.code() == 200){
 
                 PopUpSubmission.quiz_link = GlobalData.getLink();
-
+                loadDialog.dismissDialog();
                 startActivity(new Intent(CreateQuestionActivity.this,PopUpSubmission.class));
                 runOnUiThread(new Runnable() {
                     @Override

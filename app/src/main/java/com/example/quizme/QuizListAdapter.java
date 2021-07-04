@@ -114,13 +114,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                                     view.getContext().startActivity(intent);
                                     ((Activity) view.getContext()).finish();
 
-
-
-
-
-
-
-
                             }
                         });
 
