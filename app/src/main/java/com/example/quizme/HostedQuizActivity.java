@@ -131,6 +131,11 @@ public class HostedQuizActivity extends AppCompatActivity {
             JSONObject json = null;
             JSONArray val=null;
 
+            if(s==null){
+                Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
             try {
                 json = new JSONObject(s);
                 val = json.getJSONArray("createdQuizzes");
@@ -152,7 +157,8 @@ public class HostedQuizActivity extends AppCompatActivity {
                             val.getJSONObject(i).getString("startTime"),
                             val.getJSONObject(i).getString("startDate"),
                             val.getJSONObject(i).getString("name"),
-                            val.getJSONObject(i)
+                            val.getJSONObject(i),
+                            val.getJSONObject(i).getString("link")
                     );
                 } catch (JSONException e) {
                     e.printStackTrace();
