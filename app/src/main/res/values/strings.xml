@@ -8,11 +8,11 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="schedule_description">You can access all of your scheduled quizzes and you can edit delete any quiz which are hosting by you.</string>
+    <string name="schedule_description">You can access all of your scheduled quizzes. You can edit or delete any quizzes which are hosting by you.</string>
     <string name="past_description">You can access quizzes that you joined before</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="join_description">You can join quiz by entering quiz ID</string>
-    <string name="create_description">You can create a new quiz and host quiz by yourself by sharing quiz ID with others</string>
+    <string name="create_description">You can create a new quiz and host a quiz by yourself by sharing quiz IDs with others.</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <!--InstructionsActivity-->
