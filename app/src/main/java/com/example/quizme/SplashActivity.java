@@ -9,7 +9,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkRequest;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -43,17 +46,24 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(networkChangeListener, filter);
-
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        unregisterReceiver(networkChangeListener);
-
         super.onStop();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(networkChangeListener);
+        super.onDestroy();
     }
 
     private boolean isNetworkConnected() {
@@ -73,36 +83,62 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    private void registerConnectivityNetworkMonitorForAPI21AndUp() {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkRequest.Builder builder = new NetworkRequest.Builder();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            connectivityManager.registerNetworkCallback(
+                    builder.build(),
+                    new ConnectivityManager.NetworkCallback() {
+                        /**
+                         * @param network
+                         */
+                        @Override
+                        public void onAvailable(Network network) {
+
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                            String token = pref.getString("jwt", null);
+                            if (token != null) {
+                                WebRequest webRequest = new WebRequest(getApplicationContext());
+                                webRequest.execute();
+                            }else {
+                                finish();
+                                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+
+                        /**
+                         * @param network
+                         */
+                        @Override
+                        public void onLost(Network network) {
+
+
+                        }
+                    }
+
+            );
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        if (!isNetworkConnected() || !isInternetAvailable()) {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                    builder.setMessage("Please Turn on your Internet Connection")
-                            .setCancelable(false)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    //finish();
-                                    finishAffinity();
-                                    System.exit(0);
-                                }
-                            });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                }
-            });
-
-
-
-        }
+        registerConnectivityNetworkMonitorForAPI21AndUp();
 
 
         status = 0;
@@ -135,9 +171,8 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
 
-
         String token = pref.getString("jwt", null);
-        if (token != null) {
+        if (token != null && isNetworkConnected()) {
             WebRequest webRequest = new WebRequest(getApplicationContext());
             webRequest.execute();
         }
