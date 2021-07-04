@@ -72,17 +72,6 @@ public class SplashActivity extends AppCompatActivity {
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-            //You can replace it with your name
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     private void registerConnectivityNetworkMonitorForAPI21AndUp() {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -109,9 +98,10 @@ public class SplashActivity extends AppCompatActivity {
                                 WebRequest webRequest = new WebRequest(getApplicationContext());
                                 webRequest.execute();
                             }else {
-                                finish();
-                                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                                startActivity(intent);
+                                status = 0;
+                                timer.start();
+//                                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                                startActivity(intent);
                             }
                         }
 
@@ -135,19 +125,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(networkChangeListener, filter);
-
-        registerConnectivityNetworkMonitorForAPI21AndUp();
-
-
-        status = 0;
-
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("baseURL", "http://quizme-env-1.eba-iz7bmwvh.us-east-1.elasticbeanstalk.com");
-        editor.commit();
-
         timer = new CountDownTimer(6000, 15) {
 
             @Override
@@ -170,6 +147,21 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         };
+
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        registerConnectivityNetworkMonitorForAPI21AndUp();
+
+
+        status = 0;
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("baseURL", "http://quizme-env-1.eba-iz7bmwvh.us-east-1.elasticbeanstalk.com");
+        editor.commit();
+
+
 
         String token = pref.getString("jwt", null);
         if (token != null && isNetworkConnected()) {
