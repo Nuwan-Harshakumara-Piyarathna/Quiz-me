@@ -41,18 +41,18 @@ import okhttp3.Response;
 public class CreateQuestionActivity extends AppCompatActivity {
 
     ImageView questionImage;
-    Button pickImage;
+//    Button pickImage;
     Button addQuestion;
     Button viewQuestions;
     Button uploadQuiz;
     Button questionCount;
-    Button deleteImage;
+//    Button deleteImage;
     EditText questionTitle;
     EditText ans1;
     EditText ans2;
     EditText ans3;
     EditText ans4;
-    Uri imageUri;
+//    Uri imageUri;
     RadioGroup selectAnswerSection;
     int correctAnswer = -1;
     TextView showCorrectAnswer;
@@ -82,14 +82,14 @@ public class CreateQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
 
-        questionImage = findViewById(R.id.quesImg);
-        pickImage = findViewById(R.id.pickImage);
+//        questionImage = findViewById(R.id.quesImg);
+//        pickImage = findViewById(R.id.pickImage);
         viewQuestions = findViewById(R.id.viewList);
         uploadQuiz = findViewById(R.id.submitQuiz);
         addQuestion = findViewById(R.id.addQuestion);
         questionTitle = findViewById(R.id.qId);
         questionCount = findViewById(R.id.questionCount);
-        deleteImage = findViewById(R.id.deleteImage);
+//        deleteImage = findViewById(R.id.deleteImage);
         ans1 = findViewById(R.id.qA1);
         ans2 = findViewById(R.id.qA2);
         ans3 = findViewById(R.id.qA3);
@@ -111,20 +111,20 @@ public class CreateQuestionActivity extends AppCompatActivity {
             ans2.setText(tmpQuestion.getAnswer2());
             ans3.setText(tmpQuestion.getAnswer3());
             ans4.setText(tmpQuestion.getAnswer4());
-            imageUri = tmpQuestion.getImageUri();
+//            imageUri = tmpQuestion.getImageUri();
             correctAnswer = tmpQuestion.getCorrectAnswer();
             selectAnswerSection.check(correctAnswer-1);
             String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
             showCorrectAnswer.setText(correct);
         }
 
-        pickImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               openGallery();
-
-            }
-        });
+//        pickImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               openGallery();
+//
+//            }
+//        });
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,15 +156,15 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
         });
 
-        deleteImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                questionImage.setImageURI(null);
-                imageUri = null;
-
-            }
-        });
+//        deleteImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                questionImage.setImageURI(null);
+//                imageUri = null;
+//
+//            }
+//        });
 
         addQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,17 +208,18 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
                 if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0) {
 
-                    if (imageUri != null) {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,correctAnswer);
-
-                    } else {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,correctAnswer);
-                    }
+//                    if (imageUri != null) {
+//                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,correctAnswer);
+//
+//                    } else {
+//                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,correctAnswer);
+//                    }
+                    tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,correctAnswer);
 
                     GlobalData.addQuestion(tmpQuestion);
                     questionCount.setText("Question Count : "+GlobalData.getLength());
                     questionImage.setImageURI(null);
-                    imageUri = null;
+//                    imageUri = null;
                     questionTitle.setText("");
                     ans1.setText("");
                     ans2.setText("");
@@ -364,16 +365,16 @@ public class CreateQuestionActivity extends AppCompatActivity {
         startActivityForResult(intent,PICK_IMAGE);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-
-            imageUri = data.getData();
-            questionImage.setImageURI( imageUri);
-
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+//
+//            imageUri = data.getData();
+//            questionImage.setImageURI( imageUri);
+//
+//        }
+//    }
 
     public void answerCheckButton(View view){
         int radioId = selectAnswerSection.getCheckedRadioButtonId();
