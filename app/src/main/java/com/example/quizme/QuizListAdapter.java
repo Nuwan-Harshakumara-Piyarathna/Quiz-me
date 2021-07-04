@@ -140,8 +140,12 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     //Log.e("selected",String.valueOf(i-2131230795));
+                    int buttonId = radioGroup.getCheckedRadioButtonId();
+                    View radioButton = radioGroup.findViewById(buttonId);
+                    int index = radioGroup.indexOfChild(radioButton);
+                    Log.e("index",String.valueOf(index));
                     Question tmpQuestion = questions.get(position);
-                    tmpQuestion.setClientAns(i - 2131230796);
+                    tmpQuestion.setClientAns(index+1);
                     questions.set(position, tmpQuestion);
                     GlobalData.modifyClientQuestion(position, tmpQuestion);
                     Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
