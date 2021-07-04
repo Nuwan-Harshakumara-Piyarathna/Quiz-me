@@ -4,13 +4,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+
+import com.example.quizme.utility.NetworkChangeListener;
 
 import java.util.ArrayList;
 
 public class LeaderBoardActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,18 +41,11 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.lBRev);
 
-        //collecting dummy data
-        ArrayList<QuizResult> tmpData = new ArrayList<>();
-        String[] names = {"John","Dev","Jason","Sam","Jim"};
-        float[] marks = {88,50,60,90,75};
-        QuizResult quizResult;
-        for(int i=0;i<5;i++){
-            quizResult = new QuizResult(names[i],marks[i]);
-            tmpData.add(quizResult);
-        }
+        Intent intent = getIntent();
+        int index = intent.getIntExtra("index",0);
 
 
-        LeaderBoardAdapter adapter = new LeaderBoardAdapter (tmpData);
+        LeaderBoardAdapter adapter = new LeaderBoardAdapter (GlobalData.getLeaderBoard(index));
         recyclerView.setAdapter(adapter);
 
         recyclerView.setHasFixedSize(true);

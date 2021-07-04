@@ -7,10 +7,6 @@
     android:layout_gravity="center"
     android:background="#344955"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="30dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="30dp"
     tools:context=".CreateQuestionActivity">
 
     <ScrollView
@@ -25,8 +21,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/round_background"
+                android:background="#232F34"
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -38,42 +33,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Question Count : 0"
-                    android:layout_marginBottom="8dp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
                     android:padding="8dp"
-                    android:background="#FEEAE6"
-                    android:textColor="#442C2E"/>
+                    android:background="#344955"
+                    android:textColor="#F9AA33"/>
 
-                <LinearLayout
+                <android.widget.Button
+                    android:id="@+id/viewList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_background"
+                    android:padding="8dp"
+                    android:text="VIEW QUESTIONS"
+                    android:textColor="#F9AA33" />
 
-
-                    <android.widget.Button
-                        android:id="@+id/viewList"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
-                        android:padding="8dp"
-                        android:text="VIEW QUESTIONS"
-                        android:background="#FEEAE6"
-                        android:textColor="#442C2E"/>
-
-                    <android.widget.Button
-                        android:id="@+id/submitQuiz"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        android:padding="8dp"
-                        android:text="UPLOAD QUIZ"
-                        android:background="#FEEAE6"
-                        android:textColor="#442C2E"/>
-
-
-                </LinearLayout>
+                <android.widget.Button
+                    android:id="@+id/submitQuiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="8dp"
+                    android:textStyle="bold"
+                    android:text="finish"
+                    android:background="@drawable/btn_background"
+                    android:textColor="#F9AA33"/>
 
 
             </LinearLayout>
@@ -99,47 +87,62 @@
                     android:hint="Enter The Question"
                     android:inputType="textPersonName" />
 
-                <ImageView
-                    android:id="@+id/quesImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="8dp"
-                    android:autofillHints="Question Image"
-                    android:background="@drawable/image_border"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/quesImg"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:autofillHints="Question Image"-->
+<!--                    android:background="@drawable/image_border"-->
+<!--                    android:paddingTop="4dp"-->
+<!--                    android:paddingBottom="4dp" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="#FEEAE6"
                     android:orientation="vertical">
 
-                    <android.widget.Button
-                        android:id="@+id/pickImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="Pick an image from gallery"
-                        android:textStyle="italic"
-                        android:background="#FEEAE6"
-                        android:textColor="#442C2E"/>
+<!--                    <android.widget.Button-->
+<!--                        android:id="@+id/pickImage"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_margin="5dp"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:text="Pick an image from gallery"-->
+<!--                        android:background="@drawable/btn_background"-->
+<!--                        android:textColor="#F9AA33"/>-->
+
+<!--                    <android.widget.Button-->
+<!--                        android:id="@+id/deleteImage"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_margin="5dp"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:text="Delete Image"-->
+<!--                        android:background="@drawable/btn_background"-->
+<!--                        android:textColor="#F9AA33"/>-->
 
                     <android.widget.Button
-                        android:id="@+id/deleteImage"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/addAnswers"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:text="Delete Image"
-                        android:textStyle="italic"
-                        android:background="#FEEAE6"
-                        android:textColor="#442C2E"/>
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:text="Enter Answers"
+                        android:background="#344955"
+                        android:textColor="#F9AA33"/>
                 </LinearLayout>
 
                 <EditText
@@ -220,15 +223,32 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     />
-                <android.widget.Button
-                    android:id="@+id/addQuestion"
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Add To List"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginTop="15dp"
                     android:background="#FEEAE6"
-                    android:textColor="#442C2E"/>
+                    android:orientation="vertical">
+
+                    <android.widget.Button
+                        android:id="@+id/addQuestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:text="add to list"
+                        android:background="@drawable/btn_background"
+                        android:textColor="#F9AA33"/>
+                </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

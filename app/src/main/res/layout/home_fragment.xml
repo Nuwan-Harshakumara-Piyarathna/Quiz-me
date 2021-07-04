@@ -71,6 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="open"
+                        android:id="@+id/scheduleBtn"
                         style="?attr/borderlessButtonStyle"
                         />
                 </LinearLayout>
@@ -137,6 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="open"
+                        android:id="@+id/quizTake"
                         style="?attr/borderlessButtonStyle"
                         />
                 </LinearLayout>

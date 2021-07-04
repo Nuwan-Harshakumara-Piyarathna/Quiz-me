@@ -1,0 +1,492 @@
+Index: app/src/main/res/layout/personal_marks.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:layout_margin=\"5dp\"\r\n    android:padding=\"10dp\"\r\n    android:background=\"@drawable/deletebtn_background\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/participantName\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_weight=\"1\"\r\n        android:text=\"Name\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/participantMarks\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Marks\"\r\n        android:textAlignment=\"viewEnd\" />\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/personal_marks.xml	(revision ceb68c9d59c72d0c7dc5ef7fed754a65d10bc733)
++++ app/src/main/res/layout/personal_marks.xml	(date 1625320085240)
+@@ -1,22 +1,75 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+-    android:layout_margin="5dp"
+-    android:padding="10dp"
+-    android:background="@drawable/deletebtn_background">
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    android:background="#FEEAE6"
++    android:orientation="vertical">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
++
++        <androidx.cardview.widget.CardView
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            app:cardCornerRadius="10dp"
++            android:layout_marginLeft="20dp"
++            android:layout_marginRight="20dp"
++            android:layout_marginTop="5dp"
++            android:layout_marginBottom="5dp"
++            android:clickable="true">
++
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:orientation="vertical"
++                android:layout_margin="8dp"
++                android:padding="5dp">
++
++                <LinearLayout
++                    android:layout_width="match_parent"
++                    android:layout_height="match_parent"
++                    android:layout_gravity="center"
++                    android:orientation="horizontal"
++                    android:paddingTop="5dp"
++                    android:paddingRight="20dp"
++                    android:paddingBottom="5dp">
+ 
+-    <TextView
+-        android:id="@+id/participantName"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_weight="1"
+-        android:text="Name" />
++                    <TextView
++                        android:id="@+id/participantName"
++                        android:layout_width="match_parent"
++                        android:layout_height="match_parent"
++                        android:layout_marginLeft="10dp"
++                        android:layout_weight="1"
++                        android:gravity="start"
++                        android:textColor="@android:color/background_dark"
++                        android:text="Quiz: "
++                        android:textSize="15dp"
++                        android:textStyle="bold" />
+ 
+-    <TextView
+-        android:id="@+id/participantMarks"
+-        android:layout_width="100dp"
+-        android:layout_height="wrap_content"
+-        android:text="Marks"
+-        android:textAlignment="viewEnd" />
++                    <TextView
++                        android:id="@+id/participantMarks"
++                        android:layout_width="match_parent"
++                        android:layout_height="match_parent"
++                        android:layout_weight="1"
++                        android:gravity="end"
++                        android:text="Marks"
++                        android:textColor="@android:color/background_dark"
++                        android:textSize="15dp"
++                        android:textStyle="bold"/>
++                </LinearLayout>
++
++            </LinearLayout>
++
++        </androidx.cardview.widget.CardView>
++
++
++    </LinearLayout>
++
++
++
++
+ </LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/schedule_quiz_recycle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"wrap_content\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:gravity=\"center\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"20dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:gravity=\"center\">\r\n\r\n        <androidx.cardview.widget.CardView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_margin=\"10dp\"\r\n            app:cardCornerRadius=\"10dp\"\r\n            app:cardElevation=\"5dp\"\r\n            app:cardMaxElevation=\"12dp\"\r\n            app:cardPreventCornerOverlap=\"true\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\"\r\n                android:paddingTop=\"20dp\">\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:orientation=\"horizontal\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:paddingTop=\"10dp\"\r\n                    android:paddingRight=\"20dp\"\r\n                    android:paddingBottom=\"20dp\">\r\n\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/text_name\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"Test\"\r\n                        android:layout_weight=\"1\"\r\n                        android:gravity=\"start\"\r\n                        android:textSize=\"35sp\"\r\n                        android:textStyle=\"bold\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n\r\n                    <android.widget.Button\r\n                        android:id=\"@+id/editBtn\"\r\n                        android:layout_width=\"180dp\"\r\n                        android:layout_height=\"60dp\"\r\n                        android:layout_weight=\"1\"\r\n                        android:gravity=\"center\"\r\n                        android:layout_gravity=\"top\"\r\n                        android:text=\"EDIT\"\r\n                        android:textColor=\"@color/colorOnPrimaryConnection\"\r\n                        android:background=\"@color/colorPrimary\"\r\n                        android:textSize=\"20sp\"\r\n                        android:textStyle=\"bold\" />\r\n\r\n                </LinearLayout>\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:orientation=\"horizontal\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:paddingTop=\"10dp\"\r\n                    android:paddingRight=\"20dp\"\r\n                    android:paddingBottom=\"20dp\">\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/text_date\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"Date\"\r\n                        android:layout_weight=\"1\"\r\n                        android:gravity=\"start\"\r\n                        android:layout_marginLeft=\"15dp\"\r\n                        android:textSize=\"15sp\"\r\n                        android:textStyle=\"bold\" />\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/text_time\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:gravity=\"end\"\r\n                        android:layout_weight=\"1\"\r\n                        android:text=\"Time\"\r\n                        android:textSize=\"15sp\"\r\n                        android:textStyle=\"bold\" />\r\n\r\n                </LinearLayout>\r\n\r\n            </LinearLayout>\r\n\r\n        </androidx.cardview.widget.CardView>\r\n\r\n\r\n    </LinearLayout>\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/schedule_quiz_recycle.xml	(revision ceb68c9d59c72d0c7dc5ef7fed754a65d10bc733)
++++ app/src/main/res/layout/schedule_quiz_recycle.xml	(date 1625317449572)
+@@ -1,85 +1,110 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+-    android:layout_width="wrap_content"
++    android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+-    android:gravity="center">
++    android:background="#FEEAE6"
++    android:orientation="vertical">
+ 
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:layout_marginEnd="20dp"
+-        android:layout_marginTop="10dp"
+-        android:gravity="center">
++        android:orientation="vertical">
+ 
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_margin="10dp"
+             app:cardCornerRadius="10dp"
+-            app:cardElevation="5dp"
+-            app:cardMaxElevation="12dp"
+-            app:cardPreventCornerOverlap="true">
++            android:layout_marginLeft="20dp"
++            android:layout_marginRight="20dp"
++            android:layout_marginTop="5dp"
++            android:layout_marginBottom="5dp"
++            android:clickable="true">
+ 
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical"
+-                android:paddingTop="20dp">
++                android:layout_margin="8dp"
++                android:padding="5dp">
+ 
+                 <LinearLayout
+                     android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
++                    android:layout_height="match_parent"
++                    android:layout_gravity="center"
+                     android:orientation="horizontal"
+-                    android:layout_gravity="center"
+-                    android:paddingTop="10dp"
++                    android:paddingTop="5dp"
+                     android:paddingRight="20dp"
+-                    android:paddingBottom="20dp">
+-
++                    android:paddingBottom="5dp">
++
++                    <TextView
++                        android:layout_width="200dp"
++                        android:layout_height="match_parent"
++                        android:layout_marginLeft="10dp"
++                        android:layout_weight="1"
++                        android:gravity="start"
++                        android:text="Quiz: "
++                        android:textSize="20dp"
++                        android:textStyle="bold" />
+ 
+                     <TextView
+                         android:id="@+id/text_name"
+                         android:layout_width="match_parent"
+-                        android:layout_height="wrap_content"
+-                        android:text="Test"
++                        android:layout_height="match_parent"
+                         android:layout_weight="1"
+                         android:gravity="start"
+-                        android:textSize="35sp"
+-                        android:textStyle="bold"
+-                        android:layout_marginLeft="15dp"/>
+-
+-                    <android.widget.Button
+-                        android:id="@+id/editBtn"
+-                        android:layout_width="180dp"
+-                        android:layout_height="60dp"
+-                        android:layout_weight="1"
+-                        android:gravity="center"
+-                        android:layout_gravity="top"
+-                        android:text="EDIT"
+-                        android:textColor="@color/colorOnPrimaryConnection"
+-                        android:background="@color/colorPrimary"
+-                        android:textSize="20sp"
+-                        android:textStyle="bold" />
+-
++                        android:text="Marks"
++                        android:textColor="@android:color/background_dark"
++                        android:textSize="20dp"
++                        android:textStyle="bold"/>
+                 </LinearLayout>
+ 
+                 <LinearLayout
+                     android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
++                    android:layout_height="match_parent"
++                    android:layout_gravity="center"
+                     android:orientation="horizontal"
+-                    android:layout_gravity="center"
+-                    android:paddingTop="10dp"
++                    android:paddingTop="5dp"
+                     android:paddingRight="20dp"
+-                    android:paddingBottom="20dp">
++                    android:paddingBottom="5dp">
+ 
++                    <TextView
++                        android:layout_width="200dp"
++                        android:layout_height="wrap_content"
++                        android:text="Date: "
++                        android:layout_weight="1"
++                        android:layout_marginLeft="10dp"
++                        android:gravity="start"
++                        android:textSize="15sp"
++                        android:textStyle="bold" />
+                     <TextView
+                         android:id="@+id/text_date"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:text="Date"
++                        android:textColor="@android:color/background_dark"
+                         android:layout_weight="1"
+                         android:gravity="start"
+-                        android:layout_marginLeft="15dp"
++                        android:textSize="15sp"
++                        android:textStyle="bold" />
++
++                </LinearLayout>
++                <LinearLayout
++                    android:layout_width="match_parent"
++                    android:layout_height="match_parent"
++                    android:layout_gravity="center"
++                    android:orientation="horizontal"
++                    android:paddingTop="5dp"
++                    android:paddingRight="20dp"
++                    android:paddingBottom="5dp">
++
++                    <TextView
++                        android:layout_width="200dp"
++                        android:layout_height="wrap_content"
++                        android:text="Time: "
++                        android:layout_weight="1"
++                        android:layout_marginLeft="10dp"
++                        android:gravity="start"
+                         android:textSize="15sp"
+                         android:textStyle="bold" />
+ 
+@@ -87,12 +112,34 @@
+                         android:id="@+id/text_time"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+-                        android:gravity="end"
++                        android:gravity="start"
+                         android:layout_weight="1"
++                        android:textColor="@android:color/background_dark"
+                         android:text="Time"
+                         android:textSize="15sp"
+                         android:textStyle="bold" />
+ 
++
++
++                </LinearLayout>
++
++                <LinearLayout
++                    android:layout_width="match_parent"
++                    android:layout_height="match_parent"
++                    android:layout_gravity="center"
++                    android:orientation="horizontal"
++                    android:gravity="end"
++                    >
++
++
++                    <com.google.android.material.button.MaterialButton
++                        android:id="@+id/editBtn"
++                        android:layout_width="wrap_content"
++                        android:layout_height="40dp"
++                        android:text="Edit"
++                        style="?attr/borderlessButtonStyle"
++                        />
++
+                 </LinearLayout>
+ 
+             </LinearLayout>
+@@ -102,4 +149,4 @@
+ 
+     </LinearLayout>
+ 
+-</RelativeLayout>
+\ No newline at end of file
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_leader_board.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".LeaderBoardActivity\">\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/lBRev\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\" />\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_leader_board.xml	(revision ceb68c9d59c72d0c7dc5ef7fed754a65d10bc733)
++++ app/src/main/res/layout/activity_leader_board.xml	(date 1625316380148)
+@@ -4,10 +4,68 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".LeaderBoardActivity">
++    android:background = "#FEEAE6"
++    android:orientation="vertical">
++
++    <ScrollView
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="vertical"
++        >
++
++        <com.google.android.material.card.MaterialCardView
++            android:id="@+id/card"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_margin="20dp">
++
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:orientation="vertical">
++
++                <!-- Media -->
++                <ImageView
++                    android:layout_width="match_parent"
++                    android:layout_height="150dp"
++                    app:srcCompat="@drawable/champion"
++                    android:scaleType="centerCrop"
++                    android:contentDescription="content_description_media"
++                    />
++
++                <LinearLayout
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:orientation="vertical"
++                    android:gravity="center"
++                    android:padding="10dp">
++
++                    <TextView
++                        android:layout_width="wrap_content"
++                        android:layout_height="wrap_content"
++                        android:text="LEADERBOARD"
++                        android:textStyle="bold"
++                        android:textAppearance="?attr/textAppearanceHeadline6"
++                        />
++
++                </LinearLayout>
++
++
++
++            </LinearLayout>
++
++        </com.google.android.material.card.MaterialCardView>
++
++
++
++    </ScrollView>
+ 
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/lBRev"
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent" />
+-</LinearLayout>
+\ No newline at end of file
++        android:layout_height="match_parent">
++    </androidx.recyclerview.widget.RecyclerView>
++
++</LinearLayout>
++
++
+Index: app/src/main/res/layout/hosted_quiz_activity.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".HostedQuizActivity\"\r\n    android:orientation=\"vertical\"\r\n    android:gravity=\"center\">\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"hosted Quizes \"\r\n        android:layout_gravity=\"left\"\r\n        android:textStyle=\"bold\"\r\n        android:textSize=\"35sp\"\r\n        android:textAllCaps=\"true\"\r\n        android:layout_marginTop=\"50dp\"\r\n        android:paddingLeft=\"10dp\"\r\n        android:paddingBottom=\"20dp\"/>\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/recycler_view\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:layout_weight=\"1\"\r\n        android:layout_marginBottom=\"10dp\"\r\n        android:layout_marginTop=\"10dp\" />\r\n\r\n</LinearLayout>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/hosted_quiz_activity.xml	(revision ceb68c9d59c72d0c7dc5ef7fed754a65d10bc733)
++++ app/src/main/res/layout/hosted_quiz_activity.xml	(date 1625313727023)
+@@ -1,23 +1,30 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".HostedQuizActivity"
++    tools:context=".PastQuizActivity"
+     android:orientation="vertical"
++    android:background="#FEEAE6"
+     android:gravity="center">
+ 
+-    <TextView
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="hosted Quizes "
+-        android:layout_gravity="left"
+-        android:textStyle="bold"
+-        android:textSize="35sp"
+-        android:textAllCaps="true"
+-        android:layout_marginTop="50dp"
+-        android:paddingLeft="10dp"
+-        android:paddingBottom="20dp"/>
++    <com.google.android.material.appbar.AppBarLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content">
++
++        <com.google.android.material.appbar.MaterialToolbar
++            android:id="@+id/qdAppBar"
++            android:layout_width="match_parent"
++            android:layout_height="?attr/actionBarSize"
++            app:title="Schedule"
++            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
++            android:background="#344955"
++            app:titleTextColor="#F9AA33"
++            style="@style/Widget.MaterialComponents.Toolbar.Primary"
++            />
++
++    </com.google.android.material.appbar.AppBarLayout>
+ 
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/recycler_view"
+Index: app/src/main/java/com/example/quizme/HostedQuizActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quizme;\r\n\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.IntentFilter;\r\nimport android.content.SharedPreferences;\r\nimport android.net.ConnectivityManager;\r\nimport android.os.AsyncTask;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.DefaultItemAnimator;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\n\r\nimport com.example.quizme.utility.NetworkChangeListener;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport okhttp3.MediaType;\r\nimport okhttp3.OkHttpClient;\r\nimport okhttp3.RequestBody;\r\nimport okhttp3.Response;\r\n\r\n\r\npublic class HostedQuizActivity extends AppCompatActivity {\r\n\r\n    RecyclerView recyclerView;\r\n    ArrayList<HostedQuizModel> HostedQuizModels;\r\n    HostedQuizAdopter HostedQuizAdopter;\r\n\r\n    NetworkChangeListener networkChangeListener = new NetworkChangeListener();\r\n\r\n    @Override\r\n    protected void onStart() {\r\n        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);\r\n        registerReceiver(networkChangeListener,filter);\r\n\r\n        super.onStart();\r\n    }\r\n\r\n    @Override\r\n    protected void onStop() {\r\n        unregisterReceiver(networkChangeListener);\r\n\r\n        super.onStop();\r\n    }\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n        WebRequest webRequest = new WebRequest(this);\r\n        webRequest.execute();\r\n\r\n        setContentView(R.layout.hosted_quiz_activity);\r\n\r\n\r\n    }\r\n\r\n    private class WebRequest extends AsyncTask<String, String, String> {\r\n\r\n        Context con;\r\n\r\n        public WebRequest(Context con) {\r\n            this.con = con;\r\n        }\r\n\r\n\r\n        @Override\r\n        protected String doInBackground(String... strings) {\r\n\r\n\r\n\r\n            SharedPreferences pref = con.getSharedPreferences(\"MyPreferences\", Context.MODE_PRIVATE);\r\n            String jwt = pref.getString(\"jwt\", null);\r\n            final String token = \"Bearer \" + jwt;\r\n\r\n            OkHttpClient client = new OkHttpClient();\r\n            MediaType Json = MediaType.parse(\"application/json;charset=utf-8\");\r\n            JSONObject data = new JSONObject();\r\n            String val = \"\";\r\n\r\n            RequestBody body = RequestBody.create(data.toString(), Json);\r\n\r\n            okhttp3.Request request = new okhttp3.Request.Builder().url(\r\n                    \"https://quizmeonline.herokuapp.com/quiz/find/created/quizzes\"\r\n            ).header(\"Authorization\", token).build();\r\n\r\n\r\n            Response response = null;\r\n            String responseBody = null;\r\n\r\n\r\n            try {\r\n                response = client.newCall(request).execute();\r\n                responseBody = response.body().string();\r\n            } catch (IOException e) {\r\n                e.printStackTrace();\r\n            }\r\n            if (response.code() == 200) {\r\n\r\n                return responseBody;\r\n\r\n            }\r\n            return null;\r\n\r\n\r\n        }\r\n\r\n        @Override\r\n        protected void onPostExecute(String s) {\r\n            super.onPostExecute(s);\r\n            Log.i(\"schedule\",s);\r\n            JSONObject json = null;\r\n            JSONArray val=null;\r\n\r\n            try {\r\n                json = new JSONObject(s);\r\n                val = json.getJSONArray(\"createdQuizzes\");\r\n            } catch ( Exception e) {\r\n                e.printStackTrace();\r\n            }\r\n\r\n\r\n\r\n            recyclerView = findViewById(R.id.recycler_view);\r\n\r\n            HostedQuizModels = new ArrayList<>();\r\n\r\n            for (int i = 0; i < val.length(); i++) {\r\n\r\n                HostedQuizModel model = null;\r\n                try {\r\n                    model = new HostedQuizModel(\r\n                            val.getJSONObject(i).getString(\"startTime\"),\r\n                            val.getJSONObject(i).getString(\"startDate\"),\r\n                            val.getJSONObject(i).getString(\"name\"),\r\n                            val.getJSONObject(i)\r\n                    );\r\n                } catch (JSONException e) {\r\n                    e.printStackTrace();\r\n                }\r\n                HostedQuizModels.add(model);\r\n            }\r\n\r\n            LinearLayoutManager layoutManager = new LinearLayoutManager(HostedQuizActivity.this, LinearLayoutManager.VERTICAL, false);\r\n            recyclerView.setLayoutManager(layoutManager);\r\n            recyclerView.setItemAnimator(new DefaultItemAnimator());\r\n            HostedQuizAdopter = new HostedQuizAdopter(HostedQuizModels, HostedQuizActivity.this);\r\n            recyclerView.setAdapter(HostedQuizAdopter);\r\n\r\n\r\n        }\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/quizme/HostedQuizActivity.java	(revision ceb68c9d59c72d0c7dc5ef7fed754a65d10bc733)
++++ app/src/main/java/com/example/quizme/HostedQuizActivity.java	(date 1625314395158)
+@@ -38,7 +38,7 @@
+     RecyclerView recyclerView;
+     ArrayList<HostedQuizModel> HostedQuizModels;
+     HostedQuizAdopter HostedQuizAdopter;
+-
++    LoadingDialog loadDialog;
+     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+ 
+     @Override
+@@ -60,7 +60,10 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+ 
+-        WebRequest webRequest = new WebRequest(this);
++        loadDialog = new LoadingDialog(HostedQuizActivity.this);
++        loadDialog.startLoadingDialog();
++
++        WebRequest webRequest = new WebRequest(this,loadDialog);
+         webRequest.execute();
+ 
+         setContentView(R.layout.hosted_quiz_activity);
+@@ -71,9 +74,11 @@
+     private class WebRequest extends AsyncTask<String, String, String> {
+ 
+         Context con;
++        LoadingDialog ld;
+ 
+-        public WebRequest(Context con) {
+-            this.con = con;
++        public WebRequest(Context con, LoadingDialog ld){
++            this.con=con;
++            this.ld=ld;
+         }
+ 
+ 
+@@ -153,7 +158,7 @@
+                 }
+                 HostedQuizModels.add(model);
+             }
+-
++            ld.dismissDialog();
+             LinearLayoutManager layoutManager = new LinearLayoutManager(HostedQuizActivity.this, LinearLayoutManager.VERTICAL, false);
+             recyclerView.setLayoutManager(layoutManager);
+             recyclerView.setItemAnimator(new DefaultItemAnimator());
