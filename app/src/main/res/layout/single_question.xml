@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#60A3D9"
-    android:paddingTop="70dp"
+    android:background="#344955"
+    android:gravity="center"
     android:visibility="visible">
 
     <ScrollView
@@ -13,140 +13,155 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true" >
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/create_card"
+            app:cardCornerRadius="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/round_background"
-            android:orientation="vertical"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp">
+            android:layout_margin="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/quizNum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:text="1"
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=") "
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic" />
-
-                <TextView
-                    android:id="@+id/singleQus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:text="This is your first question.Please answer"
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/quizImage"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:maxWidth="10dp"
-                android:maxHeight="10dp"
-                android:visibility="gone" />
-
-            <RadioGroup
-                android:id="@+id/mcq"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="20dp">
-
-                <RadioButton
-                    android:id="@+id/ans1"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="20dp"
-                    android:text="answer1" />
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/ans2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="20dp"
-                    android:text="answer2" />
+                    <TextView
+                        android:id="@+id/quizNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="1"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
-                <RadioButton
-                    android:id="@+id/ans3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="20dp"
-                    android:text="answer3" />
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
 
-                <RadioButton
-                    android:id="@+id/ans4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="20dp"
-                    android:text="answer4" />
+                        android:text=") "
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
-            </RadioGroup>
+                    <TextView
+                        android:id="@+id/singleQus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:text="This is your first question.Please answer"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/modQus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="3dp"
-                    android:text="MODIFY QUESTION" />
-
-                <Button
-                    android:id="@+id/delQus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="DELETE QUESTION" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/finishQuiz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Finish Quiz"
+                <ImageView
+                    android:id="@+id/quizImage"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_gravity="center"
-                    android:visibility="gone"/>
+                    android:layout_marginBottom="10dp"
+                    android:maxWidth="10dp"
+                    android:maxHeight="10dp"
+                    android:visibility="gone" />
+
+                <RadioGroup
+                    android:id="@+id/mcq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
+
+                    <RadioButton
+                        android:id="@+id/ans1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="answer1" />
+
+                    <RadioButton
+                        android:id="@+id/ans2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="answer2" />
+
+                    <RadioButton
+                        android:id="@+id/ans3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="answer3" />
+
+                    <RadioButton
+                        android:id="@+id/ans4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="answer4" />
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    >
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/modQus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="edit"
+                        style="?attr/borderlessButtonStyle"
+                        />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/delQus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:text="delete"
+                        style="?attr/borderlessButtonStyle"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/finishQuiz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Finish Quiz"
+                        android:layout_gravity="center"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>

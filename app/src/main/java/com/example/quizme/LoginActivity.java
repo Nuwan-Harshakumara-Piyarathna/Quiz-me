@@ -1,11 +1,15 @@
 package com.example.quizme;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.quizme.utility.NetworkChangeListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -39,14 +44,16 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText userName,password;
     private TextInputLayout user,pass;
     String userText,passText;
-
+    LoadingDialog loadDialog;
     Button button;
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         //text field
         userName = findViewById(R.id.name);
@@ -63,6 +70,21 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this,SignUpActivity.class);
         this.startActivity(intent);
 
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
     }
 
     private boolean validateFields() {
@@ -92,8 +114,12 @@ public class LoginActivity extends AppCompatActivity {
         final String userName = userText;
         final String password = passText;
 
-        WebRequest webRequest = new WebRequest(this);
+        loadDialog = new LoadingDialog(LoginActivity.this);
+        loadDialog.startLoadingDialog();
+
+        WebRequest webRequest = new WebRequest(this,loadDialog);
         webRequest.execute(userName,password);
+
 
 
     }
@@ -101,8 +127,11 @@ public class LoginActivity extends AppCompatActivity {
     private class WebRequest extends AsyncTask<String,String,String> {
 
         Context con;
-        public WebRequest(Context con){
+        LoadingDialog ld;
+
+        public WebRequest(Context con, LoadingDialog ld){
             this.con=con;
+            this.ld=ld;
         }
 
 
@@ -125,8 +154,14 @@ public class LoginActivity extends AppCompatActivity {
 
             RequestBody body = RequestBody.create(data.toString(), Json);
 
+
+
+            SharedPreferences pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL =pref.getString("baseURL",null);
+            String url = baseURL+"/all/login";
+            Log.d("URL : ",url);
             Request request = new Request.Builder().url(
-                    "https://quizmeonline.herokuapp.com/all/login"
+                    url
             ).post(body).build();
 
             Response response = null;
@@ -164,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            ld.dismissDialog();
             if(s==null){
                 Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
                 toast.show();
@@ -200,6 +235,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
+
     }
 }
 

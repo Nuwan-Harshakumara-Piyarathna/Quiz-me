@@ -3,6 +3,9 @@ package com.example.quizme;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.quizme.utility.NetworkChangeListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -32,6 +37,23 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText fName,lName,userName,passwordOne,passwordTwo;
     private TextInputLayout fstName,lstName,user,passOne,passTwo;
     String fNameText,lNameText,userText,passText,cPassText;
+    LoadingDialog loadDialog;
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         user = findViewById(R.id.loginUsername);
         passOne =findViewById(R.id.loginPassword);
         passTwo = findViewById(R.id.confirmPassword);
-
+        loadDialog = new LoadingDialog(SignUpActivity.this);
     }
 
     private boolean validateFields(){
@@ -116,21 +138,30 @@ public class SignUpActivity extends AppCompatActivity {
         final String fName = fNameText;
         final String lName = lNameText;
 
-        WebRequest webRequest = new WebRequest(this);
+        loadDialog = new LoadingDialog(SignUpActivity.this);
+        loadDialog.startLoadingDialog();
+
+        WebRequest webRequest = new WebRequest(this,loadDialog);
         webRequest.execute(userName, password, fName, lName);
     }
 
     private class WebRequest extends AsyncTask<String,String,String> {
 
+        LoadingDialog ld;
         Context con;
 
-        public WebRequest(Context con) {
-            this.con = con;
+        public WebRequest(Context con, LoadingDialog ld){
+            this.con=con;
+            this.ld=ld;
         }
 
 
         @Override
         protected String doInBackground(String... strings) {
+
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+            String baseURL =pref.getString("baseURL",null);
+            String url = baseURL + "/all/registration";
 
             OkHttpClient client = new OkHttpClient();
             MediaType Json = MediaType.parse("application/json;charset=utf-8");
@@ -151,7 +182,7 @@ public class SignUpActivity extends AppCompatActivity {
             RequestBody body = RequestBody.create(data.toString(), Json);
 
             Request request = new Request.Builder().url(
-                    "https://quizmeonline.herokuapp.com/all/registration"
+                    url
             ).post(body).build();
 
             Response response = null;
@@ -185,7 +216,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            ld.dismissDialog();
             if (s == null) {
                 Toast toast = Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
                 toast.show();

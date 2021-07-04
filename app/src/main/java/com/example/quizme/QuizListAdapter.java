@@ -30,7 +30,11 @@ import java.io.IOException;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -76,7 +80,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             holder.quizImage.setImageURI(tmpQuestion.getImageUri());
         }
 
-
         holder.answer1.setText(tmpQuestion.getAnswer1().trim());
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
@@ -90,21 +93,26 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 holder.finishQuiz.setVisibility(View.VISIBLE);
                 holder.finishQuiz.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(final View view) {
+                    public void onClick(final View view){
 
                         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(view.getContext());
                         builder.setTitle("Finish Quiz...!");
                         builder.setMessage("Do you want to finish quiz?");
+                        GlobalData.setQuizStatus(1);
+                        String label = "Confirm";
 
 
-                        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+
+                        builder.setPositiveButton(label, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                Intent intent = new Intent(view.getContext(), QuizResultActivity.class);
-                                view.getContext().startActivity(intent);
-                                ((Activity) view.getContext()).finish();
+                                Intent intent;
 
+                                    intent = new Intent(view.getContext(), QuizResultActivity.class);
+                                    view.getContext().startActivity(intent);
+                                    ((Activity) view.getContext()).finish();
 
                             }
                         });
@@ -125,8 +133,12 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     //Log.e("selected",String.valueOf(i-2131230795));
+                    int buttonId = radioGroup.getCheckedRadioButtonId();
+                    View radioButton = radioGroup.findViewById(buttonId);
+                    int index = radioGroup.indexOfChild(radioButton);
+                    Log.e("index",String.valueOf(index));
                     Question tmpQuestion = questions.get(position);
-                    tmpQuestion.setClientAns(i - 2131230795);
+                    tmpQuestion.setClientAns(index+1);
                     questions.set(position, tmpQuestion);
                     GlobalData.modifyClientQuestion(position, tmpQuestion);
                     Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
