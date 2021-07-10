@@ -143,6 +143,19 @@
                         android:text="Enter Answers"
                         android:background="#344955"
                         android:textColor="#F9AA33"/>
+
+<!--                    test-->
+                    <android.widget.Button
+                        android:id="@+id/uploadImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:text="Upload Image"
+                        android:background="#344955"
+                        android:textColor="#F9AA33"/>
                 </LinearLayout>
 
                 <EditText
