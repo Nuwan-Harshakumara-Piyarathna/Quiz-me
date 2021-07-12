@@ -69,12 +69,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
     int correctAnswer = -1;
     TextView showCorrectAnswer;
     LoadingDialog loadDialog;
-    Button uploadImage;
 
     private static final int PICK_IMAGE = 100;
     private  static  final  int STORAGE_PERMISSION_CODE = 1001;
     private static final int IMAGE_PICK_CODE = 1000;
-    private static final String UPLOAD_URL = "http://192.168.1.122:8080/all/upload/add";
 
     private Bitmap bitmap;
 
@@ -116,7 +114,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
         ans4 = findViewById(R.id.qA4);
         selectAnswerSection = findViewById(R.id.correctAnswerRadioGroup);
         showCorrectAnswer = findViewById(R.id.text_correct_answer);
-        uploadImage = findViewById(R.id.uploadImage);
 
 
         questionCount.setText("Question Count : " + GlobalData.getLength());
@@ -138,14 +135,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
             String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
             showCorrectAnswer.setText(correct);
         }
-
-        uploadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO
-                uploadMultipart();
-            }
-        });
 
         pickImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -458,34 +447,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
         cursor.close();
 
         return path;
-    }
-
-    /*
-     * This is the method responsible for image upload
-     * We need the full image path and the name for the image in this method
-     * */
-    public void uploadMultipart() {
-        //getting name for the image
-        String name = "Question";
-
-        //getting the actual path of the image
-        String path = getPath(imageUri);
-
-        //Uploading code
-        try {
-            String uploadId = UUID.randomUUID().toString();
-
-            //Creating a multi part request
-            new MultipartUploadRequest(this, uploadId, UPLOAD_URL)
-                    .addFileToUpload(path, "profile") //Adding file
-                    .addParameter("name", name) //Adding text parameter to the request
-                    .setNotificationConfig(new UploadNotificationConfig())
-                    .setMaxRetries(2)
-                    .startUpload(); //Starting the upload
-
-        } catch (Exception exc) {
-            Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 
 
