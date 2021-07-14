@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -46,12 +48,14 @@ public class LoginActivity extends AppCompatActivity {
     String userText,passText;
     LoadingDialog loadDialog;
     Button button;
+    Button languageButton;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_login);
 
 
@@ -63,8 +67,64 @@ public class LoginActivity extends AppCompatActivity {
         user = findViewById(R.id.loginUsername);
         pass = findViewById(R.id.loginPassword);
         button = findViewById(R.id.loginBtn);
+        languageButton = findViewById(R.id.changeLan);
+
+        languageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showChangeLanguageDialog();
+            }
+        });
 
     }
+
+    private void showChangeLanguageDialog() {
+
+        final String[] languages = {"English","සින්හල"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setTitle("Choose Language");
+        builder.setSingleChoiceItems(languages, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(i == 0){
+                    setLocate("en");
+                    Log.e("lan","en");
+                    recreate();
+                }
+                if(i == 1){
+                    setLocate("si");
+                    Log.e("lan","si");
+                    recreate();
+                }
+
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void setLocate(String language) {
+
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor = getSharedPreferences("Settings",MODE_PRIVATE).edit();
+        editor.putString("My_Lang",language);
+        editor.apply();
+
+    }
+
+    public void loadLocale(){
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings",Activity.MODE_PRIVATE);
+        String language = sharedPreferences.getString("My_Lang","");
+        setLocate(language);
+    }
+
     public void goReg(View v){
 
         Intent intent = new Intent(this,SignUpActivity.class);
