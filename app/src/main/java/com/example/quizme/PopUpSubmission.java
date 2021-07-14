@@ -19,6 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -35,6 +38,8 @@ public class PopUpSubmission extends Activity {
     static String name;
     String message = "";
 
+    @NotNull
+    @Contract(pure = true)
     private String genMessage(String link, String date, String time, String dur, String name) {
         return "Quizz: "+name+"\nLink for the Quiz: "+link+"\non: "+date+"\nat: "+time+"\nDuration: "+dur+" minutes";
     }
@@ -80,11 +85,6 @@ public class PopUpSubmission extends Activity {
                 intentShare.putExtra(Intent.EXTRA_TEXT, message);
 
                 startActivity(Intent.createChooser(intentShare, name));
-//                ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);
-//                ClipData clip = ClipData.newPlainText("Copy Link", quiz_link);
-//                clipboard.setPrimaryClip(clip);
-//                clip.getDescription();
-//                Toast.makeText(getApplicationContext(), "Copied", Toast.LENGTH_SHORT);
             }
         });
     }
