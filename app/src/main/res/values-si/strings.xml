@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quiz Me Dev</string>
+
+    //login activity
+    <string name="login_pageName">ඇතුල් වන්න</string>
+    <string name="login_userName">පරිශීලක නාමය</string>
+    <string name="login_password">මුරපදය</string>
+    <string name="login_button">ඇතුල් වන්න</string>
+    <string name="Login_forgot"></string>
+    <string name="login_newUser">නව පරිශීලකයෙක්? ලියාපදින්චි වන්න</string>
+    <string name="login_changeLan">භාශාව වෙනස් කරන්න</string>
+</resources>
