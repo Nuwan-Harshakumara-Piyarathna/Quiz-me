@@ -70,4 +70,15 @@ We want to inform users of this Service that these third parties have access to 
     <string name="activity_privacy_policy_value_10">If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</string>
 
     <string name="leaderboard_description">You can access leaderboard of the quizzes that you hosted before</string>
+
+
+    //login activity
+    <string name="login_pageName">LOGIN</string>
+    <string name="login_userName">User Name</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">LOGIN</string>
+    <string name="Login_forgot">Forget your password?</string>
+    <string name="login_newUser">New User? Sign UP</string>
+    <string name="login_changeLan">Change Language</string>
+
 </resources>
