@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quiz Me</string>
+    <string name="app_name">Quiz Me Dev</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
@@ -69,5 +69,5 @@ We want to inform users of this Service that these third parties have access to 
     <string name="activity_privacy_policy_value_9">We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.</string>
     <string name="activity_privacy_policy_value_10">If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</string>
 
-    <string name="leaderboard_description">You can access leaderboard of the quizzes that you joined before</string>
+    <string name="leaderboard_description">You can access leaderboard of the quizzes that you hosted before</string>
 </resources>
