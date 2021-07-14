@@ -343,6 +343,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
             if(response.code() == 200){
 
                 PopUpSubmission.quiz_link = GlobalData.getLink();
+                PopUpSubmission.name = GlobalData.getName();
+                PopUpSubmission.startDate = GlobalData.getStartDate();
+                PopUpSubmission.startTime = GlobalData.getStartTime();
+                PopUpSubmission.duration = GlobalData.getDuration();
                 loadDialog.dismissDialog();
                 startActivity(new Intent(CreateQuestionActivity.this,PopUpSubmission.class));
                 runOnUiThread(new Runnable() {
