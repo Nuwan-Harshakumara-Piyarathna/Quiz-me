@@ -60,6 +60,10 @@
         <activity
             android:name=".NewQuestionEditActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".PastQuizQuestionActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait" >

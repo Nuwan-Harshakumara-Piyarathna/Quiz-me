@@ -115,9 +115,8 @@ public class PastQuizActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             if (response.code() == 200) {
-
+                Log.i("res",responseBody);
                 return responseBody;
-
             }
             return null;
 
@@ -157,7 +156,9 @@ public class PastQuizActivity extends AppCompatActivity {
                             val.getJSONObject(i).getString("time"),
                             val.getJSONObject(i).getString("date"),
                             val.getJSONObject(i).getString("name"),
-                            val.getJSONObject(i).getString("marks")
+                            val.getJSONObject(i).getString("marks"),
+                            val.getJSONObject(i).getJSONArray("problems"),
+                            val.getJSONObject(i).getJSONArray("providedAnswers")
                     );
                 } catch (JSONException e) {
                     e.printStackTrace();

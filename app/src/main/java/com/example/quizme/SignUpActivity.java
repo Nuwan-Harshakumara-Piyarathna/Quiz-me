@@ -77,11 +77,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean validateFields(){
-        fNameText = fName.getText().toString();
-        lNameText = lName.getText().toString();
-        userText =  userName.getText().toString();
-        passText = passwordOne.getText().toString();
-        cPassText = passwordTwo.getText().toString();
+        fNameText = fName.getText().toString().trim();
+        lNameText = lName.getText().toString().trim();
+        userText =  userName.getText().toString().trim();
+        passText = passwordOne.getText().toString().trim();
+        cPassText = passwordTwo.getText().toString().trim();
 
         if(fNameText.isEmpty()){
             fstName.setError("First Name can't be Empty");

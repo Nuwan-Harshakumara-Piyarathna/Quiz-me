@@ -13,6 +13,7 @@ public class EditQuestion {
     private String answer2;
     private String answer3;
     private String answer4;
+    int providedAns;
     private int correctAns;
     private String imageUri;
 
@@ -25,6 +26,26 @@ public class EditQuestion {
         this.answer4 = answer4;
         this.correctAns = correctAns;
         this.imageUri = imageUri;
+    }
+
+    public EditQuestion(String question, String answer1, String answer2, String answer3, String answer4, int correctAns, String imageUri,int ans) {
+        this.question = question;
+        this.questionNum = questionNum;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.answer4 = answer4;
+        this.correctAns = correctAns;
+        this.imageUri = imageUri;
+        this.providedAns = ans;
+    }
+
+    public int getProvidedAns() {
+        return providedAns;
+    }
+
+    public void setProvidedAns(int providedAns) {
+        this.providedAns = providedAns;
     }
 
     public String getQuestion() {
