@@ -149,8 +149,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean validateFields() {
 
-        userText = userName.getText().toString();
-        passText = password.getText().toString();
+        userText = userName.getText().toString().trim();
+        passText = password.getText().toString().trim();
 
         if (userText.isEmpty()) {
             user.setError("User Name can't be Empty");
@@ -280,11 +280,6 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("jwt", s);
                     editor.commit();
-
-                    //meken jwt gnin
-                    pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-                    String jwt=pref.getString("jwt",null);
-                    Log.i("jwt",jwt);
                     Intent intent = new Intent(con, MainActivity.class);
                     con.startActivity(intent);
 

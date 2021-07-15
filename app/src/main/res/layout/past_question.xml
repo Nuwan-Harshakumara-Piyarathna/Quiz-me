@@ -38,7 +38,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginStart="10dp"
                         android:text="1"
-                        android:textSize="18dp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -82,7 +82,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp">
+                    android:layout_marginEnd="20dp"
+                    android:clickable="false" >
 
                     <RadioButton
                         android:id="@+id/ans1"
@@ -124,43 +125,29 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="end"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
-                    >
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/correctAns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="Correct Answer : 1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"/>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/modQus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="edit"
-                        style="?attr/borderlessButtonStyle"
-                        />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/delQus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="delete"
-                        style="?attr/borderlessButtonStyle"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <Button
-                        android:id="@+id/finishQuiz"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Finish Quiz"
-                        android:layout_gravity="center"
-                        android:visibility="gone"/>
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/right"
+                    android:layout_marginRight="20dp"/>
                 </LinearLayout>
 
             </LinearLayout>

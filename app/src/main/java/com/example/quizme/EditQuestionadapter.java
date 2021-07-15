@@ -98,6 +98,17 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
         holder.answer4.setText(tmpQuestion.getAnswer4().trim());
 
+        if(tmpQuestion.getCorrectAns()==1){
+            holder.answer1.setChecked(true);
+        }else if(tmpQuestion.getCorrectAns()==2){
+            holder.answer2.setChecked(true);
+        }else if(tmpQuestion.getCorrectAns()==3){
+            holder.answer3.setChecked(true);
+        }else if(tmpQuestion.getCorrectAns()==4){
+            holder.answer4.setChecked(true);
+        }
+
+
 
         holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
