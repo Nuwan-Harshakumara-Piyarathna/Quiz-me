@@ -33,9 +33,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.quizme.utility.NetworkChangeListener;
 
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.UploadNotificationConfig;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
