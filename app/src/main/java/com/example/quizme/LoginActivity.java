@@ -13,6 +13,8 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -73,6 +75,56 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showChangeLanguageDialog();
+            }
+        });
+
+        userName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                userText = userName.getText().toString().trim();
+                user.setError(null);
+                user.setErrorEnabled(false);
+                if (userText.isEmpty()) {
+                    user.setErrorEnabled(true);
+                    user.setError("User Name can't be Empty");
+                }
+
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                passText = password.getText().toString().trim();
+                pass.setError(null);
+                pass.setErrorEnabled(false);
+                if (passText.isEmpty()) {
+                    pass.setErrorEnabled(true);
+                    pass.setError("Password can't be Empty");
+                }
+
             }
         });
 
