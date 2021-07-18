@@ -7,13 +7,95 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
+
     <string name="previous">Previous</string>
-    <string name="schedule_description">You can access all of your scheduled quizzes. You can edit or delete any quizzes which are hosting by you.</string>
+
+    <string name="open">OPEN</string>
+    <string name="delete_btn">Delete</string>
+    <string name="score">SCORE</string>
+
+
+    //login activity
+   // <string name="login_pageName">LOGIN</string>
+    <string name="login_userName">User Name</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">LOGIN</string>
+    <string name="Login_forgot">Forget your password?</string>
+    <string name="login_newUser">New User? Sign UP</string>
+    <string name="login_changeLan">Change Language</string>
+    <string name="username_error">Username cannot be empty</string>
+
+    //sign up activity
+    <string name="sign_up">SIGN UP</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="sign_username">User Name</string>
+    <string name="sign_password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_button">SIGN UP</string>
+
+    //home UI
+    <string name="schedule_description">You can access all of your scheduled quizzes. You can edit or delete any quizzes which are hosting by you</string>
     <string name="past_description">You can access quizzes that you joined before</string>
+    <string name="schedule">Schedule</string>
+    <string name="past_quiz">Past Quizzes</string>
+
     <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="join_description">You can join quiz by entering quiz ID</string>
-    <string name="create_description">You can create a new quiz and host a quiz by yourself by sharing quiz IDs with others.</string>
+
+    //quiz UI
+    <string name="join_description">You can join quiz by entering the quiz ID</string>
+    <string name="create_description">You can create a new quiz and host a quiz by yourself by sharing quiz IDs with others</string>
+    <string name="new_quiz">New Quiz</string>
+    <string name="join_quiz">Join Quiz</string>
+    <string name="create">start</string>
+    <string name="join">join</string>
+
+    //leaderboard
+    <string name="leaderboard_description">You can access the leaderboard of the quizzes that you hosted before</string>
+
+    //schedule quiz recycle
+    <string name="quiz_name">Quiz: </string>
+    <string name="date">Date: </string>
+    <string name="time">Time: </string>
+    <string name="quiz_id">Quiz ID: </string>
+    <string name="copy_button">copy</string>
+    <string name="edit_button">edit</string>
+
+    //edit quiz detail UI
+    <string name="edit_title">Edit Quiz</string>
+    <string name="edit_quiz">EDIT QUIZ</string>
+    <string name="edit_quizname">Quiz Name</string>
+    <string name="start_date">Start Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="duration">Duration (minutes)</string>
+    <string name="edit_que_btn">EDIT QUESTIONS</string>
+    <string name="submit">SUBMIT</string>
+
+    //quiz details UI
+    <string name="new_title">New Quiz</string>
+    <string name="newquiz">NEW QUIZ</string>
+    <string name="next">Next</string>
+
+
+    //create question UI
+    <string name="que_count">question count: 0</string>
+    <string name="view_que">view question</string>
+    <string name="finish">finish</string>
+    <string name="enter_que">Enter the Question</string>
+    <string name="pick_image">pick an image from gallery</string>
+    <string name="delete_img">delete image</string>
+    <string name="enter_img">enter answers</string>
+    <string name="answer1">Answer 1</string>
+    <string name="answer2">Answer 2</string>
+    <string name="answer3">Answer 3</string>
+    <string name="answer4">Answer 4</string>
+    <string name="correct_answer">Correct Answer = Not selected</string>
+    <string name="add_list">add to list</string>
+
+    //pop up submission
+    <string name="pop_title">Your quiz has been scheduled.</string>
+    <string name="id">Quiz ID: </string>
+
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <!--InstructionsActivity-->
@@ -70,17 +152,9 @@ We want to inform users of this Service that these third parties have access to 
     <string name="activity_privacy_policy_value_9">We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.</string>
     <string name="activity_privacy_policy_value_10">If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</string>
 
-    <string name="leaderboard_description">You can access leaderboard of the quizzes that you hosted before</string>
 
 
-<!--    login activity-->
-    <string name="login_pageName">LOGIN</string>
-    <string name="login_userName">User Name</string>
-    <string name="login_password">Password</string>
-    <string name="login_button">LOGIN</string>
-    <string name="Login_forgot">Forget your password?</string>
-    <string name="login_newUser">New User? Sign UP</string>
-    <string name="login_changeLan">Change Language</string>
+
 
 
 <!--    Edit Quiz-->
@@ -152,7 +226,7 @@ We want to inform users of this Service that these third parties have access to 
     <string name="connection_check_retry">Retry</string>
 
 <!--    other-->
-    <string name="quiz_id">Quiz Id</string>
+
 
 <!--    home tab-->
     <string name="home_schedule">Schedule</string>
@@ -183,7 +257,7 @@ We want to inform users of this Service that these third parties have access to 
     <string name="quiz_new_quiz">New Quiz</string>
     <string name="quiz_start">Start</string>
     <string name="quiz_join">Join</string>
-    <string name="quiz_name">Quiz Name</string>
+    
     <string name="single_question_edit">edit</string>
     <string name="single_question_delete">delete</string>
     <string name="single_question_finish_quiz">Finish Quiz</string>

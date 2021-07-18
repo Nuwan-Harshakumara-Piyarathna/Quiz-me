@@ -43,7 +43,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home_schedule"
+                        android:text="@string/schedule"
                         android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         />
@@ -70,7 +70,7 @@
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home_open"
+                        android:text="@string/open"
                         android:id="@+id/scheduleBtn"
                         style="?attr/borderlessButtonStyle"
                         />
@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home_past_quizzes"
+                        android:text="@string/past_quiz"
                         android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceHeadline6" />
 
@@ -137,7 +137,7 @@
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home_open"
+                        android:text="@string/open"
                         android:id="@+id/quizTake"
                         style="?attr/borderlessButtonStyle"
                         />

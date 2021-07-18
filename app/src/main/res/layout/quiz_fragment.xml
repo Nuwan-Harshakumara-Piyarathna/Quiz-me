@@ -44,7 +44,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/quiz_new_quiz"
+                        android:text="@string/new_quiz"
                         android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         />
@@ -72,7 +72,7 @@
                         android:id="@+id/quizBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/quiz_start"
+                        android:text="@string/create"
                         style="?attr/borderlessButtonStyle"
                         />
                 </LinearLayout>
@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/quiz_join"
+                        android:text="@string/join_quiz"
                         android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceHeadline6" />
 
@@ -138,7 +138,7 @@
                         android:id="@+id/takeQuiz"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/quiz_join"
+                        android:text="@string/join"
                         style="?attr/borderlessButtonStyle"
                         />
                 </LinearLayout>
