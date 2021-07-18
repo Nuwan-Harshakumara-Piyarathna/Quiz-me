@@ -60,7 +60,7 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
-                        android:text="This is your first question.Please answer"
+                        android:text="@string/past_question_this_is_your_first_question_please_answer"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer1"
+                        android:text="@string/past_question_answer1"
                         android:clickable="false"/>
 
                     <RadioButton
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer2"
+                        android:text="@string/past_question_answer2"
                         android:clickable="false"/>
 
                     <RadioButton
@@ -109,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer3"
+                        android:text="@string/past_question_answer3"
                         android:clickable="false"/>
 
                     <RadioButton
@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer4"
+                        android:text="@string/past_question_answer4"
                         android:clickable="false"/>
 
                 </RadioGroup>
@@ -137,7 +137,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="Correct Answer : 1"
+                    android:text="@string/past_question_correct_answer"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:paddingLeft="10dp"/>

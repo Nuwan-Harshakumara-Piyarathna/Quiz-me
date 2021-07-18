@@ -49,19 +49,19 @@ import okhttp3.Response;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
-    ImageView questionImage;
-    Button pickImage;
+//    ImageView questionImage;
+//    Button pickImage;
     Button addQuestion;
     Button viewQuestions;
     Button uploadQuiz;
     Button questionCount;
-    Button deleteImage;
+//    Button deleteImage;
     EditText questionTitle;
     EditText ans1;
     EditText ans2;
     EditText ans3;
     EditText ans4;
-    Uri imageUri;
+//    Uri imageUri;
     RadioGroup selectAnswerSection;
     int correctAnswer = -1;
     TextView showCorrectAnswer;
@@ -97,14 +97,14 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         requestStoragePermission();
 
-        questionImage = findViewById(R.id.quesImg);
-        pickImage = findViewById(R.id.pickImage);
+//        questionImage = findViewById(R.id.quesImg);
+//        pickImage = findViewById(R.id.pickImage);
         viewQuestions = findViewById(R.id.viewList);
         uploadQuiz = findViewById(R.id.submitQuiz);
         addQuestion = findViewById(R.id.addQuestion);
         questionTitle = findViewById(R.id.qId);
         questionCount = findViewById(R.id.questionCount);
-        deleteImage = findViewById(R.id.deleteImage);
+//        deleteImage = findViewById(R.id.deleteImage);
         ans1 = findViewById(R.id.qA1);
         ans2 = findViewById(R.id.qA2);
         ans3 = findViewById(R.id.qA3);
@@ -121,39 +121,39 @@ public class CreateQuestionActivity extends AppCompatActivity {
             GlobalData.setModifiedQuestion(null);
 
             questionTitle.setText(tmpQuestion.getQuestion());
-            questionImage.setImageURI(tmpQuestion.getImageUri());
+//            questionImage.setImageURI(tmpQuestion.getImageUri());
             ans1.setText(tmpQuestion.getAnswer1());
             ans2.setText(tmpQuestion.getAnswer2());
             ans3.setText(tmpQuestion.getAnswer3());
             ans4.setText(tmpQuestion.getAnswer4());
-            imageUri = tmpQuestion.getImageUri();
+//            imageUri = tmpQuestion.getImageUri();
             correctAnswer = tmpQuestion.getCorrectAnswer();
             selectAnswerSection.check(correctAnswer-1);
             String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
             showCorrectAnswer.setText(correct);
         }
 
-        pickImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-                        //permission not granted.request it
-                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        //show popup for runtime permission
-                        requestPermissions(permissions, STORAGE_PERMISSION_CODE);
-                    }
-                    else{
-                        //permission already granted
-                        openGallery();
-                    }
-                }
-                else {
-                    //system os is less than marshmallow
-                    openGallery();
-                }
-            }
-        });
+//        pickImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+//                        //permission not granted.request it
+//                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+//                        //show popup for runtime permission
+//                        requestPermissions(permissions, STORAGE_PERMISSION_CODE);
+//                    }
+//                    else{
+//                        //permission already granted
+//                        openGallery();
+//                    }
+//                }
+//                else {
+//                    //system os is less than marshmallow
+//                    openGallery();
+//                }
+//            }
+//        });
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,15 +187,15 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
         });
 
-        deleteImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                questionImage.setImageURI(null);
-                imageUri = null;
-
-            }
-        });
+//        deleteImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                questionImage.setImageURI(null);
+//                imageUri = null;
+//
+//            }
+//        });
 
         addQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,18 +239,18 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
                 if(title.trim().length() != 0 && answer1.trim().length() != 0 && answer2.trim().length() != 0 && answer3.trim().length() != 0 && answer4.trim().length() != 0 && correctAnswer != -1) {
 
-                    if (imageUri != null) {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,correctAnswer);
-
-                    } else {
-                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,correctAnswer);
-                    }
+//                    if (imageUri != null) {
+//                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4, imageUri,correctAnswer);
+//
+//                    } else {
+//                        tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,correctAnswer);
+//                    }
                     tmpQuestion = new Question(title, GlobalData.getLength(), answer1, answer2, answer3, answer4,correctAnswer);
 
                     GlobalData.addQuestion(tmpQuestion);
                     questionCount.setText("Question Count : "+GlobalData.getLength());
-                    questionImage.setImageURI(null);
-                    imageUri = null;
+//                    questionImage.setImageURI(null);
+//                    imageUri = null;
                     questionTitle.setText("");
                     ans1.setText("");
                     ans2.setText("");
@@ -406,15 +406,15 @@ public class CreateQuestionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE && data.getData() != null){
-            imageUri = data.getData();
-            questionImage.setImageURI( imageUri);
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
-                questionImage.setImageBitmap(bitmap);
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
+//            imageUri = data.getData();
+//            questionImage.setImageURI( imageUri);
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+//                questionImage.setImageBitmap(bitmap);
+//            }
+//            catch (IOException e){
+//                e.printStackTrace();
+//            }
         }
     }
 

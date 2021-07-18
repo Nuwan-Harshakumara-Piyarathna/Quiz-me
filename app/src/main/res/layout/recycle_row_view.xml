@@ -45,7 +45,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Quiz: "
+                        android:text="@string/marks_quiz"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Marks"
+                        android:text="@string/marks_marks"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -78,7 +78,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Marks: "
+                        android:text="@string/marks_marks"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Marks"
+                        android:text="@string/marks_marks"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -112,7 +112,7 @@
                         android:id="@+id/text_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Date"
+                        android:text="@string/marks_date"
                         android:layout_weight="1"
                         android:layout_marginRight="10dp"
                         android:gravity="end"
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:layout_weight="1"
-                        android:text="Time"
+                        android:text="@string/marks_time"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 

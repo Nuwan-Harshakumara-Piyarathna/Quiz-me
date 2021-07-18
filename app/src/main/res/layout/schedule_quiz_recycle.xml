@@ -43,7 +43,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Quiz: "
+                        android:text="@string/marks_quiz"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
@@ -53,7 +53,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Marks"
+                        android:text="@string/marks_marks"
                         android:textColor="@android:color/background_dark"
                         android:textSize="22sp"
                         android:textStyle="bold"/>
@@ -71,7 +71,7 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="Date: "
+                        android:text="@string/marks_date2"
                         android:layout_weight="1"
                         android:layout_marginLeft="10dp"
                         android:gravity="start"
@@ -81,7 +81,7 @@
                         android:id="@+id/text_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Date"
+                        android:text="@string/marks_date"
                         android:textColor="@android:color/background_dark"
                         android:layout_weight="1"
                         android:gravity="start"
@@ -103,7 +103,7 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="Time: "
+                        android:text="@string/marks_time2"
                         android:layout_weight="1"
                         android:layout_marginLeft="10dp"
                         android:gravity="start"
@@ -117,7 +117,7 @@
                         android:gravity="start"
                         android:layout_weight="1"
                         android:textColor="@android:color/background_dark"
-                        android:text="Time"
+                        android:text="@string/marks_time"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -137,7 +137,7 @@
                     <TextView
                         android:layout_width="85dp"
                         android:layout_height="wrap_content"
-                        android:text="Quiz ID: "
+                        android:text="@string/marks_quiz_id"
                         android:layout_weight="1"
                         android:layout_marginLeft="10dp"
                         android:gravity="start"
@@ -149,7 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         app:icon="@drawable/ic_baseline_content_copy_24"
-                        android:text="copy"
+                        android:text="@string/marks_copy"
                         style="?attr/borderlessButtonStyle"
                         />
 
@@ -167,7 +167,7 @@
                         android:id="@+id/editBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:text="Edit"
+                        android:text="@string/marks_edit"
                         style="?attr/borderlessButtonStyle"
                         />
 

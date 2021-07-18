@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.quizme.utility.NetworkChangeListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -197,6 +198,13 @@ public class LoginActivity extends AppCompatActivity {
         unregisterReceiver(networkChangeListener);
 
         super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //finish();
+        finishAffinity();
+        System.exit(0);
     }
 
     private boolean validateFields() {
