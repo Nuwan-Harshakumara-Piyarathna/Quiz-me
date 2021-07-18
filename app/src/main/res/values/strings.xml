@@ -257,7 +257,7 @@ We want to inform users of this Service that these third parties have access to 
     <string name="quiz_new_quiz">New Quiz</string>
     <string name="quiz_start">Start</string>
     <string name="quiz_join">Join</string>
-    
+
     <string name="single_question_edit">edit</string>
     <string name="single_question_delete">delete</string>
     <string name="single_question_finish_quiz">Finish Quiz</string>
