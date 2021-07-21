@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +40,7 @@ public class PastQuizActivity extends AppCompatActivity {
     PastQuizAdopter pastQuizAdopter;
     LoadingDialog loadDialog;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+    TextView blankText;
 
     @Override
     protected void onStart() {
@@ -129,6 +131,7 @@ public class PastQuizActivity extends AppCompatActivity {
 
                 JSONObject json = null;
                 JSONArray val=null;
+                Log.i("past",s);
 
                 if(s==null){
                     Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
@@ -142,7 +145,11 @@ public class PastQuizActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+            blankText = findViewById(R.id.blank_text);
 
+                if(val.length()==0){
+                    blankText.setVisibility(blankText.VISIBLE);
+                }
 
             recyclerView = findViewById(R.id.recycler_view);
 
