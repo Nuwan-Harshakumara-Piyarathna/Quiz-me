@@ -69,7 +69,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-
+        holder.setIsRecyclable(false);
         Question tmpQuestion = this.questions.get(position);
 
         holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum() + 1));
@@ -93,6 +93,18 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             Log.e("gPosition",String.valueOf(getItemCount()-1));
             holder.finishQuiz.setVisibility(View.GONE);
 
+            Log.d("QUIZ_LIST_ADAPTER ","Item count = "+(getItemCount()-1));
+            Log.d("QUIZ_LIST_ADAPTER ","STATUS = "+1);
+            Log.d("QUIZ_LIST_ADAPTER ","position = "+position);
+            Log.d("QUIZ_LIST_ADAPTER ","globaldata length = "+GlobalData.getLengthClient());
+
+            if(GlobalData.getClientQuestions().get(position).getClientAns() != 0){
+                holder.ans.check(holder.ans.getChildAt(GlobalData.getClientQuestions().get(position).getClientAns()-1).getId());
+            }
+            else{
+                holder.ans.clearCheck();
+            }
+
             if (position == (getItemCount() - 1)) {
 
                 holder.finishQuiz.setVisibility(View.VISIBLE);
@@ -115,9 +127,9 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
                                 Intent intent;
 
-                                    intent = new Intent(view.getContext(), QuizResultActivity.class);
-                                    view.getContext().startActivity(intent);
-                                    ((Activity) view.getContext()).finish();
+                                intent = new Intent(view.getContext(), QuizResultActivity.class);
+                                view.getContext().startActivity(intent);
+                                ((Activity) view.getContext()).finish();
 
                             }
                         });
@@ -141,13 +153,19 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                     int buttonId = radioGroup.getCheckedRadioButtonId();
                     View radioButton = radioGroup.findViewById(buttonId);
                     int index = radioGroup.indexOfChild(radioButton);
-                    Log.e("index",String.valueOf(index));
-                    Question tmpQuestion = questions.get(position);
+                    Question tmpQuestion = GlobalData.getClientQuestions().get(position);
                     tmpQuestion.setClientAns(index+1);
                     questions.set(position, tmpQuestion);
                     GlobalData.modifyClientQuestion(position, tmpQuestion);
-                    Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
-                    Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
+
+//                    int myIndex = 0;
+//                    for(Question q: GlobalData.getClientQuestions()){
+//                        Log.d("QUIZ_LIST_ADAPTER : ","Question "+myIndex+" "+q.toString());
+//                    }
+                    Log.e("POSITION",""+position);
+                    Log.e("INDEX",String.valueOf(index));
+                    Log.e("CORRECT",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
+                    Log.e("CLIENT",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
                 }
             });
 
@@ -192,7 +210,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return questions.size();
+        return GlobalData.getClientQuestions().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

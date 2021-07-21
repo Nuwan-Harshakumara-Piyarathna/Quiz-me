@@ -141,4 +141,18 @@ public class Question {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", questionNum=" + questionNum +
+                ", answer1='" + answer1 + '\'' +
+                ", answer2='" + answer2 + '\'' +
+                ", answer3='" + answer3 + '\'' +
+                ", answer4='" + answer4 + '\'' +
+                ", correctAns=" + correctAns +
+                ", clientAns=" + clientAns +
+                ", answers=" + answers +
+                '}';
+    }
 }
