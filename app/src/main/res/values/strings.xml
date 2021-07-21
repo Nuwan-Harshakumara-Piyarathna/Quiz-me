@@ -58,7 +58,7 @@
     <string name="date">Date: </string>
     <string name="time">Time: </string>
     <string name="quiz_id">Quiz ID: </string>
-    <string name="copy_button">copy</string>
+    <string name="share_button">Share</string>
     <string name="edit_button">edit</string>
 
     //edit quiz detail UI
