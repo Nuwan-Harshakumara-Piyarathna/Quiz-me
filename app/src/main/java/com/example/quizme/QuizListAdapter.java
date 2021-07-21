@@ -56,6 +56,8 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         this.questions = questions;
         this.status = status;
         this.context = context;
+
+
     }
 
 
@@ -88,6 +90,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         if (status == 1) {
             holder.deleteQuestion.setVisibility(View.GONE);
             holder.modifyQuestion.setVisibility(View.GONE);
+
             Log.d("QUIZ_LIST_ADAPTER : ","STATUS = "+1);
             Log.d("QUIZ_LIST_ADAPTER : ","position = "+position);
             Log.d("QUIZ_LIST_ADAPTER : ","globaldata length = "+GlobalData.getLengthClient());
@@ -143,6 +146,12 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                     tmpQuestion.setClientAns(index+1);
                     questions.set(position, tmpQuestion);
                     GlobalData.modifyClientQuestion(position, tmpQuestion);
+
+                    //TODO
+                    int myIndex = 0;
+                    for(Question q: questions){
+                        Log.d("QUIZ_LIST_ADAPTER : ","Question "+myIndex+" "+q.toString());
+                    }
                     Log.e("correct",String.valueOf(GlobalData.clientQuestions.get(position).getCorrectAns()));
                     Log.e("client",String.valueOf(GlobalData.clientQuestions.get(position).getClientAns()));
                 }
