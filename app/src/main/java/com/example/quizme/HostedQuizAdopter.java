@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.ViewHolder> {
@@ -34,7 +35,7 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
     @NotNull
     @Contract(pure = true)
     private String genMessage(String link, String date, String time, String name) {
-        return "Quizz: "+name+"\nLink for the Quiz: "+link+"\non: "+date+"\nat: "+time;
+        return "Quizz: " + name + "\nLink for the Quiz: " + link + "\non: " + date + "\nat: " + time;
     }
 
     @NonNull
@@ -42,7 +43,7 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_quiz_recycle,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_quiz_recycle, parent, false);
 
         return new ViewHolder(view);
     }
@@ -54,13 +55,13 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
         holder.textViewTime.setText(hostedQuizModels.get(position).getTime());
         holder.textViewName.setText(hostedQuizModels.get(position).getQuizName());
         holder.schBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent in = new Intent(view.getContext(), EditQuizDetailsActivity.class);
-                        in.putExtra("quiz",hostedQuizModels.get(position).getQuiz().toString());
-                        in.putExtra("quizID",position);
-                        view.getContext().startActivity(in);
-                    }
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(view.getContext(), EditQuizDetailsActivity.class);
+                in.putExtra("quiz", hostedQuizModels.get(position).getQuiz().toString());
+                in.putExtra("quizID", position);
+                view.getContext().startActivity(in);
+            }
         });
 
         holder.quizID.setOnClickListener(new View.OnClickListener() {
@@ -69,16 +70,13 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
                 Intent intentShare = new Intent(Intent.ACTION_SEND);
                 intentShare.setType("text/plain");
                 intentShare.putExtra(Intent.EXTRA_SUBJECT, hostedQuizModels.get(position).getQuizName());
-                message = genMessage(hostedQuizModels.get(position).getQuizID(), hostedQuizModels.get(position).getDate(), hostedQuizModels.get(position).getTime(), hostedQuizModels.get(position).getQuizName());
+                message = genMessage(hostedQuizModels.get(position).getQuizID(),
+                        hostedQuizModels.get(position).getDate(),
+                        hostedQuizModels.get(position).getTime(),
+                        hostedQuizModels.get(position).getQuizName());
                 intentShare.putExtra(Intent.EXTRA_TEXT, message);
 
                 view.getContext().startActivity(Intent.createChooser(intentShare, hostedQuizModels.get(position).getQuizName()));
-                //ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                //ClipData clip = ClipData.newPlainText("Copy Link", hostedQuizModels.get(position).getQuizID());
-                //clipboard.setPrimaryClip(clip);
-                //clip.getDescription();
-                Toast.makeText(view.getContext(), "Copied", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -89,9 +87,9 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
         return hostedQuizModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewName,textViewDate,textViewTime;
+        TextView textViewName, textViewDate, textViewTime;
         Button quizID;
         Button schBtn;
 
