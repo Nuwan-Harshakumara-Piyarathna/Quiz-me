@@ -137,7 +137,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="@string/past_question_correct_answer"
+                    android:text="@string/past_quiz_correct_answer"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:paddingLeft="10dp"/>

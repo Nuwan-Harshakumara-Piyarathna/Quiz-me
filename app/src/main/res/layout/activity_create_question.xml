@@ -85,7 +85,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/enter_que"
-                    android:inputType="textPersonName" />
+                     />
 
                 <ImageView
                     android:id="@+id/quesImg"
@@ -132,19 +132,19 @@
                         android:background="@drawable/btn_background"
                         android:textColor="#F9AA33"/>
 
-                    <android.widget.Button
-                        android:id="@+id/addAnswers"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:padding="8dp"
-                        android:textStyle="bold"
-                        android:text="@string/enter_img"
-                        android:background="#344955"
-                        android:textColor="#F9AA33"/>
-
                 </LinearLayout>
+
+                <android.widget.Button
+                    android:id="@+id/addAnswers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="8dp"
+                    android:textStyle="bold"
+                    android:text="@string/enter_img"
+                    android:background="#ffffff"
+                    android:textColor="#344955"/>
 
                 <EditText
                     android:id="@+id/qA1"
@@ -153,7 +153,7 @@
                     android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="@string/answer1"
-                    android:inputType="textPersonName" />
+                   />
 
                 <EditText
                     android:id="@+id/qA2"
@@ -162,7 +162,7 @@
                     android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="@string/answer2"
-                    android:inputType="textPersonName" />
+                    />
 
                 <EditText
                     android:id="@+id/qA3"
@@ -171,7 +171,7 @@
                     android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="@string/answer3"
-                    android:inputType="textPersonName" />
+                     />
 
                 <EditText
                     android:id="@+id/qA4"
@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/answer4"
-                    android:inputType="textPersonName" />
+                     />
 
                 <RadioGroup
                     android:layout_width="match_parent"
