@@ -88,7 +88,9 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         if (status == 1) {
             holder.deleteQuestion.setVisibility(View.GONE);
             holder.modifyQuestion.setVisibility(View.GONE);
-
+            Log.d("QUIZ_LIST_ADAPTER : ","STATUS = "+1);
+            Log.d("QUIZ_LIST_ADAPTER : ","position = "+position);
+            Log.d("QUIZ_LIST_ADAPTER : ","globaldata length = "+GlobalData.getLengthClient());
             if (position == (GlobalData.getLengthClient() - 1)) {
                 holder.finishQuiz.setVisibility(View.VISIBLE);
                 holder.finishQuiz.setOnClickListener(new View.OnClickListener() {
