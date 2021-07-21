@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,7 @@ public class HostedQuizActivity extends AppCompatActivity {
     ArrayList<HostedQuizModel> HostedQuizModels;
     HostedQuizAdopter HostedQuizAdopter;
     LoadingDialog ld;
+    TextView emptyText;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
@@ -152,10 +154,17 @@ public class HostedQuizActivity extends AppCompatActivity {
             try {
                 json = new JSONObject(s);
                 val = json.getJSONArray("createdQuizzes");
+
             } catch ( Exception e) {
                 e.printStackTrace();
             }
 
+            emptyText = findViewById(R.id.blank_text);
+
+            if(val.length() == 0){
+                emptyText.setVisibility(emptyText.VISIBLE);
+                return;
+            }
 
 
             recyclerView = findViewById(R.id.recycler_view);
