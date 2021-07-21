@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 
 
@@ -74,14 +76,156 @@ public class SignUpActivity extends AppCompatActivity {
         passOne =findViewById(R.id.loginPassword);
         passTwo = findViewById(R.id.confirmPassword);
         loadDialog = new LoadingDialog(SignUpActivity.this);
+
+
+        fName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                fNameText = fName.getText().toString().trim();
+                fstName.setError(null);
+                fstName.setErrorEnabled(false);
+                if(fNameText.isEmpty()) {
+                    fstName.setErrorEnabled(true);
+                    fstName.setError("First Name can't be Empty");
+                }else if(fNameText.length()<4 || fNameText.length()>10) {
+                    fstName.setErrorEnabled(true);
+                    fstName.setError("First Name should have at least 4 characters");
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+
+
+        lName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                lNameText = lName.getText().toString().trim();
+                lstName.setError(null);
+                lstName.setErrorEnabled(false);
+                if(lNameText.isEmpty()) {
+                    lstName.setErrorEnabled(true);
+                    lstName.setError("Last Name can't be Empty");
+                }else if(lNameText.length()<4 || lNameText.length()>10) {
+                    lstName.setErrorEnabled(true);
+                    lstName.setError("Last Name should have at least 4 characters");
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+
+        userName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                userText =  userName.getText().toString().trim();
+                user.setError(null);
+                user.setErrorEnabled(false);
+                if(userText.isEmpty()) {
+                    user.setErrorEnabled(true);
+                    user.setError("User Name can't be Empty");
+                }else if(userText.length()<4 || userText.length()>10) {
+                    user.setErrorEnabled(true);
+                    user.setError("User Name should have at least 4 characters");
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+
+        passwordOne.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                passText = passwordOne.getText().toString().trim();
+                passOne.setError(null);
+                passOne.setErrorEnabled(false);
+                if(passText.isEmpty()) {
+                    passOne.setErrorEnabled(true);
+                    passOne.setError("Password can't be empty");
+                }else if(passText.length()<5 || passText.length()>15){
+                    passOne.setErrorEnabled(true);
+                    passOne.setError("Password is too short");
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+
+        passwordTwo.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                cPassText = passwordTwo.getText().toString().trim();
+                passTwo.setError(null);
+                passTwo.setErrorEnabled(false);
+                if(cPassText.isEmpty()){
+                    passTwo.setErrorEnabled(true);
+                    passTwo.setError("Confirm Password can't be empty");
+                }else if(! passText.equals(cPassText)){
+                    passTwo.setErrorEnabled(true);
+                    passTwo.setError("Password is not matched");
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+
+
+
+
     }
 
     private boolean validateFields(){
-        fNameText = fName.getText().toString();
-        lNameText = lName.getText().toString();
-        userText =  userName.getText().toString();
-        passText = passwordOne.getText().toString();
-        cPassText = passwordTwo.getText().toString();
+        fNameText = fName.getText().toString().trim();
+        lNameText = lName.getText().toString().trim();
+        userText =  userName.getText().toString().trim();
+        passText = passwordOne.getText().toString().trim();
+        cPassText = passwordTwo.getText().toString().trim();
 
         if(fNameText.isEmpty()){
             fstName.setError("First Name can't be Empty");
@@ -96,7 +240,7 @@ public class SignUpActivity extends AppCompatActivity {
             lstName.setError("Last Name can't be Empty");
             return false;
         }else if(lNameText.length()<4 || lNameText.length()>10){
-            lstName.setError("last Name should have at least 4 characters");
+            lstName.setError("Last Name should have at least 4 characters");
             return false;
         }
 
@@ -104,15 +248,15 @@ public class SignUpActivity extends AppCompatActivity {
             user.setError("User Name can't be Empty");
             return false;
 
-        }else if(lNameText.length()<4 || lNameText.length()>10){
-            fstName.setError("User Name should have at least 4 characters");
+        }else if(userText.length()<4 || userText.length()>10){
+            user.setError("User Name should have at least 4 characters");
             return false;
         }
 
         if(passText.isEmpty()){
             passOne.setError("Password can't be empty");
             return false;
-        }else if(passText.length()<6 || passText.length()>15){
+        }else if(passText.length()<5 || passText.length()>15){
             passOne.setError("Password is too short");
             return false;
         }

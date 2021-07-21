@@ -13,14 +13,18 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.quizme.utility.NetworkChangeListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -48,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
     String userText,passText;
     LoadingDialog loadDialog;
     Button button;
-    Button languageButton;
-
+    TextView languageButton;
+    int isSinhala = 0;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
@@ -76,22 +80,74 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        userName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                userText = userName.getText().toString().trim();
+                user.setError(null);
+                user.setErrorEnabled(false);
+                if (userText.isEmpty()) {
+                    user.setErrorEnabled(true);
+                    user.setError("User Name can't be Empty");
+                }
+
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                passText = password.getText().toString().trim();
+                pass.setError(null);
+                pass.setErrorEnabled(false);
+                if (passText.isEmpty()) {
+                    pass.setErrorEnabled(true);
+                    pass.setError("Password can't be Empty");
+                }
+
+            }
+        });
+
     }
 
     private void showChangeLanguageDialog() {
 
-        final String[] languages = {"English","සින්හල"};
+        final String[] languages = {"English","සිංහල"};
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setTitle("Choose Language");
+        builder.setTitle("Change Language");
         builder.setSingleChoiceItems(languages, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(i == 0){
+                    isSinhala = 0;
                     setLocate("en");
                     Log.e("lan","en");
                     recreate();
                 }
                 if(i == 1){
+                    isSinhala = 1;
                     setLocate("si");
                     Log.e("lan","si");
                     recreate();
@@ -147,18 +203,29 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
+    public void onBackPressed() {
+        //finish();
+        finishAffinity();
+        System.exit(0);
+    }
+
     private boolean validateFields() {
 
-        userText = userName.getText().toString();
-        passText = password.getText().toString();
+        userText = userName.getText().toString().trim();
+        passText = password.getText().toString().trim();
 
         if (userText.isEmpty()) {
-            user.setError("User Name can't be Empty");
+            user.setError(getString(R.string.username_error));
             return false;
         }
 
         if (passText.isEmpty()) {
-            pass.setError("Password can't be Empty");
+            if(isSinhala == 0) {
+                pass.setError("Password cannot be empty");
+            }else {
+                pass.setError("මුරපදය හිස් විය නොහැක");
+            }
             return false;
         }
 
@@ -261,15 +328,32 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(s);
             ld.dismissDialog();
             if(s==null){
-                Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
+                Toast toast;
+                if(isSinhala == 0) {
+                    toast=Toast.makeText(con, "Something Went Wrong. Try Again Later!", Toast.LENGTH_SHORT);
+                }else {
+                    toast=Toast.makeText(con, "යම් වැරැද්දක් සිදු වී ඇත. පසුව නැවත උත්සාහ කරන්න!", Toast.LENGTH_SHORT);
+                }
+
                 toast.show();
             }
             else if(s.equals("Incorrect userName or Password.")){
-                Toast toast=Toast.makeText(con, "Incorrect userName or Password.", Toast.LENGTH_SHORT);
+                Toast toast;
+                if(isSinhala == 0) {
+                    toast=Toast.makeText(con, "Incorrect username or Password.", Toast.LENGTH_SHORT);
+                }else {
+                    toast=Toast.makeText(con, "පරිශීලක නාමය හෝ මුරපදය වැරදි.", Toast.LENGTH_SHORT);
+                }
                 toast.show();
             }
             else if(s.equals("user not found")){
-                Toast toast=Toast.makeText(con, "New User?Sign UP", Toast.LENGTH_SHORT);
+                Toast toast;
+                if(isSinhala == 0) {
+                    toast=Toast.makeText(con, "New User?Sign UP", Toast.LENGTH_SHORT);
+                }else {
+                    toast=Toast.makeText(con, "නව පරිශීලකයෙක්ද? ලියාපදිංචි වන්න.", Toast.LENGTH_SHORT);
+                }
+
                 toast.show();
             }
             else {
@@ -280,11 +364,6 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("jwt", s);
                     editor.commit();
-
-                    //meken jwt gnin
-                    pref = con.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-                    String jwt=pref.getString("jwt",null);
-                    Log.i("jwt",jwt);
                     Intent intent = new Intent(con, MainActivity.class);
                     con.startActivity(intent);
 
