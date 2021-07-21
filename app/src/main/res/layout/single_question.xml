@@ -90,8 +90,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer1"
-                        android:clickable="false"/>
+                        android:text="answer1" />
 
                     <RadioButton
                         android:id="@+id/ans2"
@@ -99,8 +98,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer2"
-                        android:clickable="false"/>
+                        android:text="answer2"/>
 
                     <RadioButton
                         android:id="@+id/ans3"
@@ -108,8 +106,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer3"
-                        android:clickable="false"/>
+                        android:text="answer3" />
 
                     <RadioButton
                         android:id="@+id/ans4"
@@ -117,8 +114,7 @@
                         android:layout_height="wrap_content"
                         android:paddingEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="answer4"
-                        android:clickable="false"/>
+                        android:text="answer4" />
 
                 </RadioGroup>
 

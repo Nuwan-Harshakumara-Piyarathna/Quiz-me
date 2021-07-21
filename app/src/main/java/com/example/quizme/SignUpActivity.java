@@ -88,9 +88,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(fNameText.isEmpty()) {
                     fstName.setErrorEnabled(true);
                     fstName.setError("First Name can't be Empty");
-                }else if(fNameText.length()<4 || fNameText.length()>10) {
+                }else if(fNameText.length()<4 || fNameText.length()>30) {
                     fstName.setErrorEnabled(true);
-                    fstName.setError("First Name should have at least 4 characters");
+                    fstName.setError("First Name should have 4-30 characters");
                 }
             }
 
@@ -116,9 +116,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(lNameText.isEmpty()) {
                     lstName.setErrorEnabled(true);
                     lstName.setError("Last Name can't be Empty");
-                }else if(lNameText.length()<4 || lNameText.length()>10) {
+                }else if(lNameText.length()<4 || lNameText.length()>30) {
                     lstName.setErrorEnabled(true);
-                    lstName.setError("Last Name should have at least 4 characters");
+                    lstName.setError("Last Name should have 4-30 characters");
                 }
             }
 
@@ -143,9 +143,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(userText.isEmpty()) {
                     user.setErrorEnabled(true);
                     user.setError("User Name can't be Empty");
-                }else if(userText.length()<4 || userText.length()>10) {
+                }else if(userText.length()<4 || userText.length()>30) {
                     user.setErrorEnabled(true);
-                    user.setError("User Name should have at least 4 characters");
+                    user.setError("User Name should have 4-30 characters");
                 }
             }
 
@@ -170,7 +170,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if(passText.isEmpty()) {
                     passOne.setErrorEnabled(true);
                     passOne.setError("Password can't be empty");
-                }else if(passText.length()<5 || passText.length()>15){
+                }else if(passText.length()<5 || passText.length()>50){
                     passOne.setErrorEnabled(true);
                     passOne.setError("Password is too short");
                 }
@@ -231,16 +231,16 @@ public class SignUpActivity extends AppCompatActivity {
             fstName.setError("First Name can't be Empty");
             return false;
 
-        }else if(fNameText.length()<4 || fNameText.length()>10){
-            fstName.setError("First Name should have at least 4 characters");
+        }else if(fNameText.length()<4 || fNameText.length()>30){
+            fstName.setError("First Name should have 4-30 characters");
             return false;
         }
 
         if(lNameText.isEmpty()){
             lstName.setError("Last Name can't be Empty");
             return false;
-        }else if(lNameText.length()<4 || lNameText.length()>10){
-            lstName.setError("Last Name should have at least 4 characters");
+        }else if(lNameText.length()<4 || lNameText.length()>30){
+            lstName.setError("Last Name should have 4-30 characters");
             return false;
         }
 
@@ -248,15 +248,15 @@ public class SignUpActivity extends AppCompatActivity {
             user.setError("User Name can't be Empty");
             return false;
 
-        }else if(userText.length()<4 || userText.length()>10){
-            user.setError("User Name should have at least 4 characters");
+        }else if(userText.length()<4 || userText.length()>30){
+            user.setError("User Name should have 4-30 characters");
             return false;
         }
 
         if(passText.isEmpty()){
             passOne.setError("Password can't be empty");
             return false;
-        }else if(passText.length()<5 || passText.length()>15){
+        }else if(passText.length()<5 || passText.length()>50){
             passOne.setError("Password is too short");
             return false;
         }
