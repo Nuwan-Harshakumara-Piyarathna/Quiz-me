@@ -89,7 +89,12 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             holder.deleteQuestion.setVisibility(View.GONE);
             holder.modifyQuestion.setVisibility(View.GONE);
 
-            if (position == (GlobalData.getLengthClient() - 1)) {
+            Log.e("position",String.valueOf(position));
+            Log.e("gPosition",String.valueOf(getItemCount()-1));
+            holder.finishQuiz.setVisibility(View.GONE);
+
+            if (position == (getItemCount() - 1)) {
+
                 holder.finishQuiz.setVisibility(View.VISIBLE);
                 holder.finishQuiz.setOnClickListener(new View.OnClickListener() {
                     @Override
