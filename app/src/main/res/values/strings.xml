@@ -16,7 +16,7 @@
 
 
     //login activity
-   // <string name="login_pageName">LOGIN</string>
+    // <string name="login_pageName">LOGIN</string>
     <string name="login_userName">User Name</string>
     <string name="login_password">Password</string>
     <string name="login_button">LOGIN</string>
@@ -157,7 +157,7 @@ We want to inform users of this Service that these third parties have access to 
 
 
 
-<!--    Edit Quiz-->
+    <!--    Edit Quiz-->
     <string name="editquiz_title">EDIT QUIZ</string>
     <string name="editquiz_name">Quiz Name</string>
     <string name="editquiz_start_date">Start Date</string>
@@ -167,7 +167,7 @@ We want to inform users of this Service that these third parties have access to 
     <string name="editquiz_submit">Submit</string>
 
 
-<!--    Add Question-->
+    <!--    Add Question-->
     <string name="question_count_0">Question Count : 0</string>
     <string name="question_view_questions">VIEW QUESTIONS</string>
     <string name="question_finish">finish</string>
@@ -181,23 +181,23 @@ We want to inform users of this Service that these third parties have access to 
     <string name="question_add_to_list">add to list</string>
     <string name="question_submit">SUBMIT</string>
 
-<!--    Titles-->
+    <!--    Titles-->
     <string name="leaderboard_name">LEADERBOARD</string>
     <string name="past_quizzes">PAST QUIZZES</string>
     <string name="title_schedule">Schedule</string>
 
-<!--    nav bar-->
+    <!--    nav bar-->
     <string name="navbar_quiz">QUIZ</string>
     <string name="navbar_home">HOME</string>
     <string name="navbar_leaderboard">LEADERBOARD</string>
 
-<!--    pop up-->
+    <!--    pop up-->
     <string name="popup_success">Your quiz has been scheduled.</string>
     <string name="popup_home">Home</string>
     <string name="popup_quiz_id">Quiz ID :</string>
     <string name="popup_share">share</string>
 
-<!--    New Quiz-->
+    <!--    New Quiz-->
     <string name="new_quiz_title">NEW QUIZ</string>
     <string name="new_quiz_name">Quiz Name</string>
     <string name="new_quiz_start_date">Start Date</string>
@@ -206,11 +206,11 @@ We want to inform users of this Service that these third parties have access to 
     <string name="new_quiz_next">Next</string>
     <string name="new_quiz_title_top">New Quiz</string>
 
-<!--    score-->
+    <!--    score-->
     <string name="score_title">SCORE</string>
     <string name="score_home">Home</string>
 
-<!--    sign up-->
+    <!--    sign up-->
     <string name="sign_up_title">Sign Up</string>
     <string name="sign_up_first_name">First Name</string>
     <string name="sign_up_last_name">Last Name</string>
@@ -219,21 +219,21 @@ We want to inform users of this Service that these third parties have access to 
     <string name="sign_up_confirm_password">Confirm Password</string>
     <string name="sign_up_sign_up">Sign Up</string>
 
-<!--    connection check-->
+    <!--    connection check-->
     <string name="connection_check_oops">OOPS!</string>
     <string name="connection_check_no_internet_connection">No Internet Connection</string>
     <string name="connection_check_please_check_your_connection">Please check your connection</string>
     <string name="connection_check_retry">Retry</string>
 
-<!--    other-->
+    <!--    other-->
 
 
-<!--    home tab-->
+    <!--    home tab-->
     <string name="home_schedule">Schedule</string>
     <string name="home_open">open</string>
     <string name="home_past_quizzes">Past Quizzes</string>
 
-<!--    see past questions-->
+    <!--    see past questions-->
     <string name="past_question_this_is_your_first_question_please_answer">This is your first question.Please answer</string>
     <string name="past_question_answer1">answer1</string>
     <string name="past_question_answer2">answer2</string>
@@ -241,7 +241,7 @@ We want to inform users of this Service that these third parties have access to 
     <string name="past_question_answer4">answer4</string>
     <string name="past_question_correct_answer">Correct Answer : 1</string>
 
-<!--    personal marks-->
+    <!--    personal marks-->
     <string name="marks_quiz">Quiz:</string>
     <string name="marks_marks">Marks</string>
     <string name="marks_date">Date</string>
@@ -253,7 +253,7 @@ We want to inform users of this Service that these third parties have access to 
     <string name="marks_edit">Edit</string>
 
 
-<!--    quiz tab-->
+    <!--    quiz tab-->
     <string name="quiz_new_quiz">New Quiz</string>
     <string name="quiz_start">Start</string>
     <string name="quiz_join">Join</string>
