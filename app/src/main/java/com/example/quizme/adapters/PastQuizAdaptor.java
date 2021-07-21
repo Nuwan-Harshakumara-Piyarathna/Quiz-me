@@ -95,6 +95,7 @@ public class PastQuizAdaptor extends RecyclerView.Adapter<PastQuizAdaptor.ViewHo
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
         holder.answer4.setText(tmpQuestion.getAnswer4().trim());
 
+        holder.ans.clearCheck();
         if(tmpQuestion.getProvidedAns()==1){
             holder.answer1.setChecked(true);
         }else if(tmpQuestion.getProvidedAns()==2){
