@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
@@ -22,10 +24,17 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
 
     ArrayList<HostedQuizModel> hostedQuizModels;
     Context context;
+    String message = "";
 
     public HostedQuizAdopter(ArrayList<HostedQuizModel> hostedQuizModels, Context context) {
         this.hostedQuizModels = hostedQuizModels;
         this.context = context;
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    private String genMessage(String link, String date, String time, String name) {
+        return "Quizz: "+name+"\nLink for the Quiz: "+link+"\non: "+date+"\nat: "+time;
     }
 
     @NonNull
@@ -57,10 +66,17 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
         holder.quizID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Copy Link", hostedQuizModels.get(position).getQuizID());
-                clipboard.setPrimaryClip(clip);
-                clip.getDescription();
+                Intent intentShare = new Intent(Intent.ACTION_SEND);
+                intentShare.setType("text/plain");
+                intentShare.putExtra(Intent.EXTRA_SUBJECT, hostedQuizModels.get(position).getQuizName());
+                message = genMessage(hostedQuizModels.get(position).getQuizID(), hostedQuizModels.get(position).getDate(), hostedQuizModels.get(position).getTime(), hostedQuizModels.get(position).getQuizName());
+                intentShare.putExtra(Intent.EXTRA_TEXT, message);
+
+                view.getContext().startActivity(Intent.createChooser(intentShare, hostedQuizModels.get(position).getQuizName()));
+                //ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                //ClipData clip = ClipData.newPlainText("Copy Link", hostedQuizModels.get(position).getQuizID());
+                //clipboard.setPrimaryClip(clip);
+                //clip.getDescription();
                 Toast.makeText(view.getContext(), "Copied", Toast.LENGTH_SHORT).show();
 
             }
