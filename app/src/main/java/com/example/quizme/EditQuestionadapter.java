@@ -65,7 +65,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View singleSch = layoutInflater.inflate(R.layout.single_question, parent, false);
+        View singleSch = layoutInflater.inflate(R.layout.edit_single_question, parent, false);
         ViewHolder viewHolder = new ViewHolder(singleSch);
         return viewHolder;
     }
@@ -230,7 +230,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
         public RadioGroup ans;
         public Button deleteQuestion;
         public Button modifyQuestion;
-        public Button finishQuiz;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -249,7 +249,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
 
             this.deleteQuestion = itemView.findViewById(R.id.delQus);
             this.modifyQuestion = itemView.findViewById(R.id.modQus);
-            this.finishQuiz = itemView.findViewById(R.id.finishQuiz);
+
 
         }
     }
