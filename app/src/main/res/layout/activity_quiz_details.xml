@@ -16,8 +16,7 @@
             android:id="@+id/edit_qdAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="New Quiz"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:title="@string/new_title"
             android:background="#344955"
             app:titleTextColor="#F9AA33"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -55,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
                         android:gravity="center_horizontal"
-                        android:text="NEW QUIZ"
+                        android:text="@string/newquiz"
                         android:paddingBottom="10sp"
                         android:textColor="#000000"
                         android:textStyle="bold"
@@ -68,7 +67,7 @@
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginEnd="50dp"
-                        android:hint="Quiz Name"
+                        android:hint="@string/edit_quizname"
 
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:counterEnabled="true"
@@ -96,7 +95,7 @@
                             android:layout_marginStart="32dp"
                             android:layout_marginTop="32dp"
                             android:layout_marginEnd="50dp"
-                            android:hint="Start Date"
+                            android:hint="@string/start_date"
                             app:backgroundTint="@color/colorPrimary"
 
 
@@ -142,7 +141,7 @@
                             android:layout_marginStart="32dp"
                             android:layout_marginTop="32dp"
                             android:layout_marginEnd="50dp"
-                            android:hint="Start Time"
+                            android:hint="@string/start_time"
                             app:backgroundTint="@color/colorPrimary"
                             app:counterEnabled="true"
                             app:counterMaxLength="10">
@@ -183,7 +182,7 @@
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginEnd="50dp"
-                        android:hint="Duration (minutes)"
+                        android:hint="@string/duration"
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -202,7 +201,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="32dp"
-                            android:text="Next"
+                            android:text="@string/next"
                             android:background="@drawable/btn_background"
                             android:textColor="#F9AA33"
                             android:textSize="15sp"

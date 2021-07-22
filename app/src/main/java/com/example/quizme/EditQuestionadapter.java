@@ -65,7 +65,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View singleSch = layoutInflater.inflate(R.layout.single_question, parent, false);
+        View singleSch = layoutInflater.inflate(R.layout.edit_single_question, parent, false);
         ViewHolder viewHolder = new ViewHolder(singleSch);
         return viewHolder;
     }
@@ -97,6 +97,17 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
         holder.answer4.setText(tmpQuestion.getAnswer4().trim());
+
+        if(tmpQuestion.getCorrectAns()==1){
+            holder.answer1.setChecked(true);
+        }else if(tmpQuestion.getCorrectAns()==2){
+            holder.answer2.setChecked(true);
+        }else if(tmpQuestion.getCorrectAns()==3){
+            holder.answer3.setChecked(true);
+        }else if(tmpQuestion.getCorrectAns()==4){
+            holder.answer4.setChecked(true);
+        }
+
 
 
         holder.modifyQuestion.setOnClickListener(new View.OnClickListener() {
@@ -219,7 +230,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
         public RadioGroup ans;
         public Button deleteQuestion;
         public Button modifyQuestion;
-        public Button finishQuiz;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -238,7 +249,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
 
             this.deleteQuestion = itemView.findViewById(R.id.delQus);
             this.modifyQuestion = itemView.findViewById(R.id.modQus);
-            this.finishQuiz = itemView.findViewById(R.id.finishQuiz);
+
 
         }
     }

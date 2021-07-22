@@ -17,10 +17,12 @@ import android.widget.Toast;
 
 import com.example.quizme.utility.NetworkChangeListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -95,9 +97,14 @@ public class QuizResultActivity extends AppCompatActivity {
             double marks = ((float)GlobalData.getMarks()/(float)GlobalData.getLengthClient())*100.0;
             int finalMarks = (int)marks;
 
+
+            ArrayList<Integer> myAnswerList = new ArrayList<>();
+            for(Question q: GlobalData.getClientQuestions()){
+                myAnswerList.add(q.getClientAns());
+            }
+            JSONArray providedAnswers = new JSONArray(myAnswerList);
             try {
-                data.put("quizid", GlobalData.getQuizId());
-                data.put("marks", (finalMarks));
+                data.put("providedAnswers",providedAnswers);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
