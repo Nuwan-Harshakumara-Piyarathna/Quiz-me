@@ -19,7 +19,7 @@
     <color name="primaryDarkColor">#140078</color>
     <color name="primaryTextColor">#ffffff</color>
 
-    <color name="status_bar_color">#140078</color>
+    <color name="status_bar_color">#344955</color>
     <!--activity_instructions.xml-->
     <color name="activity_instructions_cache_color_hint">#000000</color>
 

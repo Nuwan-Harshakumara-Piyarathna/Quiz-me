@@ -2,12 +2,15 @@ package com.example.quizme;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
@@ -40,6 +43,15 @@ public class PastQuizAdopter extends RecyclerView.Adapter<PastQuizAdopter.ViewHo
         holder.textViewName.setText(pastQuizModels.get(position).getQuizName());
         holder.textViewMarks.setText(pastQuizModels.get(position).getMarks());
 
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Intent in = new Intent(v.getContext(), PastQuizQuestionActivity.class);
+                in.putExtra("problems",pastQuizModels.get(position).getProblems().toString());
+                in.putExtra("providedAns",pastQuizModels.get(position).getProvidedAns().toString());
+                v.getContext().startActivity(in);
+            }
+        });
+
     }
 
     @Override
@@ -50,6 +62,7 @@ public class PastQuizAdopter extends RecyclerView.Adapter<PastQuizAdopter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName,textViewDate,textViewTime,textViewMarks;
+        CardView card;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -57,6 +70,7 @@ public class PastQuizAdopter extends RecyclerView.Adapter<PastQuizAdopter.ViewHo
             textViewDate = itemView.findViewById(R.id.text_date);
             textViewTime = itemView.findViewById(R.id.text_time);
             textViewMarks = itemView.findViewById(R.id.text_marks);
+            card = itemView.findViewById(R.id.pastCard);
         }
     }
 }

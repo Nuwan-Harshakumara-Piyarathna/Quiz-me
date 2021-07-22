@@ -91,10 +91,10 @@ public class EditQuizActivity extends AppCompatActivity {
             question = problems.getJSONObject(Qnum).getString("question");
             answers = problems.getJSONObject(Qnum).getJSONArray("answers");
             correctAns = problems.getJSONObject(Qnum).getInt("correctAnswer");
-            ans1 = answers.get(0).toString();
-            ans2 = answers.get(1).toString();
-            ans3 = answers.get(2).toString();
-            ans4 = answers.get(3).toString();
+            ans1 = answers.get(0).toString().trim();
+            ans2 = answers.get(1).toString().trim();
+            ans3 = answers.get(2).toString().trim();
+            ans4 = answers.get(3).toString().trim();
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -169,11 +169,11 @@ public class EditQuizActivity extends AppCompatActivity {
 
     public void subEdit(View view) {
 
-        final String question = Qid.getText().toString();
-        final String answer1 = Qa1.getText().toString();
-        final String answer2 = Qa2.getText().toString();
-        final String answer3 = Qa3.getText().toString();
-        final String answer4 = Qa4.getText().toString();
+        final String question = Qid.getText().toString().trim();
+        final String answer1 = Qa1.getText().toString().trim();
+        final String answer2 = Qa2.getText().toString().trim();
+        final String answer3 = Qa3.getText().toString().trim();
+        final String answer4 = Qa4.getText().toString().trim();
         final int corrAnswer = newCorrAns;
         Boolean check = true;
 

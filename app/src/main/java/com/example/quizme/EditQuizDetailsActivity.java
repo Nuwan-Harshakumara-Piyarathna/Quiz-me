@@ -186,7 +186,7 @@ public class EditQuizDetailsActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                quiz_name = quizName.getText().toString();
+                quiz_name = quizName.getText().toString().trim();
                 if(quiz_name.trim().length() == 0){
                     tName.setError("*Quiz name is Required");
                 }
@@ -209,7 +209,7 @@ public class EditQuizDetailsActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                quiz_duration = quizDuration.getText().toString();
+                quiz_duration = quizDuration.getText().toString().trim();
                 if(quiz_duration.trim().length() == 0){
                     tDuration.setError("*Duration is Required");
                 }
