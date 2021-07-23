@@ -163,6 +163,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     Intent intent = new Intent(CreateQuestionActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }
+                else {
+                    Toast.makeText(getApplicationContext(),"No Questions to VIew",Toast.LENGTH_SHORT);
+                }
             }
         });
 
