@@ -15,10 +15,10 @@ import java.util.ArrayList;
 public class QuizNameAdapter extends RecyclerView.Adapter<QuizNameAdapter.ViewHolder> {
 
 
-    String[] quizNames;
-    String[] dateList;
+    ArrayList<String> quizNames;
+    ArrayList<String> dateList;
 
-    public QuizNameAdapter(String[] quizNames) {
+    public QuizNameAdapter(ArrayList<String> quizNames) {
         this.quizNames = quizNames;
     }
 
@@ -34,7 +34,7 @@ public class QuizNameAdapter extends RecyclerView.Adapter<QuizNameAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        holder.quizName.setText(quizNames[position]);
+        holder.quizName.setText(quizNames.get(position));
         holder.open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +51,7 @@ public class QuizNameAdapter extends RecyclerView.Adapter<QuizNameAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return quizNames.length;
+        return quizNames.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
