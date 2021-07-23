@@ -8,7 +8,8 @@
   <li>This repository is for QUIZ ME android application.</li>
   <li>System Requiremnts: - Java 11, Android Studio</li>
   <li>Version 1.0</li>
-</ul>  
+</ul>
+<img src="screenshots/playstore.png" alt="loading screenshot">  
 <h2>How do I get set up?</h2>
 <ul>
   <li>Clone or Download the repository</li>
