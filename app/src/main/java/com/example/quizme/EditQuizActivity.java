@@ -81,7 +81,7 @@ public class EditQuizActivity extends AppCompatActivity {
         String quiz= intent.getExtras().getString("quiz",null);
         Qnum = intent.getExtras().getInt("Qnum",-1);
         mongoId= intent.getExtras().getString("mongoId",null);
-
+        Log.i("Qnumgo",String.valueOf(Qnum));
         JSONArray problems =  null;
         JSONArray answers =  null;
         int correctAns = 0;

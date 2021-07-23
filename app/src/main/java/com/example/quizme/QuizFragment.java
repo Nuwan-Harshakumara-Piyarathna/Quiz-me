@@ -290,9 +290,16 @@ public class QuizFragment extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),"Quiz not found!", Toast.LENGTH_LONG).show();
-
-
+                        if(error.networkResponse.statusCode == 404){//Quiz not Found
+                            Toast.makeText(getContext(),"Quiz not found!", Toast.LENGTH_LONG).show();
+                        }
+                        else if(error.networkResponse.statusCode == 405) {//Quiz already submitted
+                            Toast.makeText(getContext(),"You cannot attempt again!\n" +
+                                    "You have attempted already!", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(getContext(),"Something Went Wrong", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }){
             @Override

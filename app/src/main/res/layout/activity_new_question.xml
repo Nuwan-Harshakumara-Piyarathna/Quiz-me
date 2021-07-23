@@ -36,6 +36,18 @@
                 android:hint="@string/question_enter_the_question"
                 android:inputType="textPersonName" />
 
+            <android.widget.Button
+                android:id="@+id/addAnswers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:text="@string/enter_img"
+                android:background="#ffffff"
+                android:textColor="#344955"/>
+
 
             <EditText
                 android:id="@+id/qA1"
@@ -110,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/question_correct_answer_not_selected"
+                android:text="@string/correct_answer"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 />
