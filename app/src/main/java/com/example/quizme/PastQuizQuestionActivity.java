@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class  PastQuizQuestionActivity extends AppCompatActivity {
     String quizProblems,providedAns;
     JSONArray problems,ans;
     String mongoID;
+    TextView blankText;
 
     @Override
     protected void onStart() {
@@ -90,10 +92,13 @@ public class  PastQuizQuestionActivity extends AppCompatActivity {
                 super.onPageScrollStateChanged(state);
             }
         });
-
+        blankText = findViewById(R.id.blank_text);
+        if(problems.length()==0){
+            blankText.setVisibility(blankText.VISIBLE);
+        }
         adapter = new PastQuizAdaptor(problems,this,ans);
-
         viewPager2.setAdapter(adapter);
+
 
     }
 

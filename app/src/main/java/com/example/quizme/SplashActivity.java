@@ -231,7 +231,7 @@ public class SplashActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (response.code() == 200) {
+            if ((response != null) && response.code() == 200) {
                 try {
                     //json = new JSONObject(responseBody);
                     //val = json.getString("jwt");

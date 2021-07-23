@@ -5,6 +5,9 @@
     <string name="open">විවෘත කරන්න</string>
     <string name="delete_btn">මකන්න</string>
     <string name="score">ස්කෝර්</string>
+    <string name="leaderboard_title">ලීඩර්බෝඩ්</string>
+    <string name="Home">ප්‍රධාන මෙනුව</string>
+    <string name="past_quiz_correct_answer">නිවැරදි පිළිතුර</string>
 
     //login activity
     <string name="login_pageName">ඇතුල් වන්න</string>
@@ -30,7 +33,7 @@
     <string name="schedule_description">ඔබගේ සියලු නියමිත ප්‍රශ්නාවලිය වෙත පිවිසිය හැකිය. ඔබ විසින් සත්කාරකත්වය සපයන ඕනෑම ප්‍රශ්නාවලිය සංස්කරණය කිරීමට හෝ මකා දැමීමට ඔබට හැකිය.</string>
     <string name="past_description">ඔබ මීට පෙර සම්බන්ධ වූ ප්‍රශ්නාවලියකට ප්‍රවේශ විය හැකිය</string>
     <string name="schedule">උපලේඛනය</string>
-    <string name="past_quiz">අතීත ප්‍රශ්නාවලිය</string>
+    <string name="past_quiz">අතීත ප්‍රශ්නාවලි</string>
 
     //quiz UI
     <string name="join_description">ප්‍රශ්නාවලිය හැඳුනුම්පත ඇතුළත් කිරීමෙන් ඔබට ප්‍රශ්නාවලියට සම්බන්ධ විය හැකිය</string>
@@ -44,12 +47,16 @@
     <string name="leaderboard_description">ඔබ කලින් සත්කාරකත්වය දුන් ප්‍රශ්නාවලියෙහි ප්‍රමුඛ පුවරුවට පිවිසිය හැකිය</string>
 
     //schedule quiz recycle
-    <string name="quiz_name">ප්‍රශ්නාවලිය: </string>
+    <string name="quiz_name">ප්‍ර.නම: </string>
     <string name="date">දිනය: </string>
     <string name="time">කාලය: </string>
-    <string name="quiz_id">ප්‍රශ්නාවලිය අංකය: </string>
-    <string name="copy_button">පිටපත් කරගන්න</string>
+    <string name="quiz_id">ප්‍ර.අං: </string>
+    <string name="share_button">බෙදාහරින්න</string>
     <string name="edit_button">සංස්කරණය කරන්න</string>
+
+    //past quiz recycle row
+    <string name="past_quiz_title">අතීත ප්‍රශ්නාවලි</string>
+    <string name="past_quiz_marks">ලකුණු: </string>
 
     //edit quiz detail UI
     <string name="edit_title">ප්‍රශ්නාවලිය සංස්කරණය කරන්න</string>
@@ -73,17 +80,23 @@
     <string name="enter_que">ප්‍රශ්නය ඇතුළත් කරන්න</string>
     <string name="pick_image">ගැලරියෙන් පින්තූරයක් තෝරන්න</string>
     <string name="delete_img">රූපය මකන්න</string>
-    <string name="enter_img">රූපය ඇතුළත් කරන්න</string>
+    <string name="enter_img">පිළිතුරු ඇතුළත් කරන්න</string>
     <string name="answer1">පිළිතුර 1</string>
     <string name="answer2">පිළිතුර 2</string>
     <string name="answer3">පිළිතුර 3</string>
     <string name="answer4">පිළිතුර 4</string>
-    <string name="correct_answer">නිවැරදි පිළිතුර = </string>
+    <string name="correct_answer">නිවැරදි පිළිතුර: </string>
     <string name="add_list">ලැයිස්තුවට එක් කරන්න</string>
 
     //pop up submission
     <string name="pop_title">ඔබගේ ප්‍රශ්නාවලිය සැලසුම් කර ඇත.</string>
     <string name="id">ප්‍රශ්නාවලිය: </string>
+
+    <!--    connection check-->
+    <string name="connection_check_oops">OOPS!</string>
+    <string name="connection_check_no_internet_connection">අන්තර්ජාල සම්බන්ධතාවයක් නොමැත</string>
+    <string name="connection_check_please_check_your_connection">කරුණාකර ඔබේ සම්බන්ධතාවය පරීක්ෂා කරන්න</string>
+    <string name="connection_check_retry">නැවත උත්සාහ කරන්න</string>
 
 
     <!--InstructionsActivity-->
