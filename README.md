@@ -122,9 +122,19 @@ create their quizzes and share them with the students and evaluate them. Even an
 <li>Do you like Our App?</li>
 <li>What can I do if I see something unusual happening in the App?</li>
 </ul>
-<li>finnally We have included the privacy policy of the application.</li>
+<li>finally We have included the privacy policy of the application.</li>
 </ul>
 </ul>
+<h2>Sinhala Language Support</h2>
+  <p>This is one of the coolest features in QUIZ ME mobile app.</p>  
+  <table style="width:100%">
+  <tr>
+    <th><img src="screenshots/s1.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/s2.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/s3.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/s4.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    </tr>
+</table>
 <h2>Tested Devices</h2>
 <ul>
   <li>Huawei GR5 mini [os-Nougat]</li>
