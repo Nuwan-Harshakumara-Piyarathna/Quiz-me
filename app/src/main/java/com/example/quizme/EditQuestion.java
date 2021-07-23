@@ -17,6 +17,7 @@ public class EditQuestion {
     private int correctAns;
     private String imageUri;
 
+    //use in both past and edit questions
     public EditQuestion(String question, int questionNum, String answer1, String answer2, String answer3, String answer4, int correctAns, String imageUri) {
         this.question = question;
         this.questionNum = questionNum;
@@ -28,7 +29,7 @@ public class EditQuestion {
         this.imageUri = imageUri;
     }
 
-    public EditQuestion(String question, String answer1, String answer2, String answer3, String answer4, int correctAns, String imageUri,int ans) {
+    public EditQuestion(String question,int questionNum, String answer1, String answer2, String answer3, String answer4, int correctAns, String imageUri,int ans) {
         this.question = question;
         this.questionNum = questionNum;
         this.answer1 = answer1;

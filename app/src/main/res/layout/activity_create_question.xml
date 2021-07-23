@@ -87,52 +87,52 @@
                     android:hint="@string/enter_que"
                      />
 
-                <ImageView
-                    android:id="@+id/quesImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="8dp"
-                    android:autofillHints="Question Image"
-                    android:background="@drawable/image_border"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/quesImg"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:autofillHints="Question Image"-->
+<!--                    android:background="@drawable/image_border"-->
+<!--                    android:paddingTop="4dp"-->
+<!--                    android:paddingBottom="4dp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="#FEEAE6"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:background="#FEEAE6"-->
+<!--                    android:orientation="vertical">-->
 
-                    <android.widget.Button
-                        android:id="@+id/pickImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:padding="8dp"
-                        android:textStyle="bold"
-                        android:text="@string/pick_image"
-                        android:background="@drawable/btn_background"
-                        android:textColor="#F9AA33"/>
+<!--                    <android.widget.Button-->
+<!--                        android:id="@+id/pickImage"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_margin="5dp"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:text="@string/pick_image"-->
+<!--                        android:background="@drawable/btn_background"-->
+<!--                        android:textColor="#F9AA33"/>-->
 
-                    <android.widget.Button
-                        android:id="@+id/deleteImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:padding="8dp"
-                        android:textStyle="bold"
-                        android:text="@string/delete_img"
-                        android:background="@drawable/btn_background"
-                        android:textColor="#F9AA33"/>
+<!--                    <android.widget.Button-->
+<!--                        android:id="@+id/deleteImage"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_margin="5dp"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:text="@string/delete_img"-->
+<!--                        android:background="@drawable/btn_background"-->
+<!--                        android:textColor="#F9AA33"/>-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
                 <android.widget.Button
                     android:id="@+id/addAnswers"

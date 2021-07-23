@@ -75,6 +75,7 @@ public class PastQuizAdaptor extends RecyclerView.Adapter<PastQuizAdaptor.ViewHo
         try {
             tmpQuestion = new EditQuestion(
                     problems.getJSONObject(position).get("question").toString(),
+                    position,
                     problems.getJSONObject(position).getJSONArray("answers").get(0).toString(),
                     problems.getJSONObject(position).getJSONArray("answers").get(1).toString(),
                     problems.getJSONObject(position).getJSONArray("answers").get(2).toString(),
@@ -89,6 +90,7 @@ public class PastQuizAdaptor extends RecyclerView.Adapter<PastQuizAdaptor.ViewHo
         }
 
         holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum() + 1));
+        // Log.i("number",String.valueOf(tmpQuestion.getQuestionNum() + 1));
         holder.question.setText(tmpQuestion.getQuestion().trim());
         holder.answer1.setText(tmpQuestion.getAnswer1().trim());
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
@@ -107,7 +109,7 @@ public class PastQuizAdaptor extends RecyclerView.Adapter<PastQuizAdaptor.ViewHo
         }
 
         holder.correctAns.setText("Correct Answer : "+String.valueOf(tmpQuestion.getCorrectAns()));
-
+        Log.i("provided ans",String.valueOf(tmpQuestion.getProvidedAns()));
         if(tmpQuestion.getCorrectAns() == tmpQuestion.getProvidedAns()){
             holder.icon.setImageResource(R.drawable.right);
         }else{
@@ -121,6 +123,8 @@ public class PastQuizAdaptor extends RecyclerView.Adapter<PastQuizAdaptor.ViewHo
     public int getItemCount() {
         return problems.length();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

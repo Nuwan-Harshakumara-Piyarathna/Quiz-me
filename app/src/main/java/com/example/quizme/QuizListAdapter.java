@@ -56,6 +56,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         this.questions = questions;
         this.status = status;
         this.context = context;
+
     }
 
 
@@ -84,6 +85,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         holder.answer2.setText(tmpQuestion.getAnswer2().trim());
         holder.answer3.setText(tmpQuestion.getAnswer3().trim());
         holder.answer4.setText(tmpQuestion.getAnswer4().trim());
+
 
         if (status == 1) {
             holder.deleteQuestion.setVisibility(View.GONE);
@@ -171,7 +173,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
 
         }
-
         else{
 
             holder.deleteQuestion.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +211,8 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return GlobalData.getClientQuestions().size();
+        Log.i("kjkgh",String.valueOf(questions.size()));
+        return questions.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
