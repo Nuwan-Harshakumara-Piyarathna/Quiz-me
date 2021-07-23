@@ -70,7 +70,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-//        holder.setIsRecyclable(false);
+        holder.setIsRecyclable(false);
         Question tmpQuestion = this.questions.get(position);
 
         holder.questionNumber.setText(String.valueOf(tmpQuestion.getQuestionNum() + 1));
