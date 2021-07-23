@@ -50,8 +50,9 @@ public class HomeActivity extends AppCompatActivity {
         QuizListAdapter adapter;
         ViewPager2 viewPager2 = findViewById(R.id.singleQ);
         if(status == 0) {
-
+            Log.i("lkhglhj",GlobalData.getProblems().toString());
             adapter = new QuizListAdapter(GlobalData.getProblems(), status,this);
+
 
         }else{
 

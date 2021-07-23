@@ -72,7 +72,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-
+        holder.setIsRecyclable(false);
         EditQuestion tmpQuestion = null;
         try {
             Qnum = position;
@@ -117,6 +117,7 @@ public class EditQuestionadapter extends RecyclerView.Adapter<EditQuestionadapte
                 in.putExtra("quiz",problems.toString());
                 in.putExtra("mongoId",mongoId);
                 in.putExtra("Qnum",position);
+                Log.i("Qnume",String.valueOf(position));
                 view.getContext().startActivity(in);
             }
         });
