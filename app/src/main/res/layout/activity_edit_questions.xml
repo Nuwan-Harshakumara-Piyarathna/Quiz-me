@@ -9,7 +9,18 @@
     android:background="@color/colorPrimaryDark">
 
 
-        <androidx.viewpager2.widget.ViewPager2
+    <TextView
+        android:id="@+id/blank_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:textColor="@color/primaryTextColor"
+        android:layout_centerHorizontal="true"
+        android:text="This Quiz has no created problems"
+       android:visibility="gone"/>
+
+    <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/singleQ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

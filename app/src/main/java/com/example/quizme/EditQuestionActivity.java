@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,7 @@ public class EditQuestionActivity extends AppCompatActivity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     int quizID;
     String mongoID;
+    TextView blankText;
 
     @Override
     protected void onStart() {
@@ -177,6 +179,12 @@ public class EditQuestionActivity extends AppCompatActivity {
                 mongoID = val.getJSONObject(quizID).getString("id");
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+
+            blankText = findViewById(R.id.blank_text);
+
+            if(problems.length()==0){
+                blankText.setVisibility(blankText.VISIBLE);
             }
 
             adapter = new EditQuestionadapter(problems, con, mongoID, quizID);

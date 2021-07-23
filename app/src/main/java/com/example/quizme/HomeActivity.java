@@ -47,13 +47,12 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int status = intent.getIntExtra("status",0);
 
-        Log.d("HomeActivity ","status = "+status);
-
         QuizListAdapter adapter;
         ViewPager2 viewPager2 = findViewById(R.id.singleQ);
         if(status == 0) {
-            Log.d("HomeActivity ","no of problems = "+GlobalData.getProblems().size());
+            Log.i("lkhglhj",GlobalData.getProblems().toString());
             adapter = new QuizListAdapter(GlobalData.getProblems(), status,this);
+
 
         }else{
 
