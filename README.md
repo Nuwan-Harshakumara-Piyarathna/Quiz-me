@@ -8,8 +8,7 @@
   <li>This repository is for QUIZ ME android application.</li>
   <li>System Requiremnts: - Java 11, Android Studio</li>
   <li>Version 1.0</li>
-</ul>
-<img src="screenshots/playstore.png" alt="loading screenshot">  
+</ul> 
 <h2>How do I get set up?</h2>
 <ul>
   <li>Clone or Download the repository</li>
@@ -157,6 +156,7 @@ create their quizzes and share them with the students and evaluate them. Even an
   <li>Please report issues at <a href="https://github.com/Team-nanocode/Quiz-me/issues">GitHub Issue Tracker</a>.</li>
   <li>Send your contributions as pull requests to <a href="https://github.com/Team-nanocode/Quiz-me/tree/main">main branch</a>.</li>
 </ul>
+  <img src="screenshots/playstore.png" alt="loading screenshot"> 
 <h2>Licence</h2>
   <li>This project is maintained under the MIT licence.</li>
 </body>
