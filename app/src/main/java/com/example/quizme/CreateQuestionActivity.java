@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -128,7 +129,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             ans4.setText(tmpQuestion.getAnswer4());
 //            imageUri = tmpQuestion.getImageUri();
             correctAnswer = tmpQuestion.getCorrectAnswer();
-            selectAnswerSection.check(correctAnswer-1);
+            selectAnswerSection.check((selectAnswerSection.getChildAt(correctAnswer-1)).getId());
             String correct = "Correct Answer = "+((correctAnswer == -1)?"Not Selected":correctAnswer);
             showCorrectAnswer.setText(correct);
         }
