@@ -17,102 +17,112 @@
 </ul> 
   <table style="width:100%">
   <tr>
-    <th><img src="screenshots/1.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/2.jpeg" alt="loading screenshot"  width="200" height="320"</th> 
-    <th><img src="screenshots/3.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/4.jpeg" alt="loading screenshot"  width="200" height="320"</th>
+    <th><img src="screenshots/1.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/2.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/3.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/4.jpeg" alt="loading screenshot"  width="200" height="380"</th>
    </tr>
      <tr>
-    <th><img src="screenshots/5.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/6.jpeg" alt="loading screenshot"  width="200" height="320"</th> 
-    <th><img src="screenshots/7.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/8.jpeg" alt="loading screenshot"  width="200" height="320"</th>
+    <th><img src="screenshots/5.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/6.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/7.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/8.jpeg" alt="loading screenshot"  width="200" height="380"</th>
    </tr>
      <tr>
-    <th><img src="screenshots/9.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/10.jpeg" alt="loading screenshot"  width="200" height="320"</th> 
-    <th><img src="screenshots/11.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/12.jpeg" alt="loading screenshot"  width="200" height="320"</th>
+    <th><img src="screenshots/9.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/10.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/11.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/12.jpeg" alt="loading screenshot"  width="200" height="380"</th>
    </tr>
      <tr>
-    <th><img src="screenshots/13.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/14.jpeg" alt="loading screenshot"  width="200" height="320"</th> 
-    <th><img src="screenshots/15.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/16.jpeg" alt="loading screenshot"  width="200" height="320"</th>
+    <th><img src="screenshots/13.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/14.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/15.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/16.jpeg" alt="loading screenshot"  width="200" height="380"</th>
    </tr>
      <tr>
-    <th><img src="screenshots/17.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/18.jpeg" alt="loading screenshot"  width="200" height="320"</th> 
-    <th><img src="screenshots/19.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/20.jpeg" alt="loading screenshot"  width="200" height="320"</th>
+    <th><img src="screenshots/17.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/18.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/19.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/20.jpeg" alt="loading screenshot"  width="200" height="380"</th>
    </tr>
      <tr>
-    <th><img src="screenshots/21.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/22.jpeg" alt="loading screenshot"  width="200" height="320"</th> 
-    <th><img src="screenshots/23.jpeg" alt="loading screenshot"  width="200" height="320"</th>
-    <th><img src="screenshots/24.jpeg" alt="loading screenshot"  width="200" height="320"</th> 
+    <th><img src="screenshots/21.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/22.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/23.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/24.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
    </tr>
 </table>
 <h2>Features</h2>
-<p>NIROGYA is based on codezilla hackathon requiremnt -Simple fitness android app that displays healthy tips from twitter stream daily and displays estimated calories burnt by analyzing foot step count</p>
+<p>Quiz Me is an online Mobile Application that allows you to, make your online mock test, set multiple choice questions & share with ease.</p>
+<p>QuizME is an online class quiz maker application that allows you to create, publish and share quizzes or exams. Tutors can
+create their quizzes and share them with the students and evaluate them. Even anyone can use it for self-evaluation or entertainment purposes and also scheduled manner.</p>
+<p>QuizMe can be used by educators, trainers, non-profits, businesses, and other professionals who need an easy way to quickly make exams, tests, and quizzes online. You can create and publish your first exam in a few minutes!
+</p>
+<p>Start using the best and most powerful quiz creator QuizME app now. The free plan includes all the cool features such as:</p>  
 <ul>
-<li>open the application</li>
-<li>select gender </li>
-<li>select height and weight</li>
+  <li>Create Quiz</li>
+  <li>Add Questions</li>
+  <li>Edit Questions</li>
+  <li>Delete Questions</li>
+  <li>Join Quizzes</li>
+  <li>Review Answer Sheet</li>
+  <li>Set Timer</li>
+  <li>Instant leaderboard</li>
+  <li>Get revisions of the past quizzes</li>
+  <li>Collects data remotely</li>
+  <li>Sinhala Language Support</li>
 </ul>
-<p>Now you have almost done. Please make sure to enter the accurate details of gender, weight & height because these data will be input to the programme to give you the best output through the application.</p>
+
+<p>Now Let's see more details about QUIZ ME Features</p>  
+<ol>
+  <li>Create online quizzes easily
+    <p>
+      You can easily start to create a new quiz using create quiz option in the quiz fragment. You may give details of the quiz, date, time, and time limit. After that, you can easily create new questions and add them to the list. After adding all the questions, you can finish it and you will get the quiz ID that will need to share with others.
+    </p>
+  </li>
+  <li>Edit schedule date, time, and questions easily
+    <p>
+     Don’t worry if you just forget to add some questions or if you need to change the scheduled date or time. You can easily change the quiz schedule anytime you want. Not only that but also you can add more questions, edit or delete existing questions.
+    </p>
+  </li>
+  <li>Publish quizzes and exams
+    <p>
+     You can publish your quiz any time before the scheduled time. You can access your scheduled quiz list and copy the quiz ID from there and share it with others (who need to join the quiz).
+    </p>
+  </li>
+  <li>Join and do the quiz or exam
+    <p>
+      Are you worrying about join and do the quiz from the same app? No, you don’t have to. This app will provide that feature as well. You can easily join a quiz just by entering the quiz ID if the quiz started only. After joining the quiz timer starts and you will need to provide answers before the given time. If you failed to submit it before the time ends, will get the 0? No.., it will automatically submit the answers you have given so far.
+    </p>
+  </li>
+  <li>Check test results and calculate marks instantly
+    <p>
+      QuizME allows checking student's scores instantly after the quiz is finished. Not only that but also, he/she can access quizzes that he/she joined before and check the scores and the answers descriptions.
+    </p>
+  </li>
+  <li>Leaderboard
+    <p>
+      You can easily get the feedback of the result sheet of all the participants who had joined to quizzes that you have hosted using the leaderboard option.
+    </p>
+  </li>
+</ol>
 <ul>
-<li>In the home page click on "start pedometer" button. It will start the counting your steps. you will be able to see the following changes while you are walking or running.</li>
-<ul>
-<li>Number of steps</li>
-<li>The distance you have walked.</li>
-<li>Calories you have burnt</li>
-<li>and your default Step goal</li>
-</ul>
-</ul>
-<p>App uses only the accelerometer to determine peaks when the user takes a step. [ doesn't use GPS ]</p>
-<ul>
-<li>Any time you can pause the pedometer and re-run from the last point you have stopped by clicking the above button. Each and every steps data is updated to the database. It will protect you all data.</li>
-<li>click on the expandable button. </li>
-<ul>
-<li>Target achievements will be displayed by clicking the red button. Here I have given 3 achievements. </li>
-<ul>
-<li>bronze medal 10000 steps</li>
-<li>silver medal 20000 steps</li>
-<li>gold medal 30000 steps</li>
-<p>App will show remaning steps to your nearest target</p>
-<p>Earn three medals and live healthily.</p>
-</ul>
-<li>You can reset all steps and related information by clicking on the green button.</li>
-<li>The yellow button will help you to move directly to the Instructions page.</li>
-</ul>
-<li>click on the middle tab of the bottom navigation bar</li>
-</ul>
-<p>It will show the daily health tips from twitter stream. Here I have created a twitter page -https://twitter.com/nirogya. Each day nirogya twitter page will be updated with new health tips. Android application will automatically link to that twitter page and day by day it will show the recent health tips. After loading a particular health tip from twitter nirogya page, the app will count down the remaining time to appear the next health tips. </p>
-<P>If someone wants to see the niroga twitter timeline, anytime he/she can see the twitter timeline by clicking on the "view more" button. First time, user has to sign in with personal twitter account through this application. After that any time,user will be redirected to the nirogya timeline soon.
-<ul>
-<li>Click on the tab "MORE" of the bottom navigation bar. This is more than a setting page</li>
-<ul>
-<li>Default step goal is 6000. You have a chance to change your goal</li>
-<li>The sensitivity of the step counter can be also changed. We have given you the best sensitivity by default. Any time you can change the sensitivity of a step and enjoy the pedometer.</li>
-<li>Weight value can be changed.</li>
-<li>Gender value can be changed.</li>
-<li>Height value can be changed.</li>
-<li>Currently, App is integrated with only English language.</li>
 <li>Instructions also are there.</li>
 <ul>
-<li>How to use</li>
-<li>Steps Counting?</li>
-<li>Counting when shaking phone?</li>
-<li>Counting when driving?</li>
-<li>Accuracy</li>
-<li>Placement Suggesstion</li>
-<li>Battery Saving</li>
+<li>How to add a Quiz?</li>
+<li>How to see created Quizzes?</li>
+<li>Can I edit the Created Quiz problems?</li>
+<li>I am a Quiz Participant. How to Get the Quiz Id?</li>
+<li>How to Join a Quiz?</li>
+<li>I am a Quiz Participant. Can I see my Quiz Results?</li>
+<li>How to see the Leaderboard of a created Quiz?</li>
+<li>How to see marks of my past attended Quizzes?</li>
 <li>Privacy</li>
-<li>Calories & Distance.</li>
-<li>Step goal</li>
+<li>Do you like Our App?</li>
+<li>What can I do if I see something unusual happening in the App?</li>
 </ul>
-<li>finnally I have included the privacy policy of the application.</li>
+<li>finnally We have included the privacy policy of the application.</li>
 </ul>
 </ul>
 <h2>Tested Devices</h2>
@@ -121,7 +131,7 @@
   <li>Samsung Galaxy J7 Nxt [os-Nougat]</li>
   <li>Samsung Galaxy J7 [os-Marshmallow]</li>
   <li>Samsung Galaxy Grand prime [os-lollipop]</li>
-  <p>Apk file was added - <a href="https://github.com/codezilla2018/NIROGYA/tree/master/apk">view APK</a> </p>
+  <p>Apk file was added - <a href="https://github.com/Team-nanocode/Quiz-me/tree/main/apk">view APK</a> </p>
 </ul>
 <h2>Contact Details</h2>
 <ul>
