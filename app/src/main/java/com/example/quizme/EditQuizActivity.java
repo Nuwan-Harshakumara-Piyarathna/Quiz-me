@@ -307,7 +307,7 @@ public class EditQuizActivity extends AppCompatActivity {
                 toast.show();
             }
             else{
-                Toast toast=Toast.makeText(con, "Question Successsfully Updated", Toast.LENGTH_SHORT);
+                Toast toast=Toast.makeText(con, "Question Successfully Updated", Toast.LENGTH_SHORT);
                 toast.show();
             }
 
