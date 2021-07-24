@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -90,7 +91,12 @@ public class QuizResultActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS) // connect timeout
+                    .writeTimeout(30, TimeUnit.SECONDS) // write timeout
+                    .readTimeout(30, TimeUnit.SECONDS) // read timeout
+                    .build();
+            
             MediaType Json = MediaType.parse("application/json;charset=utf-8");
             JSONObject data = new JSONObject();
             String val = "";
@@ -146,13 +152,14 @@ public class QuizResultActivity extends AppCompatActivity {
                 return null;
             }
 
-
+            Log.i("gyhbbyu",val);
             return val;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
             if(s==null){
                 Toast toast=Toast.makeText(con, "Something Went Wrong Try Again Later!", Toast.LENGTH_SHORT);
                 toast.show();
