@@ -96,7 +96,7 @@ public class QuizResultActivity extends AppCompatActivity {
                     .writeTimeout(30, TimeUnit.SECONDS) // write timeout
                     .readTimeout(30, TimeUnit.SECONDS) // read timeout
                     .build();
-            
+
             MediaType Json = MediaType.parse("application/json;charset=utf-8");
             JSONObject data = new JSONObject();
             String val = "";
