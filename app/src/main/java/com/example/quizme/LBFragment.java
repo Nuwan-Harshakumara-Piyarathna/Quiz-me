@@ -36,8 +36,7 @@ import java.util.Map;
 
 public class LBFragment extends Fragment {
 
-
-
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -45,8 +44,7 @@ public class LBFragment extends Fragment {
         ViewGroup lbFrag = (ViewGroup)inflater.inflate(R.layout.lb_fragment, container, false);
 
         RecyclerView recyclerView = lbFrag.findViewById(R.id.qNamesRev);
-
-
+        swipeRefreshLayout = lbFrag.findViewById(R.id.swipe_refresh_layout_leader_board);
 
         ArrayList<String> names = new ArrayList<>();
 
@@ -70,16 +68,13 @@ public class LBFragment extends Fragment {
             adapter.notifyDataSetChanged();
             swipeRefreshLayout.setRefreshing(false);
         });
-
         return  lbFrag;
 
 
 
     }
 
-
-
-    public void getLeaderBoards() {
+    private void getLeaderBoards() {
         SharedPreferences pref = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         String baseURL =pref.getString("baseURL",null);
         String URL = baseURL + "/quiz/find/leaderboards";

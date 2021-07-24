@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     LoadingDialog loadDialog;
-    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -94,10 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_leader_board);
 
-        //getLeaderBoards
-        getLeaderBoards();
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        String baseURL =pref.getString("baseURL",null);
+        String url = baseURL + "/quiz/find/leaderboards";
+        getLeaderBoards(url);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -140,15 +141,13 @@ public class MainActivity extends AppCompatActivity {
             };
 
 
-    public void getLeaderBoards() {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-        String baseURL =pref.getString("baseURL",null);
-        String URL = baseURL + "/quiz/find/leaderboards";
+    private void getLeaderBoards(String URL) {
 
         loadDialog = new LoadingDialog(MainActivity.this);
         loadDialog.startLoadingDialog();
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         String token = pref.getString("jwt", null);
         final String auth = "Bearer " + token;
         final String tkn = token;
