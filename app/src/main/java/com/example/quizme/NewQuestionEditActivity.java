@@ -89,7 +89,7 @@ public class NewQuestionEditActivity extends AppCompatActivity {
         showCorrectAnswer = findViewById(R.id.text_correct_answer);
 
         //mongo quiz id
-        Log.i("Mongo QID : ", mongoQid);
+        //Log.i("Mongo QID : ", mongoQid);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
