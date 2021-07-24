@@ -35,7 +35,7 @@ public class HostedQuizAdopter extends RecyclerView.Adapter<HostedQuizAdopter.Vi
     @NotNull
     @Contract(pure = true)
     private String genMessage(String link, String date, String time, String name) {
-        return "Quizz: " + name + "\nLink for the Quiz: " + link + "\non: " + date + "\nat: " + time;
+        return "Quizz: " + name + "\nLink for the Quiz: " + link + "\non: " + date + "\nat: " + time+"\n\nGet Quiz Me From PlayStore: \nhttps://play.google.com/store/apps/details?id=com.cipher.pera.quizme";
     }
 
     @NonNull

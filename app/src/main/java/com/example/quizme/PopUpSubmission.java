@@ -41,7 +41,7 @@ public class PopUpSubmission extends Activity {
     @NotNull
     @Contract(pure = true)
     private String genMessage(String link, String date, String time, String dur, String name) {
-        return "Quizz: "+name+"\nLink for the Quiz: "+link+"\non: "+date+"\nat: "+time+"\nDuration: "+dur+" minutes";
+        return "Quizz: "+name+"\nLink for the Quiz: "+link+"\non: "+date+"\nat: "+time+"\nDuration: "+dur+" minutes"+"\n\nGet Quiz Me From PlayStore: \nhttps://play.google.com/store/apps/details?id=com.cipher.pera.quizme";
     }
 
     @SuppressLint("SetTextI18n")
