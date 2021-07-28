@@ -156,7 +156,9 @@ create their quizzes and share them with the students and evaluate them. Even an
   <li>Please report issues at <a href="https://github.com/Team-nanocode/Quiz-me/issues">GitHub Issue Tracker</a>.</li>
   <li>Send your contributions as pull requests to <a href="https://github.com/Team-nanocode/Quiz-me/tree/main">main branch</a>.</li>
 </ul>
-  <img src="screenshots/playstore.png" alt="loading screenshot"> 
+  <a href="https://play.google.com/store/apps/details?id=com.cipher.pera.quizme">
+    <img src="screenshots/playstore.png" alt="loading screenshot"> 
+  </a>
 <h2>Licence</h2>
   <li>This project is maintained under the MIT licence.</li>
 </body>
