@@ -34,7 +34,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/question_enter_the_question"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine" />
 
             <android.widget.Button
                 android:id="@+id/addAnswers"
@@ -56,7 +56,7 @@
                 android:layout_marginBottom="8dp"
                 android:ems="10"
                 android:hint="@string/answer1"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine" />
 
             <EditText
                 android:id="@+id/qA2"
@@ -65,7 +65,7 @@
                 android:layout_marginBottom="8dp"
                 android:ems="10"
                 android:hint="@string/answer2"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine" />
 
             <EditText
                 android:id="@+id/qA3"
@@ -74,7 +74,7 @@
                 android:layout_marginBottom="8dp"
                 android:ems="10"
                 android:hint="@string/answer3"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine" />
 
             <EditText
                 android:id="@+id/qA4"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/answer4"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine" />
 
             <RadioGroup
                 android:layout_width="match_parent"

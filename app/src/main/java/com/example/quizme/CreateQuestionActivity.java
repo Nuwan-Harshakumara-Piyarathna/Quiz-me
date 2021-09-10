@@ -96,7 +96,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
 
-        requestStoragePermission();
+       // requestStoragePermission();
 
 //        questionImage = findViewById(R.id.quesImg);
 //        pickImage = findViewById(R.id.pickImage);

@@ -85,7 +85,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/enter_que"
-                     />
+                    android:inputType="textMultiLine"/>
 
 <!--                <ImageView-->
 <!--                    android:id="@+id/quesImg"-->
@@ -153,6 +153,7 @@
                     android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="@string/answer1"
+                    android:inputType="textMultiLine"
                    />
 
                 <EditText
@@ -162,6 +163,7 @@
                     android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="@string/answer2"
+                    android:inputType="textMultiLine"
                     />
 
                 <EditText
@@ -171,6 +173,7 @@
                     android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="@string/answer3"
+                    android:inputType="textMultiLine"
                      />
 
                 <EditText
@@ -179,6 +182,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/answer4"
+                    android:inputType="textMultiLine"
                      />
 
                 <RadioGroup
