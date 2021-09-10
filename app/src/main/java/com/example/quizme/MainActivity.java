@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new QuizFragment()).commit();
         }
+        checkForUpdates();
         installButton90to90();
     }
 
@@ -292,5 +293,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void checkForUpdates() {
+        
+    }
 
 }
