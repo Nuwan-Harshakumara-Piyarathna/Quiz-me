@@ -5,12 +5,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.icu.text.DateTimePatternGenerator;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,6 +27,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.quizme.utility.NetworkChangeListener;
 import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
@@ -294,7 +300,60 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkForUpdates() {
-        
+        Log.e("VERSION CODE",String.valueOf(BuildConfig.VERSION_CODE));
+        Log.e("VERSION NAME",String.valueOf(BuildConfig.VERSION_NAME));
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        String baseURL =pref.getString("baseURL",null);
+        String url = baseURL + "/all/version/find";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String newerVersion = response.getString("version");
+                            Log.e("BACKEND VERSION",newerVersion);
+                            String currentVersion = String.valueOf(BuildConfig.VERSION_NAME);
+                            if(newerVersion.compareTo(currentVersion) > 0){
+                                android.view.ContextThemeWrapper ctw = new android.view.ContextThemeWrapper(MainActivity.this,R.style.Theme_AlertDialog);
+                                final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(ctw);
+                                alertDialogBuilder.setTitle("Update Quiz Me");
+                                alertDialogBuilder.setCancelable(false);
+                                alertDialogBuilder.setIcon(R.drawable.playstore1);
+                                alertDialogBuilder.setMessage("Quiz Me recommends that you update to the latest version for a seamless & enhanced performance of the app.");
+                                alertDialogBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        try{
+                                            Log.e("UPDATE TRYCATCH","try");
+                                            startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id="+getPackageName())));
+                                        }
+                                        catch (ActivityNotFoundException e){
+                                            Log.e("UPDATE TRYCATCH","catch");
+                                            startActivity(new Intent("android.intent.action.VIEW", Uri.parse("https://play.google.com/store/apps/details?id="+getPackageName())));
+                                        }
+                                    }
+                                });
+                                alertDialogBuilder.show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(request);
+
     }
 
 }

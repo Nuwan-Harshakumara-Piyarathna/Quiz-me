@@ -12,4 +12,18 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
 
     </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="cornerRadius">40dp</item>
+    </style>
+
+    <style name="Theme.AlertDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:windowTitleStyle">@style/Theme.AlertDialog.Title</item>
+    </style>
+
+    <style name="Theme.AlertDialog.Title" parent="@android:style/TextAppearance.DialogWindowTitle">
+        <item name="android:textColor">#fff</item>
+    </style>
 </resources>

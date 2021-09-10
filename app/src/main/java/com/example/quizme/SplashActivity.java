@@ -158,7 +158,7 @@ public class SplashActivity extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("baseURL", "http://quizmebackendv2-env.eba-7pycjpu4.us-east-1.elasticbeanstalk.com");
+        editor.putString("baseURL", "https://quizmeonline.herokuapp.com");
         editor.commit();
 
 
