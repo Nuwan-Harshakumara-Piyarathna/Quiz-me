@@ -141,8 +141,8 @@ create their quizzes and share them with the students and evaluate them. Even an
 </table>
 <h2>Receive newest Updates</h2>
 <p>If there is a Update and the curent version in User's App doesn't work with newest Update , user will get notified it in Quiz Me Home Page.</p>
-<div style="margin-left:100px;">
-  <img src="screenshots/updates.jpeg" alt="loading screenshot"  width="200" height="380"/>
+<div>
+  <img src="screenshots/updates.jpeg" alt="loading screenshot"  width="200" height="400"/>
 <div/> 
  <p>By clicking "Update", User will redirect to Quiz Me Google Playstore page.</p>
 <h2>Tested Devices</h2>
