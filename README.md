@@ -7,8 +7,11 @@
 <ul>
   <li>This repository is for QUIZ ME android application.</li>
   <li>System Requiremnts: - Java 11, Android Studio</li>
-  <li>Version 1.0</li>
-</ul> 
+  <li>Version 2.1</li>
+</ul>
+<div>
+  <img src="screenshots/icon.png" alt="loading icon"  width="200" height="200"/>
+<div/> 
 <h2>How do I get set up?</h2>
 <ul>
   <li>Clone or Download the repository</li>
@@ -17,40 +20,40 @@
 </ul> 
   <table style="width:100%">
   <tr>
-    <th><img src="screenshots/1.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/2.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
-    <th><img src="screenshots/3.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/4.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/1.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/2.jpeg" alt="loading screenshot"  width="200" height="380"/></th> 
+    <th><img src="screenshots/3.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/4.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
    </tr>
      <tr>
-    <th><img src="screenshots/5.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/6.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
-    <th><img src="screenshots/7.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/8.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/5.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/6.jpeg" alt="loading screenshot"  width="200" height="380"/></th> 
+    <th><img src="screenshots/7.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/8.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
    </tr>
      <tr>
-    <th><img src="screenshots/9.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/10.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
-    <th><img src="screenshots/11.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/12.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/9.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/10.jpeg" alt="loading screenshot"  width="200" height="380"/></th> 
+    <th><img src="screenshots/11.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/12.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
    </tr>
      <tr>
-    <th><img src="screenshots/13.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/14.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
-    <th><img src="screenshots/15.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/16.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/13.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/14.jpeg" alt="loading screenshot"  width="200" height="380"/></th> 
+    <th><img src="screenshots/15.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/16.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
    </tr>
      <tr>
-    <th><img src="screenshots/17.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/18.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
-    <th><img src="screenshots/19.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/20.jpeg" alt="loading screenshot"  width="200" height="380"</th>
+    <th><img src="screenshots/17.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/18.jpeg" alt="loading screenshot"  width="200" height="380"/></th> 
+    <th><img src="screenshots/19.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/20.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
    </tr>
      <tr>
-    <th><img src="screenshots/21.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/22.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
-    <th><img src="screenshots/23.jpeg" alt="loading screenshot"  width="200" height="380"</th>
-    <th><img src="screenshots/24.jpeg" alt="loading screenshot"  width="200" height="380"</th> 
+    <th><img src="screenshots/21.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/22.jpeg" alt="loading screenshot"  width="200" height="380"/></th> 
+    <th><img src="screenshots/23.jpeg" alt="loading screenshot"  width="200" height="380"/></th>
+    <th><img src="screenshots/24.jpeg" alt="loading screenshot"  width="200" height="380"/></th> 
    </tr>
 </table>
 <h2>Features</h2>
@@ -72,6 +75,7 @@ create their quizzes and share them with the students and evaluate them. Even an
   <li>Get revisions of the past quizzes</li>
   <li>Collects data remotely</li>
   <li>Sinhala Language Support</li>
+  <li>Receive newest Updates</li>
 </ul>
 
 <p>Now Let's see more details about QUIZ ME Features</p>  
@@ -135,8 +139,16 @@ create their quizzes and share them with the students and evaluate them. Even an
     <th><img src="screenshots/s4.jpeg" alt="loading screenshot"  width="200" height="380"</th>
     </tr>
 </table>
+<h2>Receive newest Updates</h2>
+<p>If there is a Update and the curent version in User's App doesn't work with newest Update , user will get notified it in Quiz Me Home Page.</p>
+<div style="margin-left:100px;">
+  <img src="screenshots/updates.jpeg" alt="loading screenshot"  width="200" height="380"/>
+<div/> 
+ <p>By clicking "Update", User will redirect to Quiz Me Google Playstore page.</p>
 <h2>Tested Devices</h2>
 <ul>
+  <li>Samsung Galaxy M10 [os-Q]</li>
+  <li>Oppo A5 2020 [os-Oreo]</li>
   <li>Huawei GR5 mini [os-Nougat]</li>
   <li>Samsung Galaxy J7 Nxt [os-Nougat]</li>
   <li>Samsung Galaxy J7 [os-Marshmallow]</li>
@@ -145,11 +157,11 @@ create their quizzes and share them with the students and evaluate them. Even an
 </ul>
 <h2>Contact Details</h2>
 <ul>
-  <li>Contributer:nuwan.harshamatrix@gmail.com</li>
-  <li>Contributer:erandanawijerathne96@gmail.com</li>
-  <li>Contributer:sm201211d@gmail.com</li>
-  <li>Contributer:randeniyamaneesha13@gmail.com</li>
-  <li>Contributer:ncdsomarathne@yahoo.com</li>
+  <li>Contributer:Nuwan Harsha        (nuwan.harshamatrix@gmail.com)</li>
+  <li>Contributer:Erandana Wijerathne (erandanawijerathne96@gmail.com)</li>
+  <li>Contributer:Saubhagya Munasinghe(sm201211d@gmail.com)</li>
+  <li>Contributer:Maneesha Randeniya  (randeniyamaneesha13@gmail.com)</li>
+  <li>Contributer:Nipun Dewanarayana  (ncdsomarathne@yahoo.com)</li>
 </ul>
 <h2>How to Contribute</h2>
 <ul>
