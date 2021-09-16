@@ -141,18 +141,14 @@ create their quizzes and share them with the students and evaluate them. Even an
 </table>
 <h2>Receive newest Updates</h2>
 <p>If there is a Update and the curent version in User's App doesn't work with newest Update , user will get notified it in Quiz Me Home Page.</p>
-<div>
+<div style="margin-left:100px;">
   <img src="screenshots/updates.jpeg" alt="loading screenshot"  width="200" height="380"/>
 <div/> 
-<ul>
-  <li>Huawei GR5 mini [os-Nougat]</li>
-  <li>Samsung Galaxy J7 Nxt [os-Nougat]</li>
-  <li>Samsung Galaxy J7 [os-Marshmallow]</li>
-  <li>Samsung Galaxy Grand prime [os-lollipop]</li>
-  <p>Apk file was added - <a href="https://github.com/Team-nanocode/Quiz-me/tree/main/apk">view APK</a> </p>
-</ul>
+ <p>By clicking "Update", User will redirect to Quiz Me Google Playstore page.</p>
 <h2>Tested Devices</h2>
 <ul>
+  <li>Samsung Galaxy M10 [os-Q]</li>
+  <li>Oppo A5 2020 [os-Oreo]</li>
   <li>Huawei GR5 mini [os-Nougat]</li>
   <li>Samsung Galaxy J7 Nxt [os-Nougat]</li>
   <li>Samsung Galaxy J7 [os-Marshmallow]</li>
