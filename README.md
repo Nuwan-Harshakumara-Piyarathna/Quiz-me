@@ -157,11 +157,11 @@ create their quizzes and share them with the students and evaluate them. Even an
 </ul>
 <h2>Contact Details</h2>
 <ul>
-  <li>Nuwan Harsha        (nuwan.harshamatrix@gmail.com)</li>
-  <li>Erandana Wijerathne (erandanawijerathne96@gmail.com)</li>
-  <li>Saubhagya Munasinghe(sm201211d@gmail.com)</li>
-  <li>Maneesha Randeniya  (randeniyamaneesha13@gmail.com)</li>
-  <li>Nipun Dewanarayana  (ncdsomarathne@yahoo.com)</li>
+  <li>Nuwan Harsha        (<a href = "mailto: nuwan.harshamatrix@gmail.com">nuwan.harshamatrix@gmail.com</a>)</li>
+  <li>Erandana Wijerathne (<a href = "mailto: erandanawijerathne96@gmail.com">erandanawijerathne96@gmail.com</a>)</li>
+  <li>Saubhagya Munasinghe(<a href = "mailto: sm201211d@gmail.com">sm201211d@gmail.com</a>)</li>
+  <li>Maneesha Randeniya  (<a href = "mailto: randeniyamaneesha13@gmail.com">randeniyamaneesha13@gmail.com</a>)</li>
+  <li>Nipun Dewanarayana  (<a href = "mailto: ncdsomarathne@yahoo.com">ncdsomarathne@yahoo.com</a>)</li>
 </ul>
 <h2>How to Contribute</h2>
 <ul>
